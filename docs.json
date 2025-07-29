@@ -14,7 +14,7 @@
         "tab": "Guides",
         "groups": [
           {
-            "group": "Getting starteddddddd",
+            "group": "Getting started",
             "pages": [
               "index",
               "quickstart",
@@ -22,7 +22,7 @@
             ]
           },
           {
-            "group": "Customization",
+            "group": "Customizationddddd",
             "pages": [
               "essentials/settings",
               "essentials/navigation"
