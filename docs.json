@@ -16,7 +16,7 @@
           {
             "group": "Foundational Concepts",
             "pages": [
-              "index",
+              "essentials/introduction",
               {
                 "group": "Key Concepts",
                 "pages": [
