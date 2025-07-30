@@ -11,38 +11,62 @@
   "navigation": {
     "tabs": [
       {
-        "tab": "Guides",
+        "tab": "Documentation",
         "groups": [
           {
-            "group": "Getting started",
+            "group": "Foundational Concepts",
             "pages": [
               "index",
-              "quickstart",
-              "development"
+              {
+                "group": "Key Concepts",
+                "pages": [
+                  "essentials/agent-builder",
+                  "essentials/agent-experience"
+                ]
+              }
             ]
           },
           {
-            "group": "Customizationddddd",
+            "group": "Use Cases",
             "pages": [
-              "essentials/settings",
-              "essentials/navigation"
-            ]
-          },
-          {
-            "group": "Writing content",
-            "pages": [
-              "essentials/markdown",
-              "essentials/code",
-              "essentials/images",
-              "essentials/reusable-snippets"
-            ]
-          },
-          {
-            "group": "AI tools",
-            "pages": [
-              "ai-tools/cursor",
-              "ai-tools/claude-code",
-              "ai-tools/windsurf"
+              {
+                "group": "Getting Started with Adopt",
+                "pages": [
+                  "essentials/initial-setup",
+                  "essentials/reviewing-tools",
+                  "essentials/reviewing-actions"
+                ]
+              },
+              {
+                "group": "Build Edit + Test Actions",
+                "pages": [
+                  "essentials/creating-new-action",
+                  "essentials/editing-actions",
+                  "essentials/testing-actions",
+                  "essentials/playground-profiles"
+                ]
+              },
+              {
+                "group": "Review + Debug Agent Performance",
+                "pages": [
+                  "essentials/adopt-dashboard",
+                  "essentials/key-metrics",
+                  "essentials/logs"
+                ]
+              },
+              {
+                "group": "Design + Deploy End User Experience",
+                "pages": [
+                  {
+                    "group": "JS SDK",
+                    "pages": [
+                      "essentials/deployment-options",
+                      "essentials/custom-themes-branding",
+                      "essentials/deployment-rules"
+                    ]
+                  }
+                ]
+              }
             ]
           }
         ]
@@ -71,19 +95,9 @@
     "global": {
       "anchors": [
         {
-          "anchor": "Documentation",
-          "href": "https://mintlify.com/docs",
-          "icon": "book-open-cover"
-        },
-        {
-          "anchor": "Community",
-          "href": "https://mintlify.com/community",
-          "icon": "slack"
-        },
-        {
-          "anchor": "Blog",
-          "href": "https://mintlify.com/blog",
-          "icon": "newspaper"
+          "anchor": "Website",
+          "href": "https://adopt.ai",
+          "icon": "globe"
         }
       ]
     }

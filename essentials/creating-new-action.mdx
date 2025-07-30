@@ -1,0 +1,263 @@
+---
+title: 'Creating a New Action'
+description: 'Step-by-step guide to creating custom actions for your AI agents'
+icon: 'plus'
+---
+
+# Creating a New Action
+
+Actions are the building blocks that define what your AI agents can do. Creating new actions allows you to extend your agent's capabilities with custom functionality tailored to your specific use cases.
+
+## Getting Started
+
+### Action Planning
+Before creating an action, consider:
+- **Purpose**: What specific task will this action accomplish?
+- **Inputs**: What information does the action need to work?
+- **Outputs**: What should the action return or accomplish?
+- **Integration**: What external systems or APIs will it interact with?
+
+### Prerequisites
+- Access to the Agent Builder
+- Understanding of your use case requirements
+- Any necessary API keys or credentials for integrations
+- Clear definition of the action's scope and functionality
+
+## Action Creation Process
+
+### Step 1: Access the Action Builder
+1. Navigate to the Agent Builder in your AdoptAI dashboard
+2. Go to the "Actions" section
+3. Click "Create New Action"
+4. Choose your action template or start from scratch
+
+### Step 2: Define Basic Information
+**Action Details**
+- **Name**: Give your action a clear, descriptive name
+- **Description**: Explain what the action does and when to use it
+- **Category**: Assign to an appropriate category for organization
+- **Tags**: Add searchable tags for easy discovery
+
+**Version Information**
+- **Version Number**: Start with 1.0.0 for new actions
+- **Change Log**: Document what this version includes
+- **Status**: Set to "Development" during creation
+
+### Step 3: Configure Input Parameters
+Define what information your action needs:
+
+**Parameter Types**
+- **Text**: String inputs for names, descriptions, etc.
+- **Number**: Numerical values for calculations
+- **Boolean**: True/false flags for conditions
+- **Date/Time**: Temporal data for scheduling
+- **File**: Document or media uploads
+- **Object**: Complex structured data
+
+**Parameter Settings**
+- **Required vs Optional**: Mark which parameters must be provided
+- **Default Values**: Set sensible defaults where appropriate
+- **Validation Rules**: Define acceptable input formats and ranges
+- **Help Text**: Provide guidance for users
+
+### Step 4: Build the Action Logic
+**Code Editor**
+- Use the built-in code editor to write your action logic
+- Support for multiple programming languages (JavaScript, Python, etc.)
+- Built-in syntax highlighting and error checking
+- Access to AdoptAI SDK and helper functions
+
+**Common Patterns**
+```javascript
+// Example action structure
+async function executeAction(inputs) {
+  try {
+    // Validate inputs
+    if (!inputs.requiredField) {
+      throw new Error('Required field is missing');
+    }
+    
+    // Process the request
+    const result = await processRequest(inputs);
+    
+    // Return structured response
+    return {
+      success: true,
+      data: result,
+      message: 'Action completed successfully'
+    };
+  } catch (error) {
+    return {
+      success: false,
+      error: error.message,
+      message: 'Action failed to execute'
+    };
+  }
+}
+```
+
+### Step 5: Configure Output Format
+**Response Structure**
+- **Success Indicators**: Clear success/failure status
+- **Data Payload**: The actual results or information
+- **Error Handling**: Detailed error messages and codes
+- **Metadata**: Additional context about the execution
+
+**Output Types**
+- **Simple Response**: Text or basic data
+- **Structured Data**: JSON objects with multiple fields
+- **File Output**: Generated documents or media
+- **Stream Response**: Real-time data feeds
+
+### Step 6: Set Up Integrations
+**External APIs**
+- Configure authentication credentials
+- Set up endpoint URLs and methods
+- Define request/response mapping
+- Handle rate limiting and retries
+
+**Database Connections**
+- Configure connection strings
+- Set up query templates
+- Handle connection pooling
+- Implement security best practices
+
+**Third-Party Services**
+- Set up service-specific SDKs
+- Configure webhooks if needed
+- Handle authentication flows
+- Manage service quotas and limits
+
+## Advanced Configuration
+
+### Error Handling
+**Comprehensive Error Management**
+- Input validation errors
+- Network connectivity issues
+- API rate limit handling
+- Timeout management
+- Graceful degradation strategies
+
+**Error Response Format**
+```json
+{
+  "success": false,
+  "error": {
+    "code": "VALIDATION_ERROR",
+    "message": "Invalid input parameter",
+    "details": {
+      "field": "email",
+      "issue": "Invalid email format"
+    }
+  }
+}
+```
+
+### Security Considerations
+**Data Protection**
+- Encrypt sensitive parameters
+- Sanitize all inputs
+- Implement proper authentication
+- Log security events
+- Follow principle of least privilege
+
+**Access Control**
+- Define who can use the action
+- Set up role-based permissions
+- Implement usage quotas
+- Monitor for abuse
+
+### Performance Optimization
+**Efficiency Best Practices**
+- Minimize external API calls
+- Implement caching where appropriate
+- Use asynchronous processing
+- Optimize database queries
+- Handle concurrent requests
+
+**Resource Management**
+- Set appropriate timeouts
+- Limit memory usage
+- Monitor CPU consumption
+- Implement graceful shutdowns
+
+## Testing During Development
+
+### Unit Testing
+- Test individual functions in isolation
+- Verify input validation logic
+- Check error handling paths
+- Validate output formats
+
+### Integration Testing
+- Test with real external services
+- Verify end-to-end workflows
+- Check authentication flows
+- Validate data transformations
+
+### Mock Testing
+- Use test data for development
+- Simulate various scenarios
+- Test edge cases and failures
+- Verify performance under load
+
+## Documentation
+
+### Code Documentation
+- Add inline comments explaining complex logic
+- Document all parameters and return values
+- Include usage examples
+- Maintain version history
+
+### User Documentation
+- Write clear usage instructions
+- Provide parameter descriptions
+- Include common use cases
+- Add troubleshooting guides
+
+## Deployment Preparation
+
+### Pre-Deployment Checklist
+- [ ] All tests passing
+- [ ] Documentation complete
+- [ ] Security review conducted
+- [ ] Performance benchmarks met
+- [ ] Error handling validated
+- [ ] Integration endpoints verified
+
+### Version Management
+- Tag stable versions
+- Maintain backward compatibility
+- Document breaking changes
+- Plan migration strategies
+
+## Best Practices
+
+### Code Quality
+- Follow consistent coding standards
+- Use meaningful variable names
+- Keep functions focused and small
+- Implement proper logging
+
+### Maintainability
+- Write modular, reusable code
+- Use configuration files for settings
+- Implement comprehensive testing
+- Keep dependencies up to date
+
+### User Experience
+- Provide clear error messages
+- Return results in expected formats
+- Handle edge cases gracefully
+- Optimize for common use cases
+
+## Next Steps
+
+Once your action is created:
+1. **Test Thoroughly**: Use the testing environment to validate functionality
+2. **Document Usage**: Create comprehensive user documentation
+3. **Deploy to Staging**: Test in a production-like environment
+4. **Gather Feedback**: Get input from intended users
+5. **Deploy to Production**: Make available to your agents
+
+Creating effective actions is key to building powerful AI agents that can accomplish complex tasks and provide real value to your users. 

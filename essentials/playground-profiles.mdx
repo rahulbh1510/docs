@@ -1,0 +1,388 @@
+---
+title: 'Playground Profiles'
+description: 'Learn how to use Playground Profiles to test and validate your AI agents in different scenarios'
+icon: 'gamepad'
+---
+
+# Playground Profiles
+
+Playground Profiles are pre-configured testing environments that allow you to test your AI agents under different conditions and scenarios. They provide a safe, controlled space to experiment with agent behavior before deploying to production.
+
+## What Are Playground Profiles?
+
+### Definition
+Playground Profiles are customizable testing configurations that simulate different user environments, data conditions, and integration scenarios. They enable you to validate how your agents perform across various real-world situations.
+
+### Key Benefits
+- **Safe Testing**: Experiment without affecting production systems
+- **Scenario Simulation**: Test different user personas and conditions
+- **Rapid Iteration**: Quickly test changes and improvements
+- **Comprehensive Validation**: Ensure agents work across all intended use cases
+- **Team Collaboration**: Share testing scenarios with team members
+
+## Profile Types
+
+### User Persona Profiles
+**Different User Types**
+- **New Users**: First-time interactions with minimal context
+- **Power Users**: Advanced users with complex requirements
+- **Guest Users**: Limited access and capabilities
+- **Admin Users**: Full access with elevated permissions
+
+**Example Persona Configuration**
+```json
+{
+  "profileName": "New Customer",
+  "userType": "first_time",
+  "context": {
+    "hasAccount": false,
+    "knowledgeLevel": "beginner",
+    "preferredLanguage": "en",
+    "deviceType": "mobile"
+  },
+  "limitations": {
+    "maxConversationLength": 10,
+    "accessToPersonalData": false,
+    "availableActions": ["basic_info", "signup_help"]
+  }
+}
+```
+
+### Environment Profiles
+**Different System Conditions**
+- **Development**: Local testing with mock services
+- **Staging**: Production-like with test data
+- **Production Mirror**: Exact production replica
+- **High Load**: Stress testing scenarios
+
+### Data Profiles
+**Various Data Scenarios**
+- **Empty State**: No existing user data
+- **Rich Data**: Comprehensive user history
+- **Edge Cases**: Unusual or problematic data
+- **Large Datasets**: Performance testing with volume
+
+## Creating Playground Profiles
+
+### Profile Setup Process
+1. **Define Objectives**: What scenarios do you want to test?
+2. **Choose Base Template**: Start with predefined or custom template
+3. **Configure Parameters**: Set up user context and environment
+4. **Add Test Data**: Include relevant datasets
+5. **Define Success Criteria**: Establish what constitutes success
+6. **Save and Share**: Make profile available to team
+
+### Profile Configuration Options
+
+**User Context Settings**
+```json
+{
+  "userProfile": {
+    "id": "test-user-001",
+    "name": "Jane Smith",
+    "email": "jane.smith@example.com",
+    "preferences": {
+      "communicationStyle": "formal",
+      "timezone": "America/New_York",
+      "language": "en-US"
+    },
+    "history": {
+      "previousInteractions": 5,
+      "lastLoginDate": "2024-01-15",
+      "completedActions": ["profile_setup", "first_purchase"]
+    }
+  }
+}
+```
+
+**System Configuration**
+```json
+{
+  "systemSettings": {
+    "environment": "staging",
+    "apiEndpoints": {
+      "customer": "https://staging-api.example.com/customers",
+      "orders": "https://staging-api.example.com/orders"
+    },
+    "features": {
+      "betaFeatures": true,
+      "experimentalActions": false
+    },
+    "performance": {
+      "simulatedLatency": 200,
+      "errorRate": 0.02
+    }
+  }
+}
+```
+
+## Using Playground Profiles
+
+### Interactive Testing
+**Conversation Simulation**
+- Start conversations with different opening messages
+- Test various user intents and requests
+- Explore different conversation paths
+- Validate agent responses and actions
+
+**Real-Time Feedback**
+- Monitor agent decision-making process
+- View action execution logs
+- Analyze response quality
+- Track performance metrics
+
+### Automated Testing with Profiles
+**Test Script Integration**
+```javascript
+// Example automated test using profile
+describe('Customer Support Agent', () => {
+  const profile = loadPlaygroundProfile('returning_customer');
+  
+  beforeEach(() => {
+    setupTestEnvironment(profile);
+  });
+  
+  test('handles returning customer inquiry', async () => {
+    const conversation = await startConversation(
+      profile,
+      'I need help with my recent order'
+    );
+    
+    expect(conversation.agent.recognized).toBe('order_inquiry');
+    expect(conversation.actions.triggered).toContain('order_lookup');
+    expect(conversation.response.helpful).toBe(true);
+  });
+});
+```
+
+### A/B Testing Scenarios
+**Comparative Analysis**
+- Test different agent configurations
+- Compare response quality across profiles
+- Measure user satisfaction metrics
+- Optimize based on profile performance
+
+## Profile Management
+
+### Organization and Categorization
+**Profile Structure**
+```
+Playground Profiles/
+├── User Personas/
+│   ├── new-user.json
+│   ├── power-user.json
+│   └── enterprise-customer.json
+├── Environments/
+│   ├── development.json
+│   ├── staging.json
+│   └── production-mirror.json
+├── Scenarios/
+│   ├── high-load.json
+│   ├── error-conditions.json
+│   └── edge-cases.json
+└── Custom/
+    ├── team-specific.json
+    └── project-testing.json
+```
+
+### Version Control
+**Profile Versioning**
+- Track changes to profile configurations
+- Maintain backward compatibility
+- Document profile evolution
+- Enable rollback to previous versions
+
+### Sharing and Collaboration
+**Team Access**
+- Share profiles across development team
+- Set permissions for profile modification
+- Collaborate on profile improvements
+- Maintain consistent testing standards
+
+## Common Use Cases
+
+### Feature Development
+**New Feature Testing**
+1. Create profile for target user segment
+2. Configure relevant data scenarios
+3. Test feature functionality thoroughly
+4. Validate user experience flow
+5. Gather performance metrics
+
+### Bug Investigation
+**Issue Reproduction**
+1. Create profile matching reported conditions
+2. Reproduce the problematic scenario
+3. Debug with controlled environment
+4. Validate fix effectiveness
+5. Prevent regression with ongoing tests
+
+### Performance Optimization
+**Load Testing Profiles**
+```json
+{
+  "profileName": "High Load Simulation",
+  "simulatedUsers": 1000,
+  "concurrentSessions": 100,
+  "requestPattern": "realistic_traffic",
+  "duration": "30_minutes",
+  "rampUp": "gradual",
+  "metrics": {
+    "responseTime": "< 500ms",
+    "successRate": "> 99%",
+    "errorThreshold": "< 1%"
+  }
+}
+```
+
+### Integration Testing
+**External Service Validation**
+- Test API integrations with various response patterns
+- Simulate service outages and timeouts
+- Validate error handling and fallbacks
+- Ensure graceful degradation
+
+## Advanced Profile Features
+
+### Dynamic Profiles
+**Runtime Adaptation**
+- Profiles that change during testing
+- Simulate user learning and preference changes
+- Model evolving system conditions
+- Test agent adaptation capabilities
+
+### Conditional Logic
+**Smart Profile Behavior**
+```json
+{
+  "conditionalBehavior": {
+    "if": "user.requestCount > 5",
+    "then": {
+      "responseStyle": "more_detailed",
+      "suggestionsEnabled": true
+    },
+    "else": {
+      "responseStyle": "concise",
+      "suggestionsEnabled": false
+    }
+  }
+}
+```
+
+### Profile Analytics
+**Performance Tracking**
+- Success rates across different profiles
+- Response quality metrics
+- User satisfaction indicators
+- Performance benchmarks
+
+## Best Practices
+
+### Profile Design
+**Comprehensive Coverage**
+- Cover all major user types and scenarios
+- Include edge cases and error conditions
+- Test both common and uncommon workflows
+- Validate security and privacy controls
+
+**Realistic Simulation**
+- Use production-like data patterns
+- Simulate real network conditions
+- Include authentic user behaviors
+- Model actual system constraints
+
+### Maintenance
+**Regular Updates**
+- Keep profiles current with system changes
+- Update test data periodically
+- Review and refresh user personas
+- Maintain profile documentation
+
+**Quality Assurance**
+- Validate profile configurations regularly
+- Test profiles against known scenarios
+- Monitor profile effectiveness
+- Gather feedback from team members
+
+### Documentation
+**Profile Documentation**
+```markdown
+# Profile: Enterprise Customer
+
+## Purpose
+Test agent behavior with large enterprise customers who have complex requirements and multiple integrations.
+
+## User Characteristics
+- High-value customer with multiple products
+- Requires detailed technical information
+- Has dedicated account manager
+- Uses enterprise-grade security features
+
+## Test Scenarios
+1. Complex product configuration requests
+2. Multi-step approval workflows
+3. Integration troubleshooting
+4. Escalation to human support
+
+## Success Criteria
+- Agent recognizes enterprise status
+- Provides appropriate level of detail
+- Offers correct escalation paths
+- Maintains security compliance
+```
+
+## Troubleshooting Profiles
+
+### Common Issues
+**Profile Not Loading**
+- Check configuration syntax
+- Verify all required fields are present
+- Ensure data files are accessible
+- Review permission settings
+
+**Inconsistent Results**
+- Validate test data consistency
+- Check for external dependencies
+- Review timing and sequencing
+- Verify environment isolation
+
+**Performance Problems**
+- Optimize large datasets
+- Reduce unnecessary computations
+- Cache frequently used data
+- Monitor resource usage
+
+## Integration with Development Workflow
+
+### Continuous Integration
+**Automated Profile Testing**
+```yaml
+# CI pipeline integration
+test_profiles:
+  stage: test
+  script:
+    - run_profile_tests --profile new_user
+    - run_profile_tests --profile power_user
+    - run_profile_tests --profile enterprise
+  artifacts:
+    reports:
+      junit: profile-test-results.xml
+```
+
+### Development Process
+1. **Feature Planning**: Create profiles for new features
+2. **Development**: Test continuously with relevant profiles
+3. **Code Review**: Include profile test results
+4. **Deployment**: Validate with production-like profiles
+5. **Monitoring**: Use profiles for ongoing validation
+
+## Next Steps
+
+To maximize the value of Playground Profiles:
+1. **Start Simple**: Begin with basic user persona profiles
+2. **Expand Gradually**: Add more complex scenarios over time
+3. **Measure Impact**: Track how profiles improve testing effectiveness
+4. **Share Knowledge**: Document successful profile patterns
+5. **Iterate and Improve**: Continuously refine based on experience
+
+Playground Profiles are a powerful tool for ensuring your AI agents work reliably across all intended scenarios. They provide the confidence needed to deploy agents that deliver consistent, high-quality user experiences. 
