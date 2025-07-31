@@ -4,112 +4,70 @@ description: 'Explore and understand the various tools available in the Agent Bu
 icon: 'wrench'
 ---
 
-# Reviewing Tools on the Agent Builder
+Now that the 24-hour discovery period is complete, you'll get access to the Agent Builder Platform. You can read more about what the Agent Builder is here. 
+This is the first screen you’ll see when you login and it highlights all the tools and actions that have been auto-generated for you to explore. 
 
-The Agent Builder comes equipped with a comprehensive set of tools that enable your AI agents to perform various tasks and integrate with external systems. Understanding these tools is crucial for building effective agents.
+![Reviewing_Tools_1](/images/Reviewing_Tools_1.png)
 
-## Tool Categories
+Let's start by exploring the **Tools section**, which is organized into 5 key tabs:
 
-### Communication Tools
-- **Email Integration**: Send and receive emails on behalf of users
-- **Messaging APIs**: Connect to Slack, Teams, Discord, and other platforms
-- **SMS/Text Messaging**: Send notifications and updates via text
-- **Voice Integration**: Text-to-speech and speech-to-text capabilities
+1. **APIs** - The app's API endpoints that we've discovered and cataloged
+2. **Content** - Individual pages from your app's Knowledge Base
+3. **Entities** - Business logic objects that highlight key data structures and resolution methods
+4. **Pages** - Specific URLs and routes within your application
+5. **FAQs** - Frequently asked questions we've extracted from your Knowledge Base
 
-### Data Tools
-- **Database Connectors**: Connect to SQL and NoSQL databases
-- **API Integrations**: REST and GraphQL API connections
-- **File Processing**: Handle documents, spreadsheets, and media files
-- **Web Scraping**: Extract information from websites and web pages
+Each of these components works together to power the Actions your users will perform through natural language commands.
 
-### Productivity Tools
-- **Calendar Management**: Schedule meetings and manage appointments
-- **Task Management**: Create and track tasks in project management systems
-- **Document Generation**: Create reports, presentations, and documents
-- **CRM Integration**: Access and update customer relationship management systems
+![Reviewing_Tools_2](/images/Reviewing_Tools_2.png)
 
-### Analytics and Reporting
-- **Data Visualization**: Create charts and graphs from data
-- **Report Generation**: Automated reporting and insights
-- **Performance Metrics**: Track agent and business performance
-- **Custom Dashboards**: Build tailored monitoring interfaces
+Let’s do a quick deep dive into two key tools - API’s and Entities. 
 
-## Tool Configuration
+### The APIs Tab
 
-### Setting Up Tools
-1. **Access Tool Library**: Navigate to the tools section in Agent Builder
-2. **Browse Available Tools**: Explore the catalog of pre-built integrations
-3. **Authentication Setup**: Configure API keys and connection credentials
-4. **Permission Settings**: Define what data and actions tools can access
+The APIs tab gives you a clear view of all the endpoints we found—basically every action your users can take in your app, traced back to its underlying API call. It's all organized in one place for easy browsing.
 
-### Custom Tool Development
-- **API Wrapper Creation**: Build custom integrations for proprietary systems
-- **Function Definition**: Create specialized functions for specific use cases
-- **Testing Environment**: Validate custom tools before deployment
-- **Version Management**: Track and update tool configurations
+**Click any row to see the details →** 
 
-## Tool Selection Strategy
+Each API has been made LLM ready - with a clear title, description, and sample prompts that help the language models understand what each endpoint does and when to use it.
 
-### Assessing Your Needs
-- **Use Case Analysis**: What tasks will your agent perform?
-- **Integration Requirements**: What systems need to connect?
-- **User Expectations**: What capabilities do users expect?
-- **Performance Considerations**: What are the speed and reliability requirements?
+You can also view the sample headers, payload structures, and response outputs for any specific endpoint here. 
 
-### Best Practices
-- **Start Simple**: Begin with essential tools and add complexity gradually
-- **Test Thoroughly**: Validate each tool integration before going live
-- **Monitor Usage**: Track which tools are most valuable to users
-- **Security First**: Ensure all tool integrations follow security best practices
+![Reviewing_Tools_3](/images/Reviewing_Tools_3.png)
 
-## Tool Management
+### The Entities Tab
 
-### Organization and Categorization
-- **Tool Groups**: Organize tools by function or department
-- **Access Control**: Define who can use which tools
-- **Usage Policies**: Set guidelines for appropriate tool usage
-- **Documentation**: Maintain clear descriptions of each tool's purpose
+![Reviewing_Tools_4](/images/Reviewing_Tools_4.png)
 
-### Monitoring and Optimization
-- **Usage Analytics**: Track how often tools are used
-- **Performance Metrics**: Monitor response times and success rates
-- **User Feedback**: Collect input on tool effectiveness
-- **Continuous Improvement**: Regular review and optimization of tool selection
+Entities are the structured objects your application revolves around—think users, tasks, campaigns, tickets, and so on. They represent the core data models your APIs act upon.
 
-## Popular Tool Combinations
+Adopt auto-discovers Entities from two key sources:
 
-### Customer Support Agent
-- CRM integration + Email tools + Knowledge base search
-- Ticket management + Live chat + Escalation workflows
+- **Your API specification** – to extract parameters, schema definitions, and object relationships.
+- **Your Knowledge Base** – to enrich Entities with context, terminology, and usage examples.
 
-### Sales Assistant
-- CRM integration + Calendar management + Email automation
-- Lead scoring + Proposal generation + Follow-up scheduling
+Each Entity is defined with a name, type (object, enum, etc.), and sample values. This makes them both human-readable and model-friendly.
 
-### Data Analyst Agent
-- Database connectors + Visualization tools + Report generation
-- Statistical analysis + Dashboard creation + Alert systems
+### **Why Entities matter →**
 
-## Troubleshooting Common Issues
+Entities play a critical role in helping the agent reason about your application’s data and execute API calls with precision.
 
-### Connection Problems
-- Verify API credentials and permissions
-- Check network connectivity and firewall settings
-- Review rate limits and usage quotas
-- Test connections in isolation
+They:
 
-### Performance Issues
-- Optimize tool configurations for speed
-- Implement caching where appropriate
-- Monitor resource usage and bottlenecks
-- Consider tool load balancing
+- Make API calls *accurate* by supplying structured values like IDs, names, or enum options.
+- Help interpret user intent (“Update John’s task” → Who’s John? What task?).
+- Ground the prompts so the LLM knows what’s possible and what’s not.
 
-## Next Steps
+**A quick example →** 
 
-After reviewing the available tools:
-1. **Select Core Tools**: Choose the essential tools for your use case
-2. **Configure Connections**: Set up authentication and permissions
-3. **Review Actions**: Understand how tools work with agent actions
-4. **Begin Testing**: Start with simple tool interactions in the playground
+Let’s say your app has a `Campaign` object. We’ll create a `Campaign` Entity with properties like:
 
-Understanding the tools available in the Agent Builder is fundamental to creating powerful, integrated AI experiences for your users. 
+- `campaign_name`
+- `campaign_id`
+- `status` (active, paused, draft)
+
+Now when a user says, “Pause the summer campaign,” your agent will:
+
+1. Look up known Campaigns
+2. Match “summer campaign” to the right one
+3. Trigger the correct API call with the appropriate ID and status

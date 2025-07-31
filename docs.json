@@ -20,11 +20,11 @@
         "tab": "Documentation",
         "groups": [
           {
-            "group": "Foundational Concepts",
+            "group": "Home",
             "pages": [
               "essentials/introduction",
               {
-                "group": "Key Concepts",
+                "group": "Our Products",
                 "pages": [
                   "essentials/agent-builder",
                   "essentials/agent-experience"
@@ -33,7 +33,7 @@
             ]
           },
           {
-            "group": "Use Cases",
+            "group": "Workflows & Use Cases",
             "pages": [
               {
                 "group": "Getting Started with Adopt",
