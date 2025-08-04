@@ -1,11 +1,20 @@
 ---
-title: 'Reviewing Tools on the Agent Builder'
-description: 'Explore and understand the various tools available in the Agent Builder'
-icon: 'wrench'
+title: "Reviewing Tools on the Agent Builder"
+description: "Explore and understand the various tools available in the Agent Builder"
+icon: "wrench"
 ---
 
-Now that the 24-hour discovery period is complete, you'll get access to the Agent Builder Platform. You can read more about what the Agent Builder is here. 
-This is the first screen you’ll see when you login and it highlights all the tools and actions that have been auto-generated for you to explore. 
+Now that the 24-hour discovery period is complete, you'll get access to the Agent Builder Platform. You can read more about what the Agent Builder is here.
+
+## Video Walkthrough
+
+You can view a complete walkthrough of the Tools tab in the video below, or keep reading for a detailed breakdown.
+
+\<ADD VIDEO HERE\>
+
+## Notes
+
+This is the first screen you’ll see when you login and it highlights all the tools and actions that have been auto-generated for you to explore.
 
 ![Reviewing_Tools_1](/images/Reviewing_Tools_1.png)
 
@@ -21,17 +30,17 @@ Each of these components works together to power the Actions your users will per
 
 ![Reviewing_Tools_2](/images/Reviewing_Tools_2.png)
 
-Let’s do a quick deep dive into two key tools - API’s and Entities. 
+Let’s do a quick deep dive into two key tools - API’s and Entities.
 
 ### The APIs Tab
 
 The APIs tab gives you a clear view of all the endpoints we found—basically every action your users can take in your app, traced back to its underlying API call. It's all organized in one place for easy browsing.
 
-**Click any row to see the details →** 
+**Click any row to see the details →**
 
 Each API has been made LLM ready - with a clear title, description, and sample prompts that help the language models understand what each endpoint does and when to use it.
 
-You can also view the sample headers, payload structures, and response outputs for any specific endpoint here. 
+You can also view the sample headers, payload structures, and response outputs for any specific endpoint here.
 
 ![Reviewing_Tools_3](/images/Reviewing_Tools_3.png)
 
@@ -54,11 +63,11 @@ Entities play a critical role in helping the agent reason about your application
 
 They:
 
-- Make API calls *accurate* by supplying structured values like IDs, names, or enum options.
+- Make API calls _accurate_ by supplying structured values like IDs, names, or enum options.
 - Help interpret user intent (“Update John’s task” → Who’s John? What task?).
 - Ground the prompts so the LLM knows what’s possible and what’s not.
 
-**A quick example →** 
+**A quick example →**
 
 Let’s say your app has a `Campaign` object. We’ll create a `Campaign` Entity with properties like:
 

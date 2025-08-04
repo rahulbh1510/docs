@@ -1,188 +1,57 @@
 ---
-title: 'Reviewing Actions on the Agent Builder'
-description: 'Understanding and exploring the different actions your AI agents can perform'
-icon: 'play'
+title: "Reviewing Actions on the Agent Builder"
+description: "Understanding and exploring the different actions your AI agents can perform"
+icon: "play"
 ---
 
-# Reviewing Actions on the Agent Builder
+Now that your Tools (APIs, Entities, Pages, and Knowledge Base content) have been discovered and defined, it's time to see what they’ve helped create—**Actions**.
 
-Actions are the specific tasks and behaviors that your AI agents can perform. They define what your agent can do in response to user requests and represent the core functionality of your AI assistant.
+### What’s an Action?
 
-## What Are Actions?
+An **Action** is a single, well-defined task that a user can perform inside your product—like _“Create a new campaign,”_ _“Update user access,”_ or _“Show me this month’s spend.”_
 
-Actions are predefined or custom-built functions that enable your agents to:
-- Execute specific tasks
-- Interact with external systems
-- Process and manipulate data
-- Respond to user queries with dynamic content
-- Trigger workflows and automations
+Actions are what power the Agent’s capabilities. They're how natural language inputs like “Cancel John’s license” get translated into structured API calls and real outcomes. In short, **Actions are what your agent can do.**
 
-## Types of Actions
+Every Action combines your tools—API endpoints, Pages, KB content—into a usable command the agent can understand and execute.
 
-### Built-in Actions
-Pre-configured actions that come ready to use:
+You can watch the video below for a complete walkthrough of the Actions tab inside the Agent Builder platform, or keep reading for a step-by-step breakdown.
 
-**Communication Actions**
-- Send email notifications
-- Post messages to chat platforms
-- Make phone calls or send SMS
-- Create calendar invitations
+\<ADD VIDEO HERE\>
 
-**Data Actions**
-- Query databases
-- Fetch information from APIs
-- Parse and process files
-- Generate reports and summaries
+### The Actions Dashboard
 
-**Workflow Actions**
-- Create tasks in project management tools
-- Update CRM records
-- Trigger approval processes
-- Schedule follow-up activities
+![Screenshot2025 07 07at10 40 32AM Pn](/images/Screenshot2025-07-07at10.40.32AM.png)
 
-### Custom Actions
-Tailored actions built for specific use cases:
+From the **Actions** tab inside the Agent Builder, you’ll see a full list of all the Actions Adopt has generated for your app. 
 
-**Business Logic Actions**
-- Calculate pricing and quotes
-- Process order fulfillments
-- Generate custom documents
-- Validate business rules
+Here's a quick overview of what each column represents →
 
-**Integration Actions**
-- Connect to proprietary systems
-- Sync data between platforms
-- Execute complex multi-step workflows
-- Handle specialized data formats
+| **Action**        | **What It Means**                                                                                                                                                                                                                                       |
+| :---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Type**          | The name of the action the agent can perform. This is usually phrased in natural language for easy scanning—like _“Display all pending tasks”_.                                                                                                         |
+| **Tools**         | The category of action based on intent: <br />• <br />`Assist` – Uses KB content to answer or guide users <br />• <br />`Navigation` – Opens a page or route <br />• <br />`Create`, `Fetch`, `Update`, `Delete` – Standard CRUD actions linked to APIs |
+| **Topics**        | The underlying components (APIs, KB pages, or app routes) that power the action. Actions often pull from multiple tools to execute a complete flow.                                                                                                     |
+| **Last Modified** | High-level product areas or workflows—like _“Spend Management”_ or _“Access Management.”_ These are automatically derived from your Knowledge Base and help categorize where each action belongs.                                                       |
+| **Status**        | The most recent date the action was edited or updated. Helpful for version tracking.                                                                                                                                                                    |
+|                   | A toggle to **Publish** or **Un-publish** an action. Only published actions are available to the end users to use. Keep them unpublished until fully reviewed.                                                                                          |
 
-## Action Components
+### How Actions Come Together
 
-### Input Parameters
-- **Required Fields**: Information the action needs to execute
-- **Optional Parameters**: Additional configuration options
-- **Data Types**: Text, numbers, dates, files, and structured data
-- **Validation Rules**: Ensuring input meets requirements
+To recap:
 
-### Processing Logic
-- **Core Functionality**: What the action actually does
-- **Error Handling**: How the action responds to problems
-- **Conditional Logic**: Different behaviors based on input
-- **Business Rules**: Specific requirements and constraints
+- **APIs** define what can be done
+- **Entities** help fill in the right data
+- **Pages** define where to go
+- **KB content** supports guidance and context
 
-### Output Results
-- **Return Values**: Data or confirmations sent back to the agent
-- **Status Indicators**: Success, failure, or partial completion
-- **Error Messages**: Detailed information about any issues
-- **Formatted Responses**: User-friendly result presentation
+All of that comes together into **Actions**—the building blocks of your agent’s capabilities.
 
-## Action Categories
+## You're All Set\!
 
-### Information Retrieval
-- **Knowledge Base Search**: Find answers in documentation
-- **Data Lookup**: Retrieve specific records or information
-- **Web Search**: Gather information from online sources
-- **File Access**: Read documents and extract content
+If you've read this far, you've got the essentials down—how Adopt discovers your tools, maps your entities, and generates actions that actually work. Nice job.
 
-### Task Execution
-- **Process Automation**: Complete multi-step procedures
-- **System Updates**: Modify records and configurations
-- **Notification Delivery**: Send alerts and reminders
-- **Workflow Triggers**: Initiate business processes
+**What's next?**
 
-### Analysis and Reporting
-- **Data Analysis**: Perform calculations and generate insights
-- **Report Creation**: Build formatted documents and presentations
-- **Visualization**: Create charts and graphs
-- **Trend Analysis**: Identify patterns and anomalies
+Now that you've got the foundation down, you might want to dive into particular use cases.
 
-## Action Configuration
-
-### Setting Up Actions
-1. **Action Selection**: Choose from available actions or create new ones
-2. **Parameter Configuration**: Define required inputs and options
-3. **Permission Setup**: Control who can trigger which actions
-4. **Testing and Validation**: Ensure actions work as expected
-
-### Action Flows
-- **Sequential Actions**: Chain actions together in order
-- **Conditional Actions**: Execute actions based on conditions
-- **Parallel Actions**: Run multiple actions simultaneously
-- **Loop Actions**: Repeat actions with different parameters
-
-## Best Practices
-
-### Action Design
-- **Single Responsibility**: Each action should have one clear purpose
-- **Robust Error Handling**: Plan for and handle edge cases
-- **Clear Documentation**: Describe what each action does and requires
-- **User-Friendly Outputs**: Return results in understandable formats
-
-### Performance Optimization
-- **Efficient Processing**: Minimize resource usage and response time
-- **Caching Strategy**: Store frequently accessed data temporarily
-- **Rate Limiting**: Respect API limits and system constraints
-- **Monitoring**: Track action performance and success rates
-
-### Security Considerations
-- **Input Validation**: Verify all parameters before processing
-- **Permission Checks**: Ensure users are authorized for actions
-- **Data Protection**: Handle sensitive information appropriately
-- **Audit Logging**: Track action execution for compliance
-
-## Common Action Patterns
-
-### Customer Service Actions
-- Look up customer information
-- Create support tickets
-- Send status updates
-- Escalate to human agents
-
-### Sales Support Actions
-- Generate quotes and proposals
-- Schedule demonstrations
-- Update lead information
-- Process orders
-
-### Administrative Actions
-- Schedule meetings
-- Book resources
-- Send reminders
-- Generate reports
-
-## Testing Actions
-
-### Development Testing
-- **Unit Testing**: Test individual actions in isolation
-- **Integration Testing**: Verify actions work with connected systems
-- **User Acceptance Testing**: Ensure actions meet business requirements
-- **Performance Testing**: Validate response times and resource usage
-
-### Production Monitoring
-- **Success Rate Tracking**: Monitor how often actions complete successfully
-- **Performance Metrics**: Track response times and resource consumption
-- **Error Analysis**: Review and address common failure patterns
-- **User Feedback**: Collect input on action effectiveness
-
-## Troubleshooting Actions
-
-### Common Issues
-- **Permission Errors**: Verify authentication and authorization settings
-- **Data Format Problems**: Check input validation and formatting
-- **Timeout Issues**: Optimize processing or increase time limits
-- **Integration Failures**: Test connections to external systems
-
-### Debugging Techniques
-- **Log Analysis**: Review detailed execution logs
-- **Step-by-Step Testing**: Isolate issues by testing components separately
-- **Data Validation**: Verify input and output data at each stage
-- **Environment Comparison**: Test in different environments
-
-## Next Steps
-
-After reviewing available actions:
-1. **Map Use Cases**: Identify which actions support your agent's goals
-2. **Plan Action Flows**: Design how actions will work together
-3. **Configure Priority Actions**: Set up the most important actions first
-4. **Begin Building**: Start creating your agent with selected actions
-
-Understanding actions is crucial for building agents that can effectively help users accomplish their goals and integrate seamlessly with existing business processes. 
+Head over to our **Use Cases** section to learn how to create and edit actions, test them before going live, monitor agent performance, and all the other ways you can fine-tune your agentic experience.

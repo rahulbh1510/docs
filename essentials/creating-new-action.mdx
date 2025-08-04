@@ -1,263 +1,104 @@
 ---
-title: 'Creating a New Action'
-description: 'Step-by-step guide to creating custom actions for your AI agents'
-icon: 'plus'
+title: "Creating a New Action"
+description: "Step-by-step guide to creating custom actions for your AI agents"
+icon: "plus"
 ---
 
-# Creating a New Action
+Creating custom Actions is one of the most powerful features of the Agent Builder platform. This page walks you through how to define your own Actions from scratch using natural language commands.
 
-Actions are the building blocks that define what your AI agents can do. Creating new actions allows you to extend your agent's capabilities with custom functionality tailored to your specific use cases.
+Watch the video walkthrough below for a quick demo, or keep scrolling for the step-by-step explanation.
 
-## Getting Started
+Let's Dive In
 
-### Action Planning
-Before creating an action, consider:
-- **Purpose**: What specific task will this action accomplish?
-- **Inputs**: What information does the action need to work?
-- **Outputs**: What should the action return or accomplish?
-- **Integration**: What external systems or APIs will it interact with?
+Open the Actions tab in the Agent Builder Platform.
 
-### Prerequisites
-- Access to the Agent Builder
-- Understanding of your use case requirements
-- Any necessary API keys or credentials for integrations
-- Clear definition of the action's scope and functionality
+Now, you can create an action in 3 simple steps. 
 
-## Action Creation Process
+1. **Step 1 - Click the **`+ New Action`**button**  in the top-right corner of the Actions tab.
+2. **Step 2 - **Add Action Name
+3. Step 3 - Define how this Action works
 
-### Step 1: Access the Action Builder
-1. Navigate to the Agent Builder in your AdoptAI dashboard
-2. Go to the "Actions" section
-3. Click "Create New Action"
-4. Choose your action template or start from scratch
+### Fill in the Action Name
 
-### Step 2: Define Basic Information
-**Action Details**
-- **Name**: Give your action a clear, descriptive name
-- **Description**: Explain what the action does and when to use it
-- **Category**: Assign to an appropriate category for organization
-- **Tags**: Add searchable tags for easy discovery
+After clicking the `+ New Action` button, you'll be asked to fill in the Action Name.This is what you want to call the action. We recommend starting with a verb so it’s immediately clear what it does.
 
-**Version Information**
-- **Version Number**: Start with 1.0.0 for new actions
-- **Change Log**: Document what this version includes
-- **Status**: Set to "Development" during creation
+Examples:
 
-### Step 3: Configure Input Parameters
-Define what information your action needs:
+- `Track license renewals`
+- `Update user permissions`
+- `Cancel unassigned licenses`
 
-**Parameter Types**
-- **Text**: String inputs for names, descriptions, etc.
-- **Number**: Numerical values for calculations
-- **Boolean**: True/false flags for conditions
-- **Date/Time**: Temporal data for scheduling
-- **File**: Document or media uploads
-- **Object**: Complex structured data
+### Define How this Action works
 
-**Parameter Settings**
-- **Required vs Optional**: Mark which parameters must be provided
-- **Default Values**: Set sensible defaults where appropriate
-- **Validation Rules**: Define acceptable input formats and ranges
-- **Help Text**: Provide guidance for users
+<img
+  src="/images/Screenshot2025-07-07at2.15.42PM.png"
+  alt="Screenshot2025 07 07at2 15 42PM Pn"
+  title="Screenshot2025 07 07at2 15 42PM Pn"
+  style={{ width:"71%" }}
+/>
 
-### Step 4: Build the Action Logic
-**Code Editor**
-- Use the built-in code editor to write your action logic
-- Support for multiple programming languages (JavaScript, Python, etc.)
-- Built-in syntax highlighting and error checking
-- Access to AdoptAI SDK and helper functions
+This is the important bit. Here, you’ll describe what the action should do—either as a short paragraph or a list of steps.
 
-**Common Patterns**
-```javascript
-// Example action structure
-async function executeAction(inputs) {
-  try {
-    // Validate inputs
-    if (!inputs.requiredField) {
-      throw new Error('Required field is missing');
-    }
-    
-    // Process the request
-    const result = await processRequest(inputs);
-    
-    // Return structured response
-    return {
-      success: true,
-      data: result,
-      message: 'Action completed successfully'
-    };
-  } catch (error) {
-    return {
-      success: false,
-      error: error.message,
-      message: 'Action failed to execute'
-    };
-  }
-}
-```
+You don’t need to know the exact API or underlying tools. Just describe what the agent should accomplish. If you have a clear step-by-step in mind, even better. The more detail you provide, the better our AI can build a fully functional action.
 
-### Step 5: Configure Output Format
-**Response Structure**
-- **Success Indicators**: Clear success/failure status
-- **Data Payload**: The actual results or information
-- **Error Handling**: Detailed error messages and codes
-- **Metadata**: Additional context about the execution
+**Here’s an example of a good prompt →**
 
-**Output Types**
-- **Simple Response**: Text or basic data
-- **Structured Data**: JSON objects with multiple fields
-- **File Output**: Generated documents or media
-- **Stream Response**: Real-time data feeds
+Let’s say you want to track license renewals in a spend management application. A strong prompt might look like this:
 
-### Step 6: Set Up Integrations
-**External APIs**
-- Configure authentication credentials
-- Set up endpoint URLs and methods
-- Define request/response mapping
-- Handle rate limiting and retries
+> _Let users check which application renewals are coming up soon. They should be able to choose a timeframe like "next month" or a custom date range. Optionally, let them filter by specific applications._
+>
+> **_Step-by-step:_**
+>
+> 1. _Ask the user what timeframe to check_
+> 2. _If "next month," calculate the date range_
+> 3. _Return a list of upcoming renewals grouped by application_
 
-**Database Connections**
-- Configure connection strings
-- Set up query templates
-- Handle connection pooling
-- Implement security best practices
+### Get Live Feedback as You Type
 
-**Third-Party Services**
-- Set up service-specific SDKs
-- Configure webhooks if needed
-- Handle authentication flows
-- Manage service quotas and limits
+![Screenshot 2025-08-03 at 8.25.44 PM.png](/images/Screenshot2025-08-03at8.25.44PM.png)
 
-## Advanced Configuration
+As you fill in the “How this action works” field, you’ll see real-time suggestions below it.
 
-### Error Handling
-**Comprehensive Error Management**
-- Input validation errors
-- Network connectivity issues
-- API rate limit handling
-- Timeout management
-- Graceful degradation strategies
+This feedback helps improve your input so the LLM understands the task better—and builds the most accurate version of the Action.
 
-**Error Response Format**
-```json
-{
-  "success": false,
-  "error": {
-    "code": "VALIDATION_ERROR",
-    "message": "Invalid input parameter",
-    "details": {
-      "field": "email",
-      "issue": "Invalid email format"
-    }
-  }
-}
-```
+### Submit Action
 
-### Security Considerations
-**Data Protection**
-- Encrypt sensitive parameters
-- Sanitize all inputs
-- Implement proper authentication
-- Log security events
-- Follow principle of least privilege
+![Screenshot2025 07 07at2 21 57PM(1) Pn](/images/Screenshot2025-07-07at2.21.57PM\(1\).png)
 
-**Access Control**
-- Define who can use the action
-- Set up role-based permissions
-- Implement usage quotas
-- Monitor for abuse
+Click `Create Action`to save your new action.
 
-### Performance Optimization
-**Efficiency Best Practices**
-- Minimize external API calls
-- Implement caching where appropriate
-- Use asynchronous processing
-- Optimize database queries
-- Handle concurrent requests
+Once submitted, it’ll take about 10–15 seconds for our AI to process your input, understand the intent, and generate the action logic behind the scenes.
 
-**Resource Management**
-- Set appropriate timeouts
-- Limit memory usage
-- Monitor CPU consumption
-- Implement graceful shutdowns
+## Inside the Action Details Page
 
-## Testing During Development
+Once your action is created—either by you or auto-generated by Adopt—you’ll be taken to the **Action Details Page**. This is your command center for reviewing, testing, and fine-tuning how the agent will execute this action.
 
-### Unit Testing
-- Test individual functions in isolation
-- Verify input validation logic
-- Check error handling paths
-- Validate output formats
+![Screenshot2025 07 07at2 22 29PM Pn](/images/Screenshot2025-07-07at2.22.29PM.png)
 
-### Integration Testing
-- Test with real external services
-- Verify end-to-end workflows
-- Check authentication flows
-- Validate data transformations
+Here’s a quick walkthrough of the key sections you’ll see:
 
-### Mock Testing
-- Use test data for development
-- Simulate various scenarios
-- Test edge cases and failures
-- Verify performance under load
+### **Description**
 
-## Documentation
+This is a high-level summary of what the action does, written in natural language. It’s auto-generated based on your inputs when creating the action—think of it as a quick confirmation that the agent has understood your intent correctly.
 
-### Code Documentation
-- Add inline comments explaining complex logic
-- Document all parameters and return values
-- Include usage examples
-- Maintain version history
+### **Instructions**
 
-### User Documentation
-- Write clear usage instructions
-- Provide parameter descriptions
-- Include common use cases
-- Add troubleshooting guides
+Instructions are the heart of the action. This section outlines the step-by-step logic the agent will follow to complete the task—from gathering user input to calling APIs and formatting outputs.
 
-## Deployment Preparation
+You’ll be able to edit, reorder, delete, or add new steps as needed (we’ll cover that in detail next).
 
-### Pre-Deployment Checklist
-- [ ] All tests passing
-- [ ] Documentation complete
-- [ ] Security review conducted
-- [ ] Performance benchmarks met
-- [ ] Error handling validated
-- [ ] Integration endpoints verified
+### **Test Action (Right-side Panel)**
 
-### Version Management
-- Tag stable versions
-- Maintain backward compatibility
-- Document breaking changes
-- Plan migration strategies
+On the right side of the page, you’ll find the **Test Action** panel. This is where you can see your action in motion.
 
-## Best Practices
+Type in a natural language prompt—just like your end user would—and the agent will attempt to execute the action using the steps you’ve defined in the Instructions. It’s a quick way to validate whether the action behaves as expected.
 
-### Code Quality
-- Follow consistent coding standards
-- Use meaningful variable names
-- Keep functions focused and small
-- Implement proper logging
+### **Example Prompts**
 
-### Maintainability
-- Write modular, reusable code
-- Use configuration files for settings
-- Implement comprehensive testing
-- Keep dependencies up to date
+Below the test box, you’ll see a list of **example prompts**. These are clickable and serve as useful reference points—they highlight common phrases or variations that would trigger this action.
 
-### User Experience
-- Provide clear error messages
-- Return results in expected formats
-- Handle edge cases gracefully
-- Optimize for common use cases
+Clicking on any of these will run the test automatically, letting you observe how the agent handles different language inputs.
 
-## Next Steps
-
-Once your action is created:
-1. **Test Thoroughly**: Use the testing environment to validate functionality
-2. **Document Usage**: Create comprehensive user documentation
-3. **Deploy to Staging**: Test in a production-like environment
-4. **Gather Feedback**: Get input from intended users
-5. **Deploy to Production**: Make available to your agents
-
-Creating effective actions is key to building powerful AI agents that can accomplish complex tasks and provide real value to your users. 
+<Info>
+  Don't worry - your action isn’t limited to just these phrases. Adopt’s agent is built to understand a wide range of natural language inputs and will dynamically map user intent to the right action, even if the phrasing changes.
+</Info>
