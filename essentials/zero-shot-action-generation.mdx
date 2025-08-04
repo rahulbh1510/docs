@@ -1,0 +1,61 @@
+---
+title: "Zero Shot Action Generation (ZACTION)"
+description: "Description of your new file."
+---
+
+## What is ZACTION?
+
+ZACTION is Adopt’s proprietary system that transforms your discovered [**Tools**](/essentials/reviewing-tools)—including APIs, entities, and KB content—into interactive, executable agent programs called [**Actions.**](/essentials/reviewing-actions)
+
+Think of Actions as the operational units your agent uses to get things done.
+
+For example:
+
+“Generate invoice,” “Update user permissions,” or “Get this week’s campaign performance.”
+
+Each of these is an **Action**—and ZACTION is what builds them.
+
+Actions are designed to be triggered via natural language, gather any required inputs from the user, and safely execute the corresponding API call. No manual wiring, no custom glue code.
+
+## How It Works
+
+ZACTION picks up where [ZAPI](/essentials/zero-shot-api-ingestion) leaves off.
+
+Once your APIs, entities, and other resources have been discovered and structured inside the [**Tools Dashboard**](/essentials/reviewing-tools), ZACTION uses that foundation to automatically generate Actions.
+
+![Screenshot2025 07 24at12 25 44PM(1) Pn](/images/Screenshot2025-07-24at12.25.44PM\(1\).png)
+
+Each Action contains:
+
+- A **natural language trigger** (e.g., “Send renewal email to all customers in North America”)
+- One or more **underlying APIs** to call
+- A dynamic **input schema** to collect required user inputs
+- A safe, testable **execution flow** with step-by-step instructions
+- A **response formatter** to structure the output (tables, lists, summaries, etc.)
+
+These Actions are visible and manageable inside the **Actions tab** of the Agent Builder.
+
+You can:
+
+- [Review or edit any action’s structure](/essentials/editing-actions)
+- Add or adjust logic through instruction steps
+- [Test actions with prompts before publishing](/essentials/testing-actions)
+
+---
+
+## Key Benefits of ZACTION
+
+1. **Zero manual effort - **No need to write frontend code, design forms, or build integrations. Actions are fully generated.
+2. **Multiple variations per API - **One API can generate multiple Actions, covering different intents and query styles.
+3. **Composable primitives - **Actions can be reused, chained, or enhanced to create more advanced workflows.
+4. **LLM-ready execution - **All Actions are formatted for natural language processing—so agents know when and how to use them.
+
+## Why ZACTION Matters
+
+Agentic applications need more than just API awareness—they need operational logic.
+
+ZACTION fills that gap.
+
+It turns the raw capabilities of your app into discrete, callable functions the agent can execute confidently.
+
+You don’t just get a list of APIs—you get a library of intelligent, ready-to-run agent instructions.

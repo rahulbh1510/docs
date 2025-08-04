@@ -73,7 +73,8 @@
           {
             "group": "Features",
             "pages": [
-            "essentials/zero-shot-api-ingestion"
+            "essentials/zero-shot-api-ingestion",
+            "essentials/zero-shot-action-generation"
             ]
           }
         ]
