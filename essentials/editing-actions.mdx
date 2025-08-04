@@ -1,348 +1,51 @@
 ---
-title: 'Editing Actions'
-description: 'Learn how to modify, update, and maintain existing actions in your AI agents'
-icon: 'pencil'
+title: "Editing Actions"
+description: "Explore how to fine-tune an Action’s logic by modifying its instruction steps. You’ll learn about step types, editing in natural language or JSON, and how to adapt behavior to fit your application."
+icon: "pencil"
 ---
 
-# Editing Actions
+Now that you’ve created a new action, you’ll land on the Action Details page — your control center for reviewing, refining, and testing how the agent will execute that task.
 
-Editing actions is a crucial part of maintaining and improving your AI agents. Whether you're fixing bugs, adding new features, or optimizing performance, understanding how to safely modify existing actions is essential.
+You can watch the quick video walkthrough below to see how to Edit actions, or read through the detailed notes to explore each part of the interface.
 
-## When to Edit Actions
+\<INSERT VIDEO\>
 
-### Common Scenarios
-- **Bug Fixes**: Resolving errors or unexpected behaviors
-- **Feature Enhancements**: Adding new capabilities or parameters
-- **Performance Improvements**: Optimizing speed or resource usage
-- **Integration Updates**: Adapting to changes in external APIs
-- **Security Updates**: Addressing security vulnerabilities
-- **User Feedback**: Incorporating suggestions from users
+## Editing Steps in an Action
 
-### Planning Your Edits
-Before making changes:
-- **Assess Impact**: Understand how changes affect existing workflows
-- **Version Strategy**: Plan for backward compatibility
-- **Testing Approach**: Define how you'll validate changes
-- **Rollback Plan**: Prepare for potential issues
+![Screenshot2025 07 07at2 25 22PM Pn](/images/Screenshot2025-07-07at2.25.22PM.png)
 
-## Accessing Action Editor
+Every Action is made up of a set of instruction steps—these define the logic your agent will follow when the Action is triggered.
 
-### Finding Your Action
-1. Navigate to the Agent Builder dashboard
-2. Go to the "Actions" section
-3. Use search or filters to locate your action
-4. Click on the action name to open the editor
+You can **edit**, **delete**, or **add new steps** to any Action. This gives you full control over how the agent behaves.
 
-### Editor Interface
-**Main Components**
-- **Code Editor**: Where you modify the action logic
-- **Parameter Panel**: Configure inputs and outputs
-- **Version History**: Track changes over time
-- **Testing Panel**: Validate your modifications
-- **Documentation Section**: Update usage instructions
+### Select Step Type
 
-## Types of Edits
+When editing a step, the first thing you’ll select is the **Step Type**. Adopt supports six core step types:
 
-### Code Modifications
-**Logic Updates**
-- Improving algorithms and calculations
-- Adding conditional logic and branching
-- Optimizing data processing workflows
-- Implementing new business rules
+![Screenshot2025 07 07at2 31 29PM Pn](/images/Screenshot2025-07-07at2.31.29PM.png)
 
-**Error Handling Improvements**
-```javascript
-// Before: Basic error handling
-function processData(input) {
-  const result = externalAPI.call(input);
-  return result;
-}
+1. **User Input** – Asks the user for specific information (e.g., “What timeframe do you want to check?”).
+2. **API Call** – Calls an external API using configured inputs.
+3. **Filter** – Filters a dataset or response (e.g., show only active users).
+4. **Output** – Displays a message or result back to the user.
+5. **Condition** – Adds branching logic (e.g., if-else based on user input or API response).
+6. **Loop** – Repeats a block of steps for each item in a list.
 
-// After: Comprehensive error handling
-async function processData(input) {
-  try {
-    validateInput(input);
-    const result = await externalAPI.call(input);
-    return {
-      success: true,
-      data: result,
-      timestamp: new Date().toISOString()
-    };
-  } catch (error) {
-    logError(error, input);
-    return {
-      success: false,
-      error: error.message,
-      errorCode: error.code || 'UNKNOWN_ERROR'
-    };
-  }
-}
-```
+### Add Step Description
 
-### Parameter Changes
-**Adding New Parameters**
-- Define new input fields
-- Set default values for backward compatibility
-- Update validation rules
-- Document new parameter usage
+![Screenshot2025 08 04at12 11 50PM Pn](/images/Screenshot2025-08-04at12.11.50PM.png)
 
-**Modifying Existing Parameters**
-- Change data types carefully
-- Update validation constraints
-- Maintain backward compatibility
-- Provide migration guidance
+After selecting the Step Type, you’ll add a **natural language description** of what the step should do. This helps our AI generate the corresponding JSON logic that powers the agent's execution under the hood.
 
-**Removing Parameters**
-- Mark as deprecated first
-- Provide sunset timeline
-- Update documentation
-- Plan for cleanup
+### Manually Configure Step JSON
 
-### Integration Updates
-**API Endpoint Changes**
-- Update URLs and authentication
-- Modify request/response formats
-- Handle versioning differences
-- Test connectivity thoroughly
+![Screenshot2025 08 04at12 11 57PM Pn](/images/Screenshot2025-08-04at12.11.57PM.png)
 
-**Database Schema Updates**
-- Adapt to new table structures
-- Update query logic
-- Handle data migration
-- Test with real data
+You can also **manually edit the JSON** if you need to fine-tune anything. 
 
-## Version Management
+<Info>
+  The step’s JSON logic is auto-generated based on the Step Type and description you provide — no manual editing required.\
+  But if you want more control, you can open the JSON editor and fine-tune it directly.
+</Info>
 
-### Version Control Strategy
-**Semantic Versioning**
-- **Major (X.0.0)**: Breaking changes
-- **Minor (0.X.0)**: New features, backward compatible
-- **Patch (0.0.X)**: Bug fixes and small improvements
-
-**Version Documentation**
-```json
-{
-  "version": "2.1.3",
-  "changelog": {
-    "2.1.3": "Fixed timeout handling in API calls",
-    "2.1.2": "Improved error message clarity",
-    "2.1.0": "Added support for batch processing",
-    "2.0.0": "Complete rewrite with new API structure"
-  }
-}
-```
-
-### Branching Strategy
-**Development Workflow**
-1. **Create Branch**: Start from the latest stable version
-2. **Make Changes**: Implement your modifications
-3. **Test Thoroughly**: Validate all scenarios
-4. **Code Review**: Get peer feedback
-5. **Merge**: Deploy to production
-
-**Branch Types**
-- **Feature Branches**: New functionality
-- **Hotfix Branches**: Critical bug fixes
-- **Release Branches**: Prepare for deployment
-- **Maintenance Branches**: Long-term support
-
-## Testing Edited Actions
-
-### Pre-Edit Testing
-**Baseline Establishment**
-- Run comprehensive tests on current version
-- Document expected behaviors
-- Capture performance metrics
-- Record all edge cases
-
-### Post-Edit Testing
-**Validation Checklist**
-- [ ] All existing functionality still works
-- [ ] New features work as expected
-- [ ] Error handling is robust
-- [ ] Performance meets requirements
-- [ ] Security vulnerabilities are addressed
-- [ ] Documentation is updated
-
-### Testing Strategies
-**Unit Testing**
-```javascript
-// Test specific functions
-describe('Data Processing', () => {
-  test('handles valid input correctly', () => {
-    const input = { name: 'test', value: 123 };
-    const result = processData(input);
-    expect(result.success).toBe(true);
-  });
-  
-  test('handles invalid input gracefully', () => {
-    const input = { invalid: 'data' };
-    const result = processData(input);
-    expect(result.success).toBe(false);
-    expect(result.error).toBeDefined();
-  });
-});
-```
-
-**Integration Testing**
-- Test with real external services
-- Validate complete workflows
-- Check authentication flows
-- Verify data consistency
-
-**Regression Testing**
-- Ensure old functionality still works
-- Test with historical data
-- Validate backward compatibility
-- Check dependent actions
-
-## Deployment Process
-
-### Staged Deployment
-**Development Environment**
-- Initial testing and validation
-- Code review and approval
-- Documentation updates
-- Security scanning
-
-**Staging Environment**
-- Production-like testing
-- Performance benchmarking
-- User acceptance testing
-- Final validation
-
-**Production Environment**
-- Gradual rollout strategy
-- Monitoring and alerting
-- Rollback preparation
-- Post-deployment validation
-
-### Rollback Strategy
-**When to Rollback**
-- Critical bugs discovered
-- Performance degradation
-- Security vulnerabilities
-- User-reported issues
-
-**Rollback Process**
-1. **Immediate Action**: Stop deployment if ongoing
-2. **Assess Impact**: Understand scope of issues
-3. **Execute Rollback**: Revert to previous version
-4. **Communicate**: Notify stakeholders
-5. **Investigate**: Determine root cause
-6. **Plan Fix**: Prepare corrected version
-
-## Best Practices
-
-### Code Quality
-**Maintain Standards**
-- Follow established coding conventions
-- Use consistent naming patterns
-- Keep functions focused and small
-- Add meaningful comments
-
-**Security Considerations**
-- Validate all inputs thoroughly
-- Sanitize outputs appropriately
-- Use secure communication protocols
-- Implement proper authentication
-
-### Change Management
-**Documentation**
-- Update all relevant documentation
-- Include migration guides if needed
-- Provide clear changelog entries
-- Update API documentation
-
-**Communication**
-- Notify affected users in advance
-- Provide training if needed
-- Share release notes
-- Gather feedback post-deployment
-
-### Performance Monitoring
-**Key Metrics**
-- Response time changes
-- Error rate variations
-- Resource usage patterns
-- User satisfaction scores
-
-**Alerting**
-- Set up monitoring for critical metrics
-- Define threshold alerts
-- Implement automated rollback triggers
-- Track performance trends
-
-## Common Pitfalls
-
-### Avoiding Problems
-**Breaking Changes**
-- Always consider backward compatibility
-- Provide migration paths
-- Communicate changes clearly
-- Test with existing integrations
-
-**Performance Issues**
-- Profile code before and after changes
-- Monitor resource usage
-- Test under realistic load
-- Optimize critical paths
-
-**Security Vulnerabilities**
-- Review all input validation
-- Check authentication flows
-- Validate authorization logic
-- Scan for common vulnerabilities
-
-## Troubleshooting Edits
-
-### Common Issues
-**Compilation Errors**
-- Check syntax carefully
-- Verify all imports and dependencies
-- Validate configuration settings
-- Review error messages thoroughly
-
-**Runtime Errors**
-- Test with various input scenarios
-- Check external service availability
-- Validate environment configuration
-- Review error logs
-
-**Performance Problems**
-- Profile critical code paths
-- Check for inefficient queries
-- Monitor resource usage
-- Optimize bottlenecks
-
-### Debugging Techniques
-**Logging Strategy**
-```javascript
-function debugProcessing(input) {
-  console.log('Processing started:', JSON.stringify(input));
-  
-  try {
-    const validated = validateInput(input);
-    console.log('Validation passed:', validated);
-    
-    const result = processData(validated);
-    console.log('Processing completed:', result);
-    
-    return result;
-  } catch (error) {
-    console.error('Processing failed:', error);
-    throw error;
-  }
-}
-```
-
-## Next Steps
-
-After editing an action:
-1. **Monitor Performance**: Watch for any issues in production
-2. **Gather Feedback**: Collect user input on the changes
-3. **Plan Improvements**: Identify areas for future enhancement
-4. **Update Documentation**: Keep all materials current
-5. **Share Knowledge**: Document lessons learned
-
-Effective action editing ensures your AI agents continue to evolve and improve while maintaining reliability and user satisfaction. 
+Once you’re happy with the step, click **Apply** to save your changes and update the Action.

@@ -1,440 +1,72 @@
 ---
-title: 'Testing Actions'
-description: 'Comprehensive guide to testing your AI agent actions for reliability and performance'
-icon: 'flask'
+title: "Testing Actions"
+description: "Two ways to test—either in the Agent Builder interface or directly in your product via the Prompt Playground. This page explains how to validate the flow, debug step-by-step, and ensure real-world accuracy."
+icon: "flask"
 ---
 
-# Testing Actions
+By this point, you’ve reviewed actions, created your own, edited steps, and explored the Action Details page. Now it’s time to put those actions to the test.
 
-Testing is a critical part of action development that ensures your AI agents work reliably, handle edge cases gracefully, and provide a consistent user experience. Proper testing helps catch issues before they reach production.
+There are **two easy ways to test actions in Adopt**—depending on whether you want to validate the logic behind the scenes or see how the agent behaves inside your actual product.
 
-## Why Testing Matters
+## **Option 1: Test Inside the Agent Builder**
 
-### Benefits of Comprehensive Testing
-- **Reliability**: Ensure actions work consistently across different scenarios
-- **User Experience**: Prevent failures that frustrate users
-- **Maintenance**: Catch regressions when making changes
-- **Confidence**: Deploy with assurance that actions will work
-- **Performance**: Identify and resolve bottlenecks
+We’ve made this super simple.
 
-### Cost of Poor Testing
-- User-facing errors and failures
-- Time spent debugging production issues
-- Damaged user trust and satisfaction
-- Increased support burden
-- Emergency fixes and rollbacks
+Just head into the **Action Details page**, and look over to the **Test Action panel** on the right.
 
-## Testing Environment Setup
+![Screenshot2025 07 10at5 42 59PM Pn](/images/Screenshot2025-07-10at5.42.59PM.png)
 
-### Development Testing Environment
-**Local Testing Setup**
-- Isolated testing environment
-- Mock data and services
-- Debug-friendly configuration
-- Fast iteration cycles
+Here’s how it works:
 
-**Required Components**
-- Test database with sample data
-- Mock external API services
-- Logging and debugging tools
-- Test automation framework
+- Type your **test prompt** into the chat - just like a real user would.
+- Hit **enter**, and watch the agent go to work.
 
-### Staging Environment
-**Production-Like Testing**
-- Mirror production configuration
-- Real external service connections
-- Production-scale data volumes
-- Performance testing capabilities
+As the agent processes the prompt, you’ll see the **Instructions section** on the left light up step-by-step—each one showing a status badge and the time it took to complete.
 
-## Types of Testing
+Once all steps run, the agent’s response appears in the chat window—letting you verify:
 
-### Unit Testing
-Testing individual components and functions in isolation.
+- Which steps were executed
+- How long the action took
+- What the final output looked like
 
-**What to Test**
-- Input validation logic
-- Data transformation functions
-- Business rule calculations
-- Error handling paths
+And if something breaks? No stress. You’ll know exactly **which step** failed. Just click into that step, edit the logic, and re-test until it’s good to go. It’s all live, transparent, and editable.
 
-**Example Unit Test**
-```javascript
-describe('Email Validation', () => {
-  const { validateEmail } = require('../src/validators');
-  
-  test('accepts valid email addresses', () => {
-    const validEmails = [
-      'user@example.com',
-      'test.email+tag@domain.co.uk',
-      'user123@subdomain.domain.org'
-    ];
-    
-    validEmails.forEach(email => {
-      expect(validateEmail(email)).toBe(true);
-    });
-  });
-  
-  test('rejects invalid email addresses', () => {
-    const invalidEmails = [
-      'not-an-email',
-      '@domain.com',
-      'user@',
-      'user space@domain.com'
-    ];
-    
-    invalidEmails.forEach(email => {
-      expect(validateEmail(email)).toBe(false);
-    });
-  });
-});
-```
+## **Option 2: Test in the Prompt Playground (On Your Product UI)**
 
-### Integration Testing
-Testing how different components work together.
+If you want to see how an action behaves _inside your actual product_, just like an end user would experience it, the **Prompt Playground** is the way to go.
 
-**Integration Scenarios**
-- Action-to-action communication
-- External API interactions
-- Database operations
-- Authentication flows
+This flow lets you test any published action directly on your app’s interface - so you can validate not just the logic, but also the feel of the full agent experience.
 
-**Example Integration Test**
-```javascript
-describe('Customer Lookup Action', () => {
-  test('retrieves customer data from CRM', async () => {
-    const customerId = 'test-customer-123';
-    
-    const result = await executeAction('customer-lookup', {
-      customerId: customerId
-    });
-    
-    expect(result.success).toBe(true);
-    expect(result.data.customer).toBeDefined();
-    expect(result.data.customer.id).toBe(customerId);
-  });
-  
-  test('handles non-existent customer gracefully', async () => {
-    const result = await executeAction('customer-lookup', {
-      customerId: 'non-existent-id'
-    });
-    
-    expect(result.success).toBe(false);
-    expect(result.error).toContain('Customer not found');
-  });
-});
-```
+Here’s how to do it:
 
-### End-to-End Testing
-Testing complete user workflows from start to finish.
+1. **Start from the Action Details page**
 
-**E2E Test Scenarios**
-- Complete conversation flows
-- Multi-step processes
-- User journey paths
-- Cross-system integrations
+   Navigate to the action you want to test, and click the `Test In-App` button at the top.
+2. **Don’t have the Chrome extension yet? No problem.**
 
-### Performance Testing
-Evaluating how actions perform under various conditions.
+   If this is your first time, you’ll be prompted to download the [**Adopt AI Chrome Extension**.](https://chromewebstore.google.com/detail/adoptai-copilot/hknjdiahldmenfhmmdcbccpecnpneabk?authuser=0&hl=en) Just click the link in the pop-up and install it from the Chrome Web Store—it takes just a few seconds.
 
-**Performance Metrics**
-- Response time under normal load
-- Throughput with concurrent requests
-- Resource usage patterns
-- Scalability limits
+   <img
+     src="/images/Screenshot2025-07-10at5.47.25PM.png"
+     alt="Screenshot2025 07 10at5 47 25PM Pn"
+     title="Screenshot2025 07 10at5 47 25PM Pn"
+     style={{ width:"60%" }}
+   />
+3. **Input your Test URL**
 
-**Load Testing Example**
-```javascript
-describe('Performance Tests', () => {
-  test('handles concurrent requests', async () => {
-    const concurrentRequests = 50;
-    const promises = [];
-    
-    for (let i = 0; i < concurrentRequests; i++) {
-      promises.push(executeAction('data-processing', {
-        data: generateTestData()
-      }));
-    }
-    
-    const results = await Promise.all(promises);
-    const successCount = results.filter(r => r.success).length;
-    
-    expect(successCount).toBeGreaterThan(concurrentRequests * 0.95);
-  });
-});
-```
+   Once the extension is installed, you’ll be asked to enter the **Test URL -** this is usually your staging or demo environment where the agent is enabled.
 
-## Testing Strategies
+   You can find this URL under **Playground Profiles** in your **Settings**.
+4. **Experience the action in-app**
 
-### Test-Driven Development (TDD)
-**TDD Process**
-1. **Write Test**: Create a failing test for new functionality
-2. **Write Code**: Implement minimal code to pass the test
-3. **Refactor**: Improve code while keeping tests passing
-4. **Repeat**: Continue cycle for each new feature
+   After entering the URL, you’ll be redirected to your test environment. The agent will launch automatically, with your selected action already loaded into the prompt field. You’ll see the full Copilot interface right on top of your app, just like an end user would.
 
-**Benefits**
-- Forces clear requirement definition
-- Ensures comprehensive test coverage
-- Promotes clean, testable code design
-- Provides built-in regression testing
+This is the fastest way to see how your agent behaves in the wild—what prompt is shown, how the UI flows, and how natural it feels in context.
 
-### Behavior-Driven Development (BDD)
-**BDD Approach**
-- Write tests in natural language
-- Focus on user behavior and outcomes
-- Collaborate between technical and business teams
-- Create living documentation
+<Note>
+  **Note** - Even though you launched the Playground from a specific action, once you’re in, you can test any other published action by simply typing in a new prompt.
+</Note>
 
-**Example BDD Test**
-```javascript
-feature('Customer Support Agent')
-  .scenario('User asks for account balance')
-  .given('user is authenticated')
-  .when('user asks "What is my account balance?"')
-  .then('agent should retrieve balance from database')
-  .and('respond with current balance amount')
-  .and('include last transaction date');
-```
-
-### Risk-Based Testing
-**Priority Testing Areas**
-- Critical business functions
-- Complex integration points
-- Error-prone components
-- High-usage features
-- Security-sensitive operations
-
-## Test Data Management
-
-### Test Data Types
-**Static Test Data**
-- Predefined datasets for consistent testing
-- Known input/output pairs
-- Edge case scenarios
-- Invalid data examples
-
-**Dynamic Test Data**
-- Generated data for variety
-- Randomized inputs for robustness
-- Large datasets for performance testing
-- Real-world data patterns
-
-**Test Data Examples**
-```javascript
-const testDataSets = {
-  validCustomers: [
-    {
-      id: 'cust-001',
-      name: 'John Smith',
-      email: 'john@example.com',
-      status: 'active'
-    },
-    {
-      id: 'cust-002',
-      name: 'Jane Doe',
-      email: 'jane@example.com',
-      status: 'pending'
-    }
-  ],
-  
-  invalidInputs: [
-    null,
-    undefined,
-    '',
-    '   ',
-    { malformed: 'object' }
-  ],
-  
-  edgeCases: [
-    { veryLongString: 'a'.repeat(10000) },
-    { specialCharacters: '!@#$%^&*()[]{}|;:,.<>?' },
-    { unicodeText: '测试数据 🎉 émojis' }
-  ]
-};
-```
-
-### Data Privacy in Testing
-**Sensitive Data Handling**
-- Use anonymized or synthetic data
-- Implement data masking techniques
-- Follow privacy regulations (GDPR, CCPA)
-- Secure test data storage and access
-
-## Automated Testing
-
-### Test Automation Framework
-**Framework Components**
-- Test runner and executor
-- Assertion libraries
-- Mock and stub utilities
-- Reporting and analytics
-- Continuous integration hooks
-
-**Automation Best Practices**
-- Maintain test independence
-- Use descriptive test names
-- Keep tests fast and reliable
-- Organize tests logically
-- Regular test maintenance
-
-### Continuous Integration Testing
-**CI/CD Pipeline Integration**
-```yaml
-# Example CI configuration
-test_stage:
-  script:
-    - npm install
-    - npm run test:unit
-    - npm run test:integration
-    - npm run test:e2e
-  coverage: '/Coverage: \d+\.\d+%/'
-  artifacts:
-    reports:
-      junit: test-results.xml
-      coverage_report: coverage/
-```
-
-## Manual Testing
-
-### Exploratory Testing
-**Unscripted Testing Approach**
-- Investigate action behavior naturally
-- Discover unexpected issues
-- Test user experience flows
-- Find edge cases not covered by automation
-
-**Exploratory Testing Techniques**
-- **Tours**: Follow different user paths through the system
-- **Personas**: Test from different user perspectives
-- **Scenarios**: Create realistic usage situations
-- **Questions**: Ask "what if?" questions about behavior
-
-### User Acceptance Testing
-**UAT Process**
-1. **Define Acceptance Criteria**: Clear success metrics
-2. **Create Test Scenarios**: Real-world usage examples
-3. **Execute Tests**: Have actual users test the actions
-4. **Gather Feedback**: Collect detailed user input
-5. **Iterate**: Make improvements based on feedback
-
-## Error Testing
-
-### Error Scenarios
-**Common Error Conditions**
-- Invalid input parameters
-- Network connectivity failures
-- External service timeouts
-- Authentication failures
-- Rate limiting exceeded
-- Resource unavailability
-
-**Error Testing Example**
-```javascript
-describe('Error Handling', () => {
-  test('handles network timeout gracefully', async () => {
-    // Mock network timeout
-    mockExternalAPI.timeout = 30000;
-    
-    const result = await executeAction('api-call', {
-      endpoint: 'https://external-api.com/data'
-    });
-    
-    expect(result.success).toBe(false);
-    expect(result.error).toContain('timeout');
-    expect(result.errorCode).toBe('NETWORK_TIMEOUT');
-  });
-  
-  test('provides helpful error messages', async () => {
-    const result = await executeAction('validate-input', {
-      email: 'invalid-email'
-    });
-    
-    expect(result.success).toBe(false);
-    expect(result.error).toContain('valid email address');
-    expect(result.suggestions).toContain('example@domain.com');
-  });
-});
-```
-
-## Testing Tools and Utilities
-
-### Testing Frameworks
-**Popular Options**
-- **Jest**: JavaScript testing framework
-- **Mocha**: Flexible testing framework
-- **Cypress**: End-to-end testing tool
-- **Postman**: API testing platform
-- **Selenium**: Web application testing
-
-### Mock and Stub Services
-**Mocking Benefits**
-- Isolate components for testing
-- Control external dependencies
-- Simulate various scenarios
-- Speed up test execution
-
-**Mock Implementation**
-```javascript
-// Mock external API service
-const mockCustomerAPI = {
-  getCustomer: jest.fn((id) => {
-    if (id === 'valid-id') {
-      return Promise.resolve({
-        id: 'valid-id',
-        name: 'Test Customer',
-        email: 'test@example.com'
-      });
-    }
-    return Promise.reject(new Error('Customer not found'));
-  })
-};
-```
-
-## Test Reporting and Analysis
-
-### Test Metrics
-**Key Indicators**
-- Test coverage percentage
-- Pass/fail rates
-- Execution time trends
-- Defect discovery rate
-- Test maintenance effort
-
-### Test Reports
-**Report Components**
-- Test execution summary
-- Coverage analysis
-- Performance benchmarks
-- Error trend analysis
-- Recommendations for improvement
-
-## Best Practices
-
-### Test Design
-- **Clear Test Names**: Describe what is being tested
-- **Single Responsibility**: Each test should verify one thing
-- **Independent Tests**: Tests shouldn't depend on each other
-- **Maintainable**: Easy to update when requirements change
-
-### Test Execution
-- **Regular Testing**: Run tests frequently during development
-- **Full Test Suites**: Execute comprehensive tests before releases
-- **Environment Parity**: Test in production-like conditions
-- **Result Analysis**: Investigate and fix failing tests promptly
-
-### Test Maintenance
-- **Keep Tests Updated**: Maintain tests alongside code changes
-- **Remove Obsolete Tests**: Clean up tests for removed features
-- **Refactor Test Code**: Apply same quality standards as production code
-- **Monitor Test Health**: Track and improve test reliability
-
-## Next Steps
-
-After implementing comprehensive testing:
-1. **Monitor Production**: Use testing insights to improve monitoring
-2. **Gather Metrics**: Track the effectiveness of your testing approach
-3. **Iterate and Improve**: Continuously enhance your testing strategy
-4. **Share Knowledge**: Document lessons learned and best practices
-5. **Expand Coverage**: Identify and fill testing gaps
-
-Effective testing is an investment that pays dividends in reliability, user satisfaction, and development velocity. It's the foundation for building trustworthy AI agents that users can depend on. 
+<Note>
+  **Shortcut** - You can also open the Prompt Playground anytime by clicking the Adopt AI Chrome Extension icon from your toolbar—no need to go through the Agent Builder each time.
+</Note>
