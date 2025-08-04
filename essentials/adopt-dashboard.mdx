@@ -4,37 +4,41 @@ description: "Overview of the Adopt dashboard for managing and monitoring your A
 icon: "gauge"
 ---
 
-# Adopt Dashboard
+Your agent isn't just smart—it's completely observable. From usage patterns to decision logic, you get full visibility into what your agent is doing, how it's performing, and how users are engaging with it.
 
-The Adopt dashboard is your central hub for managing, monitoring, and optimizing your AI Copilot. It provides real-time insights, configuration options, and tools to help you get the most out of your Copilot deployment.
+We've built detailed analytics and debugging tools so you can monitor performance and behavior at a granular level. No black boxes, no guesswork.
 
-## Key Features
+We call it the Dashboard. (And yes, we know—we're not winning any naming awards for that one)
 
-- **Analytics & Metrics:** Track usage, resolution rates, user feedback, and other key performance indicators.
-- **Deployment Management:** Control where and how your Copilot is deployed, including environment and audience targeting.
-- **Action & Knowledge Base Management:** Add, edit, or remove actions and update your Copilot’s knowledge base.
-- **Branding & Customization:** Adjust the look and feel of your Copilot to match your product’s branding.
-- **User Feedback:** Review user ratings and comments to continuously improve your Copilot.
+## The Dashboard
 
-## Navigating the Dashboard
+The Dashboard is your mission control for tracking agent performance and user engagement—both from your internal team during setup and real users once you're live.
 
-The dashboard is organized into several main sections:
+The **Dashboard** is your go-to hub for tracking how your agent is performing and how users—both internal and external—are interacting with it.
 
-1. **Overview:** High-level stats and recent activity.
-2. **Analytics:** Detailed metrics and trends about Copilot usage and performance.
-3. **Deployment:** Manage deployment rules, environments, and rollout strategies.
-4. **Actions:** Create, edit, or remove actions your Copilot can perform.
-5. **Knowledge Base:** Update FAQs, documents, and other reference material.
-6. **Settings:** Configure branding, integrations, and other preferences.
+You can easily toggle between **Internal Testing** and **Live User Data** using the dropdown at the top. This lets you track how your team is experimenting during setup, and how real users engage once the Agent is deployed.
 
-## Accessing the Dashboard
+Watch this video for a complete walkthrough. 
 
-You can access the Adopt dashboard at https://adopt.ai using your organization’s credentials.
+\<INSERT VIDEO\>
 
-> **Tip:** Regularly review your dashboard to monitor performance, identify opportunities for improvement, and ensure your Copilot is delivering value to your users.
+## Key Metrics
 
-## Next Steps
+Here are all the key metrics you can view on the Dashboard.
 
-- [Customize the Copilot’s look and feel](./custom-themes-branding)
-- [Set up deployment rules for targeting and rollout](./deployment-rules)
-- [Track key metrics and analytics](./key-metrics)
+| **Metric**                            | **What It Is**                                                                   | **How It Helps**                                                                                   |
+| :------------------------------------ | :------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------- |
+| **Active Agent Users**                | Unique end users who interacted with the Agent at least once in the past 7 days. | Gauges weekly engagement and adoption of the Agent experience.                                     |
+| **Agent Action Completion Rate**      | % of actions successfully completed out of all user-initiated actions.           | Measures how reliably the agent is delivering results.                                             |
+| **Error Rate**                        | % of actions that failed, timed out, or didn’t complete successfully.            | Identifies problem areas in execution logic or backend stability.                                  |
+| **System Health**                     | Uptime percentage of the Agent experience for end users.                         | Alerts you to integration or infrastructure issues affecting agent availability.                   |
+| **Completed Actions**                 | Daily count of completed actions alongside number of unique users.               | Tracks usage trends and spikes in engagement over time.                                            |
+| **Actions Triggered by Topic**        | Distribution of actions across product topics (e.g. Discovery, Settings, etc.).  | Reveals which areas of your product users interact with most through the agent.                    |
+| **Top Customers**                     | Accounts with the highest volume of agent interactions.                          | Identifies your most engaged and active customers.                                                 |
+| **Success vs Failure Count**          | Breakdown of individual actions by number of successes and failures.             | Pinpoints which actions are working smoothly and which need debugging or refinement.               |
+| **Action Type Distribution & Impact** | % of agent usage by action type: Assist, Navigation, API (CRUD).                 | Helps you understand how users are using the agent—guidance, navigation, or performing real tasks. |
+| **Customer Time on Adopt vs App**     | Comparison of user time spent with the agent vs within your application UI.      | Measures how much the agent is streamlining workflows and reducing manual effort.                  |
+| **Thumbs Up**                         | Total number of positive feedback signals on agent responses or actions.         | Shows which actions are performing well and creating positive user experiences.                    |
+| **Thumbs Down**                       | Total number of negative feedback signals, and which actions received them.      | Flags pain points or confusing experiences in the agent flow.                                      |
+
+All the metrics you see on the Dashboard are powered by the **Logs** - a complete record of every agent interaction. In the next section, we’ll explore how you can use the Logs to view, trace, and debug each step behind the scenes.
