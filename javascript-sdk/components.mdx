@@ -1,0 +1,92 @@
+---
+title: "Components"
+description: "Description of your new file."
+---
+
+The Adopt AI SDK provides two main interface components that power the Copilot experience: **Sidebar** and **Spotlight**. You can enable either one—or both—depending on how you want users to interact with the agent inside your product.
+
+This page walks you through what each component does, how to enable them, and how to combine them for a flexible agent experience.
+
+### 1. **Sidebar**
+
+A persistent, slide-out panel that lives on the edge of your app—ideal for deep interaction, guided assistance, or multitask workflows.
+
+**Features:**
+
+- Full-height side panel UI
+- Rich inputs and outputs (e.g. forms, charts, tables)
+- Always accessible during user sessions
+
+**Enable via Script/CDN:**
+
+```javascript
+window.AdoptAI.boot('user-123', userProperties, {
+  products: ['sidebar']
+});
+```
+
+**Enable via NPM Package:**
+
+```javascript
+import { boot } from '@adoptai/sdk';
+
+boot('user-123', userProperties, {
+  products: ['sidebar']
+});
+```
+
+---
+
+### 2. **Spotlight**
+
+A centered overlay for quick actions, focused prompts, or spotlight guidance. Ideal for search-like behavior or launching short agent flows.
+
+**Features:**
+
+- Appears as a floating prompt or modal
+- Great for lightweight, one-step tasks or FAQs
+- Can be triggered via hotkey, button, or UI element
+
+**Enable via Script/CDN:**
+
+```javascript
+window.AdoptAI.boot('user-123', userProperties, {
+  products: ['spotlight']
+});
+```
+
+**Enable via NPM Package:**
+
+```javascript
+import { boot } from '@adoptai/sdk';
+
+boot('user-123', userProperties, {
+  products: ['spotlight']
+});
+```
+
+---
+
+### 3. **Using Both Together**
+
+You can enable both Sidebar and Spotlight at the same time for a blended experience. For example: Spotlight for quick search, and Sidebar for full workflows.
+
+**Combined Config (Script or NPM):**
+
+```javascript
+boot('user-123', userProperties, {
+  products: ['sidebar', 'spotlight']
+});
+```
+
+### Where to Customize UI Appearance
+
+Theme and appearance settings (like colors, icons, and branding) are managed from your **Adopt dashboard → Settings → SDK Configuration**.
+
+The SDK will automatically fetch and apply your theme settings at runtime—no need to hardcode styles.
+
+### Next Step
+
+Once you've selected your components, it's time to set them up for your environment:
+
+**Configuration →** – Learn how to pass API URLs, security headers, and theme settings to fully integrate Adopt with your backend and brand.

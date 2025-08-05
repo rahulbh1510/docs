@@ -1,0 +1,78 @@
+---
+title: "Security"
+description: "Description of your new file."
+---
+
+Adopt AI is built with enterprise-grade security in mind. This page explains how to safely deploy the SDK in environments that enforce **Content Security Policy (CSP)**, and how to properly apply **nonces** when needed.
+
+If your application uses a CSP to restrict which scripts and styles can run, you’ll need to follow these steps to ensure the Adopt Copilot loads without triggering CSP violations.
+
+## What is a CSP?
+
+A **Content Security Policy (CSP)** is a security feature that prevents unauthorized scripts or styles from being injected into your application. It works by explicitly allowing (or blocking) resources based on source, path, or nonce.
+
+Without proper CSP configuration, your browser may block the Adopt AI SDK from running.
+
+## Supporting CSP with Adopt
+
+Adopt supports two approaches for working with CSP-secured environments:
+
+### Option 1: Script / CDN with Auto-Detected Nonce
+
+If you're using the **Script/CDN** method, you can pass the nonce directly into the script tag via a `data-nonce` attribute. Adopt will automatically detect and use it.
+
+Example →
+
+```html
+<meta http-equiv="Content-Security-Policy" content="
+  script-src 'self' 'nonce-abc123' https://*.adopt.ai;
+  style-src 'self' 'nonce-abc123' https://*.adopt.ai;
+  connect-src 'self' https://*.adopt.ai;
+">
+
+<scriptsrc="<https://cdn.adopt.ai/sdk/core/copilot.js>"
+  data-adopt-license-key="YOUR_ORG_LICENSE_KEY"
+  data-nonce="abc123">
+</script>
+```
+
+<Note>
+  **Note** - The SDK will automatically pick up and use the nonce to comply with your CSP.
+</Note>
+
+### Option 2: NPM Package with Manual Nonce
+
+If you’re using the **NPM package**, you’ll need to pass the nonce explicitly when calling `init()`.
+
+Example →
+
+```javascript
+import { init, boot } from '@adoptai/sdk';
+
+init('your-license-key', {
+  nonce: 'abc123' // Same value as used in your script tag
+});
+
+boot('user-123', {
+  name: 'John Doe',
+  email: 'john@example.com'
+}, {
+  products: ['sidebar', 'spotlight']
+});
+```
+
+<Info>
+  Make sure the nonce matches the one declared in your CSP meta tag. Otherwise, the browser may still block execution.
+</Info>
+
+## Good to Know
+
+- All Adopt-hosted resources (SDK, assets, etc.) are served over HTTPS from `https://*.adopt.ai`
+- Adopt does not inject third-party scripts
+- You only need to handle CSP/nonce setup if you already have CSP enabled on your app
+
+## Next Steps
+
+Now that your environment is secure and compliant, let’s explore how Adopt works with modern frontend frameworks like **Single Page Applications. **
+
+Learn how to support route changes, dynamic mounting, and SPA-specific behavior.

@@ -1,0 +1,113 @@
+---
+title: "API Reference"
+description: "Description of your new file."
+---
+
+This page lists all the available methods provided by the Adopt AI SDK, along with their parameters and usage structure. You can use these methods to control how and when the agent appears, manage sessions, update user data, and integrate with your app's navigation or backend.
+
+Whether you're using the Script tag (`window.AdoptAI`) or the NPM package (`import { ... } from '@adoptai/sdk`), the method signatures remain consistent.
+
+## Global Object
+
+When using the **Script/CDN** approach, all SDK methods are available via:
+
+```bash
+window.AdoptAI
+```
+
+When using the **NPM Package**, you’ll import individual methods like:
+
+```javascript
+import { init, boot, shutdown } from '@adoptai/sdk';
+```
+
+---
+
+## Method Reference
+
+`init(licenseKey: string, opts?: InitConfig): Promise<void>`
+
+Initializes the SDK (required for NPM installs only).
+
+```javascript
+init('your-license-key', { nonce: 'abc123' });
+```
+
+`boot(userId: string, userProperties?: object, instanceAttributes?: object): Promise<void>`
+
+Starts the Copilot for a specific user session.
+
+```javascript
+boot('user-123', {
+  name: 'John Doe',
+  email: 'john@example.com'
+}, {
+  products: ['sidebar', 'spotlight'],
+  apiBaseUrl: '<https://api.yourapp.com>',
+  appBaseUrl: '<https://yourapp.com>',
+  copilotHeaders: {
+    Authorization: 'Bearer token123'
+  }
+});
+```
+
+`shutdown(): void`
+
+Hides the Copilot UI. Typically called on logout or user switch.
+
+```javascript
+shutdown();
+```
+
+`setUserProperties({ userProperties: object }): void`
+
+Updates user-specific properties after boot.
+
+```javascript
+setUserProperties({
+  userProperties: {
+    plan: 'enterprise',
+    upgradeDate: new Date().toISOString()
+  }
+});
+```
+
+`addRouter(callback: (url: string) => void): void`
+
+Registers your app’s router so Adopt can track and respond to route changes in SPAs.
+
+```javascript
+addRouter((newUrl) => {
+  router.push(newUrl);
+});
+```
+
+`setCopilotHeaders(headers: Record<string, string>): void`
+
+Dynamically updates API headers—useful for refreshing tokens mid-session.
+
+```javascript
+setCopilotHeaders({
+  Authorization: 'Bearer newToken',
+  'X-Updated-At': new Date().toISOString()
+});
+```
+
+## Error Handling
+
+All async methods return Promises. Use `try/catch` blocks to gracefully handle issues during init or boot:
+
+```javascript
+try {
+  await init('your-license-key');
+  await boot('user-123');
+} catch (error) {
+  console.error('AdoptAI error:', error);
+}
+```
+
+## Next Steps
+
+Now that you know what’s possible with the SDK, let’s walk through some real-world examples:
+
+**Examples →**  See how the SDK works in basic HTML apps, React, and dynamic scenarios like user logins or token refreshes.

@@ -1,0 +1,144 @@
+---
+title: "SDK Lifecycle"
+description: "Description of your new file."
+---
+
+The Adopt AI SDK includes a set of methods that let you control when and how the Agent Experience appears inside your app.
+
+### Lifecycle Methods Covered
+
+1. `init()`
+2. `boot()`
+3. `shutdown()`
+4. `setUserProperties()`
+
+---
+
+## 1. `init()`
+
+Used only with the NPM package. Initializes the SDK with your license key and optional configuration (like CSP settings).
+
+### NPM Package:
+
+```javascript
+import { init } from '@adoptai/sdk';
+
+init('your-license-key');
+```
+
+### Optional config:
+
+```javascript
+init('your-license-key', {
+  nonce: 'abc123' // For Content Security Policy support
+});
+```
+
+<Info>
+  **Important **- You must call init() before using boot() or any other method.
+</Info>
+
+
+## 2. `boot()`
+
+Starts the Copilot for a logged-in user. This is what makes the agent visible and interactive.
+
+### Script/CDN:
+
+```javascript
+window.AdoptAI.boot('user-123', {
+  name: 'John Doe',
+  email: 'john@example.com'
+}, {
+  products: ['sidebar', 'spotlight']
+});
+```
+
+### NPM Package:
+
+```javascript
+import { boot } from '@adoptai/sdk';
+
+boot('user-123', {
+  name: 'John Doe',
+  email: 'john@example.com'
+}, {
+  products: ['sidebar', 'spotlight'],
+  apiBaseUrl: '<https://api.yourapp.com>',
+  appBaseUrl: '<https://yourapp.com>',
+  copilotHeaders: {
+    'Authorization': 'Bearer token123'
+  }
+});
+```
+
+**Parameters:**
+
+- `userId` – required (string): unique ID for the current user
+- `userProperties` – optional: user-level data (name, plan, etc.)
+- `instanceAttributes` – optional: product config, API URLs, and auth headers
+
+## 3. `shutdown()`
+
+Hides the Copilot from view. Usually called when the user logs out or switches accounts.
+
+### Script/CDN:
+
+```javascript
+window.AdoptAI.shutdown();
+```
+
+### NPM Package:
+
+```javascript
+import { shutdown } from '@adoptai/sdk';
+
+shutdown();
+```
+
+<Info>
+  Best practice: always call shutdown() before calling boot() again for a different user.
+</Info>
+
+## 4. `setUserProperties()`
+
+Updates user properties after boot()—useful for real-time changes like plan upgrades or preference updates.
+
+### Script/CDN:
+
+```javascript
+window.AdoptAI.setUserProperties({
+  userProperties: {
+    plan: 'enterprise',
+    upgradeDate: new Date().toISOString()
+  }
+});
+```
+
+### NPM Package:
+
+```javascript
+import { setUserProperties } from '@adoptai/sdk';
+
+setUserProperties({
+  userProperties: {
+    plan: 'enterprise',
+    upgradeDate: new Date().toISOString()
+  }
+});
+```
+
+## Summary Table
+
+| Method                | Purpose                                  | When to Use                              |
+| :-------------------- | :--------------------------------------- | :--------------------------------------- |
+| `init()`              | Initialize the SDK (NPM only)            | On page load                             |
+| `boot()`              | Show the agent to the current user       | After user login                         |
+| `shutdown()`          | Hide the agent                           | On user logout or session end            |
+| `setUserProperties()` | Update user data for the current session | When user attributes change in real time |
+
+Now that you know how to initialize and control the agent experience, you can move on to:
+
+**Components →** Learn how to enable and customize the Sidebar or Spotlight (or both) in your application.
+
+This is where you’ll decide how the Copilot appears to users—and how it fits into your product’s overall UX.

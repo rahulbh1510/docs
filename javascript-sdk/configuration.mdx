@@ -1,0 +1,101 @@
+---
+title: "Configuration"
+description: "Description of your new file."
+---
+
+Once you’ve installed the SDK and selected your components (Sidebar, Spotlight, or both), the next step is to configure how the agent behaves in your environment. This includes setting up:
+
+- Your app and API URLs
+- Secure headers for API access
+- Organization branding and theming
+
+This page walks through each of these options and shows you how to pass them in via SDK methods.
+
+## Theme Configuration
+
+Adopt automatically applies your organization’s brand theme to the Agent Experience.
+
+You can configure:
+
+- Primary and secondary colors
+- Typography
+- Component styling (e.g. form fields, buttons)
+- Copilot trigger icon appearance
+
+These settings are managed inside the **Adopt platform** under: **Settings → SDK Configuration**
+
+The SDK fetches this configuration automatically—no manual styling required in code.
+
+Changes you make in your theme settings will be reflected the next time the SDK boots.
+
+## API Configuration
+
+You can control the backend environment the agent communicates with by passing in:
+
+- `apiBaseUrl` – Your API server domain
+- `appBaseUrl` – Your frontend app’s root URL
+- `copilotHeaders` – Headers needed for authentication, tracking, or custom logic
+
+These are passed in as part of the `boot()` call.
+
+### Script/CDN Example:
+
+```javascript
+window.AdoptAI.boot('user-123', userProperties, {
+  apiBaseUrl: '<https://api.yourapp.com>',
+  appBaseUrl: '<https://yourapp.com>',
+  copilotHeaders: {
+    'Authorization': 'Bearer ' + getAuthToken(),
+    'X-Custom-Header': 'value'
+  }
+});
+```
+
+### NPM Package Example:
+
+```javascript
+import { boot } from '@adoptai/sdk';
+
+boot('user-123', userProperties, {
+  apiBaseUrl: '<https://api.yourapp.com>',
+  appBaseUrl: '<https://yourapp.com>',
+  copilotHeaders: {
+    'Authorization': 'Bearer ' + getAuthToken(),
+    'X-Custom-Header': 'value'
+  }
+});
+```
+
+---
+
+## Updating Copilot Headers Dynamically
+
+If your app uses expiring tokens (e.g. for session-based auth), you can update headers on the fly using `setCopilotHeaders()`.
+
+### Script/CDN:
+
+```javascript
+window.AdoptAI.setCopilotHeaders({
+  'Authorization': 'Bearer ' + newToken,
+  'X-Updated-At': new Date().toISOString()
+});
+```
+
+### NPM Package:
+
+```javascript
+import { setCopilotHeaders } from '@adoptai/sdk';
+
+setCopilotHeaders({
+  'Authorization': 'Bearer ' + newToken,
+  'X-Updated-At': new Date().toISOString()
+});
+```
+
+<Note>
+  Note - This is useful after a token refresh or when switching user permissions mid-session.
+</Note>
+
+## Next Step
+
+With your configuration in place, you're ready to secure your setup and ensure compatibility with modern frontend practices: **Security. **

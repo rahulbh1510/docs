@@ -1,0 +1,85 @@
+---
+title: "Single Page Applications (SPAs)"
+description: "Description of your new file."
+---
+
+If your app is built as a **Single Page Application (SPA)**—using frameworks like React, Vue, or Angular—Adopt AI is fully compatible.
+
+This page covers how the SDK handles route changes, how to keep the agent active across views, and how to register your app’s router so the Copilot behaves as expected.
+
+## Why This Matters
+
+In SPAs, route changes happen without full page reloads. That means components like the Copilot might not automatically reappear when a user navigates to a new page—unless they’re re-injected manually.
+
+The good news? **Adopt handles this for you.**
+
+With a simple `addRouter()` setup, the SDK will detect route changes and keep everything running smoothly.
+
+## How to Set Up SPA Routing
+
+Use the `addRouter()` method to pass your app’s navigation handler to Adopt. This allows the Copilot to stay in sync with your routing system.
+
+### React Example (using React Router)
+
+### Script/CDN:
+
+```javascript
+const navigate = useNavigate();
+
+window.AdoptAI.addRouter((newUrl) => {
+  navigate(newUrl);
+});
+```
+
+### NPM Package:
+
+```javascript
+import { addRouter } from '@adoptai/sdk';
+
+const navigate = useNavigate();
+
+addRouter((newUrl) => {
+  navigate(newUrl);
+});
+```
+
+### Vue Example
+
+```javascript
+addRouter((newUrl) => {
+  router.push(newUrl);
+});
+```
+
+### Angular Example
+
+```javascript
+addRouter((newUrl) => {
+  this.router.navigateByUrl(newUrl);
+});
+```
+
+### Custom Routing
+
+If you’re using a custom framework or vanilla JS:
+
+```javascript
+addRouter((newUrl) => {
+  window.history.pushState({}, '', newUrl);
+  // Trigger your internal route handling
+});
+```
+
+### Automatic Re-injection
+
+Adopt automatically re-injects the Copilot components when a route change is detected. As long as the widget container (`<div id="adopt-widget-container"></div>`) persists across views, no additional setup is required.
+
+## Good Practices
+
+- Place the Copilot container outside of route-specific layouts (e.g. in a global wrapper)
+- Always call `boot()` after login—even in SPAs
+- Use `shutdown()` on logout to clean up
+
+## Next Steps
+
+Your agent now works across routes and frontend views. Next up:

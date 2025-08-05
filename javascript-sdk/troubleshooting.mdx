@@ -1,0 +1,90 @@
+---
+title: "Troubleshooting"
+description: "Description of your new file."
+---
+
+Running into issues while installing or using the Adopt AI SDK?
+
+This guide covers common problems and how to quickly resolve them—whether you're using the Script tag or the NPM package.
+
+## Agent Not Appearing
+
+### The Copilot widget isn’t showing up on the page
+
+**Checklist**
+
+- Make sure you’ve added the widget container:
+
+  ```html
+  <div id="adopt-widget-container"></div>
+  ```
+- Confirm that `init()` (NPM only) completed successfully before `boot()` is called
+- Ensure `boot()` is being called with a valid `userId` and component setup (e.g., `products: ['sidebar']`)
+- Open the browser console and check for SDK-related errors
+- Verify that the user meets your defined **Targeting Rules** in the Adopt dashboard
+
+## CSP / Security Errors
+
+### You’re seeing blocked script/style warnings in the console
+
+**Checklist**
+
+- Ensure your **Content Security Policy (CSP)** allows scripts from `https://*.adopt.ai`
+- If using CSP with nonces:
+  - Script tag must include `data-nonce="your-nonce-value"`
+  - The nonce must match what’s declared in your meta tag
+- If using the NPM package, pass the nonce via:
+
+  ```javascript
+  init('your-license-key', { nonce: 'abc123' });
+  ```
+
+## SPA Routing Issues
+
+### The Copilot disappears or fails to load after a route change
+
+**Checklist**
+
+- Register your app’s router using `addRouter()` so Adopt can track navigation
+- Confirm that the widget container (`<div id="adopt-widget-container">`) persists across route changes
+- Check for route-specific console errors or missed SDK re-initializations
+
+## Authentication Issues
+
+### The Copilot loads but returns errors during API calls
+
+**Checklist**
+
+- Ensure valid `copilotHeaders` (e.g., Authorization tokens) are being passed in the `boot()` config
+- If tokens refresh mid-session, update them using:
+
+  ```javascript
+  setCopilotHeaders({ Authorization: 'Bearer newToken' });
+  ```
+
+## Testing Issues
+
+### `boot()` or `setUserProperties()` throws an error
+
+**Checklist**
+
+- For NPM installs, always call `init()` before any other SDK method
+- Confirm that `userId` is a valid, non-null string
+- Ensure all imported SDK methods are from `@adoptai/sdk` (not a typo or outdated version)
+
+## Cleanup Problems
+
+### You’re seeing the agent persist after a user logs out
+
+**Checklist**
+
+- Always call `shutdown()` on logout to fully remove the Copilot from view
+- Reset or clear any cached user data before booting the next session
+
+## Still stuck?
+
+If you're unable to resolve the issue using this guide:
+
+- Check the [Console logs] for SDK or network errors
+- Review [Targeting Rules] in your dashboard to ensure visibility criteria match
+- Contact the Adopt team directly for support

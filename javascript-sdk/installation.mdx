@@ -1,0 +1,105 @@
+---
+title: "Installation"
+description: "This guide walks you through how to install the Adopt AI JavaScript SDK inside your application. "
+---
+
+The SDK connects your live product environment to the agents you've built in the Agent Builder—powering the Copilot experience for your end users.
+
+You’ll learn how to choose the right integration method, where to place the code, and how to get the agent running in just a few steps.
+
+## What You’ll Need Before You Start
+
+- Access to your application’s codebase (or help from an engineer)
+- Your organization license key, found in **Settings → SDK Configuration** inside the Adopt platform
+- A staging or demo environment for safe testing (recommended)
+
+## Step 1: Choose Your Integration Method
+
+Adopt supports two integration methods:
+
+| Method                         | Best For                                        | Notes                                                |
+| :----------------------------- | :---------------------------------------------- | :--------------------------------------------------- |
+| **Script / CDN** (Recommended) | Simple setups, fast testing, or marketing sites | Auto-initializes the SDK. Minimal setup needed.      |
+| **NPM Package**                | React/Vue/SPA apps with build tools             | Gives full control over lifecycle and configuration. |
+
+## Step 2a: Script / CDN Setup
+
+This is the easiest and fastest way to get started.
+
+### 1. Add the Widget Container
+
+Place this wherever you want the Copilot to appear:
+
+```html
+<div id="adopt-widget-container"></div>
+```
+
+### 2. Include the SDK Script
+
+Replace `YOUR_ORG_LICENSE_KEY` with your actual license key:
+
+```html expandable
+<scriptsrc="<https://cdn.adopt.ai/sdk/core/copilot.js
+"data-adopt-license-key="YOUR_ORG_LICENSE_KEY">
+</script>
+```
+
+✅ This script automatically initializes the SDK with your org ID
+
+✅ All methods will be available via the `window.AdoptAI` global object
+
+### 3. Boot the Agent
+
+Trigger the agent for the active user:
+
+```html
+<script>
+  window.AdoptAI.boot('user-123', {
+    name: 'John Doe',
+    email: 'john@example.com'
+  }, {
+    products: ['sidebar', 'spotlight']
+  });
+</script>
+```
+
+---
+
+## Step 2b: NPM Package Setup
+
+Recommended for applications using modern frameworks or custom build pipelines.
+
+### 1. Install the SDK
+
+```bash
+npm install @adoptai/sdk
+```
+
+### 2. Import and Initialize
+
+```javascript
+import { init, boot } from '@adoptai/sdk';
+
+// First, initialize the SDK
+init('your-org-license-key');
+
+// Then, boot the agent
+boot('user-123', {
+  name: 'John Doe',
+  email: 'john@example.com'
+}, {
+  products: ['sidebar', 'spotlight']
+});
+```
+
+<Info>
+  **Important - ** init() must be called before boot() when using the NPM package. If skipped, the agent will not load.
+</Info>
+
+## Finding Your License Key
+
+Your license key is a unique ID that connects your app environment to Adopt’s backend.
+
+You can find it in the **Adopt dashboard → Settings → SDK Configuration** tab.
+
+Copy this into your script tag (`data-adopt-license-key`) or pass it to `init()` if using the NPM package.

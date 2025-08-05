@@ -1,12 +1,11 @@
 ---
 title: "JavaScript SDK"
+description: "Add the Adopt JS SDK to your application to initialize the Copilot experience. This one-time setup allows your app to securely load the right UI, theme, and targeting rules—all dynamically managed from the Adopt platform."
 ---
 
 The **Adopt AI JavaScript SDK** allows you to embed the Agent Experience directly into your web application. It connects the agents you’ve built in the Agent Builder to your live product environment—enabling real users to interact with your Copilot in production.
 
 This SDK powers everything from rendering the UI to personalizing responses and executing actions securely in the right user context.
-
----
 
 ## Why Use the SDK?
 
@@ -20,52 +19,22 @@ Before you deploy the Agent Experience to end users, you need to install the SDK
 
 Whether you're deploying on a simple marketing site or a multi-user SaaS platform, the SDK gives you the flexibility and control to make the Copilot feel like a native part of your product.
 
----
-
 ## Integration Options
 
 Adopt supports **two ways to install the SDK →**
 
-### **🌐 Script or CDN Integration (Recommended for Most Teams)**
+### **1. Script/CDN Integration (Recommended for Most Teams)**
 
 - Easiest setup—just add a script tag
 - Automatically handles initialization
 - Use the global `window.AdoptAI` object to trigger functionality
 
-### **📦 NPM Package Integration (Recommended for modern frameworks like React, Vue)**
+### **2. NPM Package Integration (Recommended for modern frameworks like React, Vue)**
 
 - Full control over when and how the SDK loads
 - Better suited for TypeScript or Webpack/Vite-based projects
 - You'll manually import methods like `init()`, `boot()`, `shutdown()` etc.
 
----
-
 ## What This Guide Covers
 
 This SDK guide is organized into sub-pages based on what you’ll need to set up and customize the experience →
-
-
-  [Installation](https://www.notion.so/Installation-238177d21d0480c99220d667a688cea3?pvs=21)
-
-  [Components](https://www.notion.so/Components-238177d21d04802bbc37c7f832dcc5f0?pvs=21)
-
-  [Security](https://www.notion.so/Security-238177d21d048026ad25f839ede5f407?pvs=21)
-
-  [API Reference](https://www.notion.so/API-Reference-238177d21d0480ddb9edecfe53a8226c?pvs=21)
-
-  [FAQ’s](https://www.notion.so/FAQ-s-238177d21d0480bdb37be367b1b7eea6?pvs=21)
-
-  [SDK Lifecycle](https://www.notion.so/SDK-Lifecycle-238177d21d04803491aec5e09620ead0?pvs=21)
-
-  [Configuration](https://www.notion.so/Configuration-238177d21d04800ebbb5d05a8c2ce0be?pvs=21)
-
-  [Single Page Applications (SPAs)](https://www.notion.so/Single-Page-Applications-SPAs-238177d21d0480e9a815e11eff3bf4c7?pvs=21)
-
-  [SDK Usage Examples](https://www.notion.so/SDK-Usage-Examples-238177d21d04806c8220cefc59ae287b?pvs=21)
-
-  [Troubleshooting](https://www.notion.so/Troubleshooting-238177d21d0480d5b50be270cba6f54d?pvs=21)
-
-
-<Note>
-  🎯 Pro Tip: If you're non-technical, you’ll only need to coordinate once with your engineering team to get the SDK set up in your app. After that, you can configure themes, targeting rules, and agent behavior entirely from within the Adopt platform.
-</Note>

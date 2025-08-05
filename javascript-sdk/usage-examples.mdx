@@ -1,0 +1,172 @@
+---
+title: "SDK Usage Examples"
+description: "Description of your new file."
+---
+
+This page includes practical examples of how to integrate and use the Adopt AI SDK—whether you’re working in plain HTML, using a modern framework like React, or handling dynamic scenarios like login/logout flows or token refreshes.
+
+## Example 1: Basic HTML Setup (Script/CDN)
+
+This is the simplest way to get started with Adopt—no build tools required.
+
+### **HTML →**
+
+```html
+<html>
+<head>
+  <title>My App with Adopt AI</title>
+</head>
+<body>
+  <div id="app">
+    <h1>Welcome to My App</h1>
+  </div>
+
+  <!-- Copilot widget container -->
+  <div id="adopt-widget-container"></div>
+
+  <!-- AdoptAI SDK -->
+  <script
+    src="<https://cdn.adopt.ai/sdk/core/copilot.js>"
+    data-adopt-license-key="YOUR_ORG_LICENSE_KEY">
+  </script>
+
+  <!-- Boot on page load -->
+  <script>
+    async function bootAdoptAI() {
+      try {
+        window.AdoptAI.boot('user-123', {
+          name: 'John Doe',
+          email: 'john@example.com'
+        }, {
+          products: ['sidebar', 'spotlight']
+        });
+        console.log('AdoptAI ready!');
+      } catch (error) {
+        console.error('AdoptAI setup failed:', error);
+      }
+    }
+
+    window.addEventListener('load', bootAdoptAI);
+  </script>
+</body>
+</html>
+
+```
+
+## Example 2: React Integration (NPM Package)
+
+A typical use case for SPAs with login and logout flows.
+
+```javascript
+import React, { useEffect, useState } from 'react';
+import { init, boot, shutdown } from '@adoptai/sdk';
+
+function App() {
+  const [user, setUser] = useState(null);
+
+  // Initialize SDK once
+  useEffect(() => {
+    const initAdoptAI = async () => {
+      try {
+        init('your-license-key');
+      } catch (error) {
+        console.error('Failed to initialize AdoptAI:', error);
+      }
+    };
+    initAdoptAI();
+  }, []);
+
+  // Boot or shutdown based on user state
+  useEffect(() => {
+    const handleUserChange = async () => {
+      if (user) {
+        try {
+          boot(user.id, {
+            name: user.name,
+            email: user.email,
+            plan: user.plan
+          }, {
+            products: ['sidebar', 'spotlight'],
+            copilotHeaders: {
+              Authorization: `Bearer ${user.token}`
+            }
+          });
+        } catch (error) {
+          console.error('Failed to boot AdoptAI:', error);
+        }
+      } else {
+        shutdown();
+      }
+    };
+    handleUserChange();
+  }, [user]);
+
+  return (
+    <div className="app">
+      <h1>My React App</h1>
+      {user ? (
+        <div>
+          <p>Welcome, {user.name}!</p>
+          <button onClick={() => setUser(null)}>Logout</button>
+        </div>
+      ) : (
+        <button onClick={() => setUser({
+          id: 'user-123',
+          name: 'John Doe',
+          email: 'john@example.com',
+          plan: 'pro',
+          token: 'auth-token'
+        })}>
+          Login
+        </button>
+      )}
+      <div id="adopt-widget-container"></div>
+    </div>
+  );
+}
+
+```
+
+## **Example 3: Updating User Info and Headers Dynamically**
+
+### **Script →**
+
+```javascript
+// User upgrades plan mid-session
+window.AdoptAI.setUserProperties({
+  userProperties: {
+    plan: 'enterprise',
+    upgradeDate: new Date().toISOString()
+  }
+});
+
+// Refresh token
+window.AdoptAI.setCopilotHeaders({
+  Authorization: `Bearer ${newToken}`,
+  'X-Refresh-Time': new Date().toISOString()
+});
+```
+
+### **NPM →**
+
+```javascript
+import { setUserProperties, setCopilotHeaders } from '@adoptai/sdk';
+
+setUserProperties({
+  userProperties: {
+    plan: 'enterprise',
+    upgradeDate: new Date().toISOString()
+  }
+});
+
+setCopilotHeaders({
+  Authorization: `Bearer ${newToken}`,
+  'X-Refresh-Time': new Date().toISOString()
+});
+```
+
+## Next Step
+
+You’ve now seen the SDK in action. Let’s wrap up with some frequently asked questions and troubleshooting tips: 
+
+**FAQ →**  Answers to the most common setup and usage questions.

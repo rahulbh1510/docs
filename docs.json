@@ -83,7 +83,17 @@
       {
         "tab": "JavaScript SDK",
         "pages": [
-          "javascript-sdk/introduction"
+          "javascript-sdk/introduction",
+          "javascript-sdk/installation",
+          "javascript-sdk/configuration",
+          "javascript-sdk/components",
+          "javascript-sdk/sdk-lifecycle",
+          "javascript-sdk/single-page-applications",
+          "javascript-sdk/security",
+          "javascript-sdk/usage-examples",
+          "javascript-sdk/troubleshooting",
+          "javascript-sdk/faq",
+          "javascript-sdk/api-reference"
         ]
       },
       {

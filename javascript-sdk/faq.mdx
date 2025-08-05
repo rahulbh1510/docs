@@ -1,0 +1,112 @@
+---
+title: "FAQ's"
+description: "Description of your new file."
+---
+
+Have questions about how the Adopt AI SDK works? You’re not alone.
+
+Below are answers to the most common questions from product and engineering teams during setup, integration, and deployment.
+
+## General Usage
+
+### Do I need to call `init()` every time a user visits my site?
+
+- **Script**: No, the script auto-initializes.
+- **NPM**: Yes, call `init()` once per page load, then call `boot()` when the user is ready.
+
+### What’s the difference between Script and NPM integration?
+
+- **Script**: Simple, auto-initialized, ideal for fast setup
+- **NPM**: Gives you full control, TypeScript-ready, better for modern apps
+
+### Can I use Adopt AI with multiple users on the same page?
+
+No. Adopt is built for single-user sessions. You must call `shutdown()` before calling `boot()` for a different user.
+
+### What happens if I call `boot()` before calling `init()` (NPM only)?
+
+The SDK will throw an error. Always call and complete `init()` before `boot()`.
+
+### Can I call `boot()` multiple times in a session?
+
+Not recommended. Call it once per session. To change users, call `shutdown()` first, then `boot()` again.
+
+### What happens if I call `boot()` before the widget container is rendered?
+
+The agent may fail to load properly. Make sure `<div id="adopt-widget-container"></div>` is in the DOM before calling `boot()`.
+
+### How do I completely remove the agent from the page?
+
+Call `shutdown()`. This will unmount the agent UI and clean up the session.
+
+### Does Adopt support anonymous or guest users?
+
+No. A unique `userId` is required. For guests, generate a temporary UUID for the session.
+
+## Integration & Environments
+
+### Can I use different API base URLs for different environments (staging, prod, etc.)?
+
+Yes. Set the `apiBaseUrl` in the `boot()` call to match your current environment.
+
+### Is Adopt compatible with Next.js, Nuxt, or SSR frameworks?
+
+Yes—with client-side precautions. Call SDK methods like `boot()` only in the browser (e.g. inside `useEffect()`).
+
+### Does the SDK support iframe embedding?
+
+We don’t currently recommend using Adopt in an iframe. Behavior may be limited or blocked due to sandboxing.
+
+### Can I conditionally show different components (e.g. only Sidebar on some pages)?
+
+Yes. You can dynamically configure the `products` array in your `boot()` call based on user or page context.
+
+---
+
+## Authentication & Security
+
+### How do I handle auth token refreshes?
+
+Use `setCopilotHeaders()` to update headers when your token refreshes.
+
+**Script Example:**
+
+```javascript
+window.AdoptAI.setCopilotHeaders({
+  Authorization: `Bearer ${newToken}`
+});
+```
+
+**NPM Example:**
+
+```javascript
+import { setCopilotHeaders } from '@adoptai/sdk';
+
+setCopilotHeaders({
+  Authorization: `Bearer ${newToken}`
+});
+```
+
+### Does Adopt AI support Content Security Policy (CSP)?
+
+Yes. Adopt supports CSP nonces via `data-nonce` in script tags (for Script setup) or as a parameter in `init()` (for NPM).
+
+---
+
+## Customization & Targeting
+
+### Can I customize the look and feel of the agent widget?
+
+Yes. All theming is handled in the **Adopt dashboard → SDK Configuration** section. This includes colors, fonts, icon styles, and UI elements.
+
+### Can I control which users see the agent experience?
+
+Yes. Use **Targeting Rules** in your Adopt settings to define exactly which users should see the Copilot. If a user doesn’t match, the Copilot won’t load—even if `boot()` is called.
+
+### How do I handle internationalization (i18n) in agent responses?
+
+The agent will respond in the language your KB is written in. For advanced multilingual support, contact your Adopt representative to enable custom language behavior.
+
+### Can I disable or hide specific actions for certain users?
+
+Yes. You can configure action-level visibility from the **Action Builder** or through **Targeting Rules** set in your SDK configuration.
