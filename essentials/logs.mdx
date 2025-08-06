@@ -6,9 +6,11 @@ icon: "file-lines"
 
 Before we dive in—**what exactly are Logs?**
 
-In Adopt, Logs are a full record of every interaction your users have with the agent. From the initial natural language request to the backend API calls, everything is captured so you can understand, troubleshoot, and improve your agent's performance.
+In Adopt, Logs are a full record of every interaction your users have with the agent. From the initial natural language request to the backend API calls, everything is captured so you can understand, troubleshoot, and improve your agent's performance. They’re your window into how the agent is behaving in the real world—with real users.
 
-They’re your window into how the agent is behaving in the real world—with real users.
+![Screenshot2025 08 06at12 56 57PM Pn](/images/Screenshot2025-08-06at12.56.57PM.png)
+
+![Screenshot2025 08 06at12 59 11PM Pn](/images/Screenshot2025-08-06at12.59.11PM.png)
 
 Watch this video below for a complete walkthrough.
 
@@ -18,15 +20,26 @@ Watch this video below for a complete walkthrough.
 
 Your agent should run flawlessly most of the time. But when something does go sideways (hey, even the best systems have occasional hiccups), the Action Logs have your back.
 
-Spot an action that's failing frequently? Drill into the logs, review actual user conversations, pinpoint where things went off track, then jump to the Action Details page to fix it.
+Adopt’s Logs give you a detailed record of every agent interaction across your user base. 
 
-**The debugging flow:**
+### What you can do with Logs:
 
-1. Notice an issue in the metrics
-2. Filter logs to find the problem actions
-3. Review the actual user conversations
-4. Identify the root cause
-5. Edit the action logic
-6. Test and republish
+- **Filter logs by:**
+  - **Action type**
+  - **Status** (completed, errored, incomplete)
+  - **Customer or Org ID**
+  - **End User ID** (with PII masked)
+- **Inspect tool failures**\
+  See the full step-by-step execution: tools called, payloads passed, and any errors returned.
+- **Understand agent behavior logic**\
+  Trace how each action step executed, including conditions, branches, and final outcomes.
+- **Analyze performance bottlenecks**\
+  View latency for each step to identify slow responses or services.
 
-Quick diagnosis. Fast fixes. Full control.
+### Common Debugging Scenarios:
+
+- Action silently fails → Logs show a step error due to a bad API response.
+- Agent behavior is inconsistent → Logs reveal misconfigured step logic.
+- Customer reports delay → Logs help pinpoint which tool caused latency.
+
+> Use Logs to quickly isolate issues, verify agent execution, and push targeted fixes with confidence.

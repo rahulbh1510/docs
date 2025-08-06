@@ -1,24 +1,57 @@
 ---
-title: 'Custom Themes & Branding'
-description: 'Learn how to customize the look and feel of your Copilot to match your brand'
-icon: 'palette'
+title: "Custom Themes & Branding"
+description: "Learn how to customize the look and feel of your Agent Experience to match your brand"
+icon: "palette"
 ---
 
-# Custom Themes & Branding
+If you're deploying your Agent using the [**JavaScript SDK**](/javascript-sdk/introduction) and using one or both of Adopt’s deployment components — the **Copilot Sidebar** and the **Universal Search** — you can fully customize the look and feel to match your product’s branding.
 
-Make your Copilot feel like a natural extension of your product by customizing its appearance to match your brand.
+## Accessing Theme Settings
 
-## What Can You Customize?
+To configure the Agent Experience UI, go to -
 
-- **Colors:** Set your brand’s primary, secondary, and accent colors.
-- **Logo:** Add your company’s logo for both light and dark modes.
-- **Favicon:** Use your own favicon for browser tabs.
-- **Typography:** (Coming soon) Choose custom fonts for a fully branded experience.
+1. Go to **Settings → SDK Configuration**
+2. Click on the **Customize Look & Feel** module
 
-## How to Update Your Theme
+![Screenshot 2025-08-06 at 3.04.00 PM.png](/images/Screenshot2025-08-06at3.04.00PM.png)
 
-All theming and branding options are managed in your `docs.json` configuration file.
+Here, you can:
 
-### 1. Set Brand Colors
+- Toggle visibility for each UI component (Copilot Sidebar, Universal Search)
+- Configure display settings for each component
+- Edit your brand colors and styles
 
-Update the `colors` section to match your brand palette:
+## Universal Search Settings
+
+You can customize the following fields for the **Search interface**:
+
+1. **Hotkey** — Choose the keyboard shortcut that launches the search (e.g., `Cmd+K`)
+2. **Input Field Default Text** — Set the placeholder text for the search bar
+3. **Log a Support Ticket** — Add a link to an in-app support form or email
+4. **Hand Off to Human Chat** — Connect any external tool (e.g., Intercom) using a JS API call
+5. **Adopt Branding Toggle** — Remove the Adopt logo if preferred
+
+## Sidebar Copilot Settings
+
+You can configure the following elements in the **Copilot Sidebar**:
+
+1. **Header Title** — Customize the heading shown at the top
+2. **Welcome Text & Subtext** — Add introductory messaging
+3. **Input Field Default Text** — Set placeholder text in the input box
+4. **Log a Support Ticket** — Add a redirect link to your support form or email
+5. **Hand Off to Human Chat** — Trigger any external support integration (e.g., Intercom)
+6. **Trigger Icon** — Upload your own icon or choose one from Adopt’s icon library
+
+## Brand Colors & Themes
+
+For both components, you can click **Edit Theme** to define:
+
+- Primary and secondary colors
+- Background and text styling
+- Component accents
+
+This allows you to fully align the agent experience with your product’s brand guidelines.
+
+<Note>
+  **Note:** The SDK will automatically fetch and apply your theme settings at runtime — no need to hardcode styles or redeploy.
+</Note>

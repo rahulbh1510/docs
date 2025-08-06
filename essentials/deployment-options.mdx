@@ -1,57 +1,44 @@
 ---
-title: 'Deployment Options'
-description: 'Learn how to deploy your AI Copilot in your product and choose the right integration method'
-icon: 'rocket'
+title: "Deployment Options"
+description: "Learn how to deploy your AI Copilot in your product and choose the right integration method"
+icon: "rocket"
 ---
 
-# Deployment Options
+Adopt AI supports **three powerful ways** to bring this experience to life, depending on your app’s design preferences and engineering flexibility.
 
-Adopt gives you flexible ways to deploy your AI Copilot in your product, so you can choose the integration method that best fits your needs and tech stack.
+### 1. SDK Deployment (Plug-and-Play UI)
 
-## How Can You Deploy the Copilot?
+Use the Adopt SDK to quickly embed a fully functional, styled Agent Experience inside your app.
 
-You have several options for integrating the Copilot into your application:
+You can choose from two key components:
 
-### 1. JavaScript SDK
+- **Copilot Sidebar**\
+  A persistent, collapsible assistant that sits across your app.
+- **Universal Search**\
+  A command-style search bar that lets users query, run actions, and get answers.
 
-Embed the Copilot directly into your web app using the JavaScript SDK. This is the fastest way to get started and offers full control over placement and behavior.
+> The SDK is ideal if you want a fast, zero-design lift way to go live with agents.
 
-**Key features:**
-- Simple script include or npm package
-- Customizable UI and triggers
-- Works with all modern web frameworks
+Learn more about the [Adopt Javascript SDK ](/javascript-sdk/introduction)and it's [Components. ](/javascript-sdk/components)
 
-**Learn more:** [JavaScript SDK documentation](../javascript-sdk/introduction)
+### 2. API Wrapper Deployment
 
-### 2. API Integration
+Use Adopt’s API wrappers to call the agent's logic from **anywhere inside your own frontend** — using your design system and UI components.
 
-For advanced use cases, you can interact with the Copilot via API. This lets you build custom UIs, trigger actions programmatically, or integrate with non-web platforms.
+This is perfect if:
 
-**Key features:**
-- Full control over the user experience
-- Integrate with mobile apps, backends, or other systems
-- Use your own authentication and session management
+- You want deeper customization or visual control.
+- You need to inject agent functionality contextually (e.g. inside modals, dashboards, walkthroughs).
+- You have embedded analytics or product flows that need agentic augmentation.
 
-**Learn more:** [API Reference](../api-reference/introduction)
+> The agent's intelligence is fully exposed via API, so your developers can build rich, native-feeling experiences.
 
-### 3. Chrome Extension (for Internal Testing)
+Learn more about [Adopt's API Wrapper here. ](/api-reference/introduction)
 
-Test the Copilot in your app without any code changes using the Chrome Extension. This is ideal for internal QA, demos, or experimenting before deploying to production.
+### 3. MCP Server Deployment
 
-**Key features:**
-- No code required
-- Preview Copilot in any environment
-- Great for product and QA teams
+If you want to host your product's agent on **third-party chat clients**, Adopt also offers a deeply configurable **MCP (Model Context Protocol)** server.
 
-## Choosing the Right Option
+You’ll still get all the functionality of the Adopt platform — including agent actions, observability, analytics, and tooling — while letting users interact with your agent _wherever they are_. It's the easiest way to meet your users where they already live.
 
-- **For most web apps:** Start with the JavaScript SDK for the fastest integration.
-- **For custom UIs or non-web platforms:** Use the API.
-- **For internal testing:** Use the Chrome Extension.
-
-You can mix and match these options as your needs evolve.
-
-## Next Steps
-
-- [Customize the Copilot’s look and feel](./custom-themes-branding)
-- [Set up deployment rules for targeting and rollout](./deployment-rules)
+Learn more about Adopt's MCP Server Deployment here.

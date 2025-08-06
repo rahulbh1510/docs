@@ -63,9 +63,8 @@
                 "group": "Design + Deploy End User Experience",
                 "pages": [
                       "essentials/deployment-options",
-                      "essentials/custom-themes-branding",
-                      "essentials/deployment-rules"
-                    ]
+                      "essentials/custom-themes-branding"
+                      ]
               }
             ]
           },
