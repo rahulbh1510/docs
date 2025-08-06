@@ -4,22 +4,50 @@ icon: "sparkles"
 description: "Learn about the core concepts and functionality of the Agent Experience Platform"
 ---
 
-**Agent Experience** is the end-user interface where your customers interact with the agents you’ve built in the Agent Builder.
+## What is the Agent Experience?
 
-It’s the Copilot layer that sits on top of your product—designed to unify agent capabilities into one intuitive, natural-language-driven experience.
+Agent Experience is the **end-user layer** where your customers interact with the agents you’ve built in Adopt’s Agent Builder.
 
-This is what your users will see and use. It’s where they can ask questions, trigger actions, automate workflows, and get real outcomes—all without needing to navigate complex menus or learn your product’s UI.
+Think of it as your app’s **Copilot interface** — a smart, natural-language-driven surface where users can ask questions, trigger workflows, and get real outcomes without needing to click through menus or learn your product’s layout.
 
-### Deployment Options
+## Deployment Options
 
-You can deploy the Agent Experience in one of three flexible formats:
+Adopt AI supports **three powerful ways** to bring this experience to life, depending on your app’s design preferences and engineering flexibility.
 
-1. **As a Copilot Sidebar**
+### 1. SDK Deployment (Plug-and-Play UI)
 
-   A collapsible assistant that lives persistently across your app, available wherever users need help or want to take action.
-2. **As a Unified Search Experience**
+Use the Adopt SDK to quickly embed a fully functional, styled Agent Experience inside your app.
 
-   A search-first interface that lets users ask questions, run actions, and surface relevant information across your product—all in one place.
-3. **As the Primary Homepage of Your Product**
+You can choose from three modes:
 
-   Turn your product's landing view into a fully agent-driven interface, where the agent becomes the first step in every user journey.
+- **Copilot Sidebar**\
+  A persistent, collapsible assistant that sits across your app.
+- **Universal Search**\
+  A command-style search bar that lets users query, run actions, and get answers.
+- **Agent Homepage**\
+  Reinvent your product’s landing screen as an AI-first interface.
+
+> The SDK is ideal if you want a fast, zero-design lift way to go live with agents.
+
+### 2. API Wrapper Deployment
+
+Use Adopt’s API wrappers to call the agent's logic from **anywhere inside your own frontend** — using your design system and UI components.
+
+This is perfect if:
+
+- You want deeper customization or visual control.
+- You need to inject agent functionality contextually (e.g. inside modals, dashboards, walkthroughs).
+- You have embedded analytics or product flows that need agentic augmentation.
+
+> The agent's intelligence is fully exposed via API, so your developers can build rich, native-feeling experiences.
+
+### 3. MCP Server Deployment
+
+If you want to host your product's agent on **third-party chat clients**, Adopt also offers a deeply configurable **MCP (Model Context Protocol)** server.
+
+You’ll still get all the functionality of the Adopt platform — including agent actions, observability, analytics, and tooling — while letting users interact with your agent _wherever they are_. It's the easiest way to meet your users where they already live.
+
+## Where to Next?
+
+Ready to get started?\
+Jump into the [**Initial Setup**](/essentials/initial-setup) guide or explore a specific use case using the menu on the left.

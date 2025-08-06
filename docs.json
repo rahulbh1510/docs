@@ -55,8 +55,7 @@
               {
                 "group": "Review + Debug Agent Performance",
                 "pages": [
-                  "essentials/adopt-dashboard",
-                  "essentials/key-metrics",
+                  "essentials/dashboard-analytics",
                   "essentials/logs"
                 ]
               },
