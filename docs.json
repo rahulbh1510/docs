@@ -7,7 +7,7 @@
     "light": "#07C983",
     "dark": "#15803D"
   },
-  "favicon": "https://asset.adopt.ai/web/icons/favicon32.png",
+  "favicon": "/favicon.png",
   "navigation": {
     "tabs": [
       {
