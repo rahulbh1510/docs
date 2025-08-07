@@ -11,12 +11,6 @@
   "navigation": {
     "tabs": [
       {
-        "tab": "Home",
-        "pages": [
-          "index"
-        ]
-      },
-      {
         "tab": "Documentation",
         "groups": [
           {
