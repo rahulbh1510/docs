@@ -124,3 +124,9 @@
     }
   }
 }
+"integrations": {
+    "gtm": {
+      "tagId": "GTM-MVZGRFXJ"
+    }
+  }
+}
