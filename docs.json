@@ -87,9 +87,12 @@
           "javascript-sdk/faq",
           "javascript-sdk/api-reference"
         ]
-      }
+      },
       {
         "tab": "API",
+        "pages": [
+          "api/external-api"
+        ]
       }
     ],
     "global": {
