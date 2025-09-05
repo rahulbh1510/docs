@@ -21,8 +21,8 @@
                 "group": "Our Products",
                 "pages": [
                   "essentials/agent-builder",
-                  "essentials/agent-experience",
-                  "essentials/external-api"
+                  "essentials/agent-experience"
+                  
                 ]
               }
             ]
@@ -96,7 +96,6 @@
           "api-reference/external-api"
         ]
       }
-      
     ],
     "global": {
       "anchors": [
