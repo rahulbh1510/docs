@@ -89,13 +89,8 @@
         ]
       }
       {
-  "tab": "API",
-  "pages": [
-    "api/overview",
-    "api/external-api"
-  ]
-}
-
+        "tab": "API",
+      }
     ],
     "global": {
       "anchors": [
