@@ -78,24 +78,25 @@ This pulls images from ECR using the pull secret you created and deploys the ser
 Set your runtime configuration via the chart’s `values.yaml` (or `--set` flags). At minimum:
 
 ```yaml
+
 env:
-  - name: SINGLESTORE_PORT
-    value: "3306"
+  - name: DB_PORT
+    value: ""
+
+  - name: DB_HOSTNAME
+    value: ""
+
+  - name: DB_USERNAME
+    value: ""
+
+  - name: DB_PASSWORD
+    value: ""
+
+  - name: DB_NAME
+    value: ""
 
   - name: ANTHROPIC_KEY
-    value: ""          # Provide if using Anthropic models
-
-  - name: SINGLESTORE_HOST
-    value: ""          # e.g., singlestore.mydomain.local
-
-  - name: SINGLESTORE_USER
-    value: ""          # DB username
-
-  - name: SINGLESTORE_PASSWORD
-    value: ""          # DB password
-
-  - name: SINGLESTORE_DATABASE
-    value: "adoptdatadb"
+    value: ""
 ```
 
 Apply the file by upgrading in place:
