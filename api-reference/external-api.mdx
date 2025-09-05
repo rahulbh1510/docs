@@ -1,0 +1,249 @@
+---
+title: "External API's"
+description: "Description of your new file."
+---
+
+Adopt’s External API lets you integrate agentic functionality directly into your app or backend services — no UI embed required.
+
+You can:
+
+- Authenticate with client credentials
+- Create conversations for end users
+- Send messages and get AI responses (optionally streaming)
+- List conversations with filters and pagination
+- Fetch messages for a given conversation
+
+## Base URLs
+
+- **Swagger UI (interactive):** https://connect.adopt.ai/docs
+- **OpenAPI (3.1) spec:** https://connect.adopt.ai/openapi.json
+
+## Authentication
+
+To call any API, you’ll need a `clientId` and `secret`.
+
+You can generate these from the **Adopt Platform**:
+
+1. Go to `Settings → Profile → Personal Tokens`
+2. Click **“Generate Token”**
+3. Copy the `clientId` and `secret`
+4. Use them in the `/v1/auth/token` request below
+
+> 💡 You can manage and revoke tokens from the same page at any time.
+
+All requests require a **JWT Bearer Token**.
+
+First, exchange your client credentials for an access token using:
+
+**POST** `/v1/auth/token`
+
+**Request**
+
+```bash
+curl -sS https://connect.adopt.ai/v1/auth/token \
+  -H "Content-Type: application/json" \
+  -d '{"clientId":"YOUR_CLIENT_ID","secret":"YOUR_SECRET"}'
+```
+
+**Request body**
+
+```json
+{
+  "clientId": "string",
+  "secret": "string"
+}
+```
+
+**Response**
+
+```json
+{
+  "access_token": "string",
+  "refresh_token": "string",
+  "expires_in": 3600,
+  "expires": "2025-09-05T12:00:00Z"
+}
+```
+
+Use the token in the `Authorization` header:
+
+```json
+Authorization: Bearer <access_token>
+```
+
+## Conversations
+
+### Create a conversation
+
+**POST** `/v1/conversations/`\
+Creates a new conversation for an end user.
+
+```bash
+curl -sS https://connect.adopt.ai/v1/conversations/ \
+  -H "Authorization: Bearer $TOKEN"
+```
+
+**Response**
+
+```json
+{
+  "conversation_id": "conv_123"
+}
+```
+
+### List conversations (paginated)
+
+**GET** `/v1/conversations/`
+
+Query parameters:
+
+- `page` (int, default `1`, min `1`)
+- `limit` (int, default `20`, min `1`, max `100`)
+- `created_at_from`, `created_at_to` (ISO date strings or `null`)
+- `updated_at_from`, `updated_at_to` (ISO date strings or `null`)
+
+```bash
+curl -sS "https://connect.adopt.ai/v1/conversations/?page=1&limit=20" \
+  -H "Authorization: Bearer $TOKEN"
+```
+
+**Response**
+
+```json
+{
+  "conversations": [
+    {
+      "conversation_id": "conv_123",
+      "created_at": "2025-09-05T10:00:00Z",
+      "updated_at": "2025-09-05T11:00:00Z"
+    }
+  ],
+  "total_count": 42,
+  "has_next_page": true,
+  "has_previous_page": false
+}
+```
+
+## Messages
+
+### Send a message
+
+**POST** `/v1/conversations/{conversation_id}/messages`\
+Adds a new message to an existing conversation and generates an AI response. Optionally stream the reply.
+
+```bash
+curl -sS https://connect.adopt.ai/v1/conversations/conv_123/messages \
+  -H "Authorization: Bearer $TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+        "message_request": {
+          "conversation_id":"conv_123",
+          "message":"How do I reset my password?",
+          "workflow_params":{"flow_id":"reset_password_v2"},
+          "security_params":{"end_user_id":"user_789"}
+        },
+        "stream": false
+      }'
+```
+
+**Request body**
+
+```json
+{
+  "message_request": {
+    "conversation_id": "conv_123",
+    "message": "How do I reset my password?",
+    "base_url": "",
+    "app_base_url": "",
+    "workflow_params": { "flow_id": "reset_password_v2" },
+    "security_params": { "end_user_id": "user_789" },
+    "additional_metadata_values": { "followups_clickable": true }
+  },
+  "stream": false
+}
+```
+
+**Response**
+
+```json
+{
+  "message_id": "msg_456",
+  "conversation_id": "conv_123",
+  "role": "assistant",
+  "content": "You can reset your password from Settings → Security..."
+}
+```
+
+### Get conversation messages
+
+**GET** `/v1/conversations/{conversation_id}/messages`\
+Retrieves paginated messages for a conversation.
+
+```bash
+curl -sS https://connect.adopt.ai/v1/conversations/conv_123/messages \
+  -H "Authorization: Bearer $TOKEN"
+```
+
+**Response**
+
+```json
+{
+  "conversation_id": "conv_123",
+  "messages": [
+    {
+      "message_id": "msg_001",
+      "conversation_id": "conv_123",
+      "role": "user",
+      "content": "Hi",
+      "created_at": "2025-09-05T10:00:00Z",
+      "updated_at": "2025-09-05T10:00:00Z"
+    }
+  ],
+  "total_count": 12,
+  "has_next_page": false,
+  "has_previous_page": true
+}
+```
+
+## Errors
+
+Validation failures return `422 Unprocessable Entity` with a standard structure:
+
+```json
+{
+  "detail": [
+    {
+      "loc": ["body", "message_request", "message"],
+      "msg": "Field required",
+      "type": "value_error.missing"
+    }
+  ]
+}
+```
+
+## End-to-end example
+
+```json
+# 1) Get token
+TOKEN=$(curl -sS https://connect.adopt.ai/v1/auth/token \
+  -H "Content-Type: application/json" \
+  -d '{"clientId":"YOUR_CLIENT_ID","secret":"YOUR_SECRET"}' \
+  | jq -r '.access_token')
+
+# 2) Create conversation
+CONV=$(curl -sS https://connect.adopt.ai/v1/conversations/ \
+  -H "Authorization: Bearer $TOKEN")
+CONV_ID=$(echo "$CONV" | jq -r '.conversation_id')
+
+# 3) Send message
+curl -sS https://connect.adopt.ai/v1/conversations/$CONV_ID/messages \
+  -H "Authorization: Bearer $TOKEN" \
+  -H "Content-Type: application/json" \
+  -d "{\"message_request\": {\"conversation_id\":\"$CONV_ID\",\"message\":\"Hello!\"}}"
+```
+
+## Security
+
+- **Scheme:** HTTP Bearer
+- **Header:** `Authorization: Bearer <token>`
+- Defined in OpenAPI as `JWTBearer`
