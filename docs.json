@@ -74,7 +74,7 @@
       },
       
       {
-        "tab": "JavaScript SDK",
+        "tab":"JavaScript SDK",
         "pages": [
           "javascript-sdk/introduction",
           "javascript-sdk/installation",
@@ -89,12 +89,14 @@
           "javascript-sdk/api-reference"
         ]
       },
+      
       {
-        "tab": "API",
+        "tab":"API",
         "pages": [
-          "api/external-api"
+          "api-reference/external-api"
         ]
       }
+      
     ],
     "global": {
       "anchors": [
