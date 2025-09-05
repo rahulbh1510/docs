@@ -93,7 +93,8 @@
       {
         "tab":"API",
         "pages": [
-          "api-reference/external-api"
+          "api-reference/external-api",
+          "api-reference/on-prem-deployment"
         ]
       }
     ],

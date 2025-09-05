@@ -1,0 +1,188 @@
+---
+title: "On-Prem Deployment (Helm)"
+description: "Step-by-step guide to running the Adopt API Service on your Kubernetes cluster using Helm, with full support for on-prem environments."
+---
+
+This guide walks you through installing the Adopt API Service on your own Kubernetes cluster using our OCI-hosted Helm chart. It covers registry auth, image pull secret creation, chart install/upgrade, networking, and required environment configuration.
+
+## Prerequisites
+
+- A Kubernetes cluster with cluster-admin (or equivalent) access
+- `kubectl` and `helm` installed (Helm 3\+)
+- `awscli` installed and the **AWS access key/secret** we provide
+- Permission to create Kubernetes secrets and install Helm releases
+- (Optional) **Istio** or your preferred Ingress/Gateway if you plan to expose the service externally
+
+---
+
+## 1) Configure AWS credentials (for ECR)
+
+Use the credentials we share with you to set up a dedicated profile (example: `6sense-ecr-pull`):
+
+```bash
+aws configure --profile 6sense-ecr-pull
+# When prompted:
+# AWS Access Key ID: <provided>
+# AWS Secret Access Key: <provided>
+# Default region name: us-east-1
+```
+
+---
+
+## 2) Retrieve the ECR password
+
+Get a short-lived registry token (you’ll paste this as the Docker password in the next step):
+
+```bash
+aws ecr get-login-password \
+  --region us-east-1 \
+  --profile 6sense-ecr-pull
+```
+
+Copy the command output (this is your **DOCKER_PASSWORD**).
+
+---
+
+## 3) Create the Kubernetes image-pull secret
+
+Create a pull secret in the namespace where you’ll install the chart (use `-n <namespace>` if needed):
+
+```bash
+kubectl create secret docker-registry adoptai-image-pull-secret \
+  --docker-server=149536482246.dkr.ecr.us-east-1.amazonaws.com \
+  --docker-username=AWS \
+  --docker-password=<PASTE_ECR_PASSWORD>
+```
+
+<Note>
+  **Tip:** If you’re deploying into a non-default namespace, create the secret in that same namespace or mark it as imagePullSecrets in your ServiceAccount.
+</Note>
+
+## 4) Install the Adopt API Service Helm chart
+
+Install from our **OCI registry**:
+
+```bash
+helm install adopt-api-service \
+  oci://trialdk3pnb.jfrog.io/adoptai-helm-helmoci/adopt-api-service
+```
+
+This pulls images from ECR using the pull secret you created and deploys the service.
+
+<Note>
+  **Verify:** `helm list` and `kubectl get pods,svc` in your target namespace to confirm resources are running.
+</Note>
+
+## 5) Configure environment variables (values.yaml)
+
+Set your runtime configuration via the chart’s `values.yaml` (or `--set` flags). At minimum:
+
+```yaml
+env:
+  - name: SINGLESTORE_PORT
+    value: "3306"
+
+  - name: ANTHROPIC_KEY
+    value: ""          # Provide if using Anthropic models
+
+  - name: SINGLESTORE_HOST
+    value: ""          # e.g., singlestore.mydomain.local
+
+  - name: SINGLESTORE_USER
+    value: ""          # DB username
+
+  - name: SINGLESTORE_PASSWORD
+    value: ""          # DB password
+
+  - name: SINGLESTORE_DATABASE
+    value: "adoptdatadb"
+```
+
+Apply the file by upgrading in place:
+
+```bash
+helm upgrade adopt-api-service \
+  oci://trialdk3pnb.jfrog.io/adoptai-helm-helmoci/adopt-api-service \
+  --reuse-values \
+  -f values.yaml
+```
+
+## 6) Upgrading to a new image version
+
+When we provide a new image tag, you can roll forward without changing other values:
+
+```bash
+helm upgrade adopt-api-service \
+  oci://trialdk3pnb.jfrog.io/adoptai-helm-helmoci/adopt-api-service \
+  --reuse-values \
+  --set image.tag=<NEW_IMAGE_TAG>
+```
+
+Replace `<NEW_IMAGE_TAG>` with the version we share.
+
+## 7) Networking & routing (example with Istio)
+
+The chart deploys the **Adopt API Service** inside your cluster. Exposing it externally (DNS, TLS, routing) is your responsibility. If you use Istio, here’s a minimal `VirtualService` pattern you can adapt:
+
+```yaml
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: adopt-api-service-http-8000
+spec:
+  hosts:
+    - adopt.dev.mycompany.com       # your external host
+  gateways:
+    - istio-system/tfy-wildcard     # your Gateway
+  http:
+    - route:
+        - destination:
+            host: adopt-api-service # K8s service name
+            port:
+              number: 8000
+```
+
+<Note>
+  **Note:** Names (Gateway, host, service) may differ in your cluster. Adjust accordingly.
+</Note>
+
+## 8) Common checks & troubleshooting
+
+- **Image pull errors (**`ImagePullBackOff`**)**
+  - Ensure the **imagePullSecret** (`adoptai-image-pull-secret`) exists in the same namespace as the workload.
+  - Re-run Step 2 to refresh the ECR password and recreate the secret if needed.
+- **Can’t reach service externally**
+  - Verify your Ingress/Gateway/VirtualService or equivalent and DNS records.
+  - Confirm the service `type`, ports, and the target `port: 8000` (example above).
+- **Helm release issues**
+  - `helm status adopt-api-service` and `kubectl describe pod/<name>` for events and logs.
+- **Database / env config**
+  - Double-check `SINGLESTORE_*` variables and network policies/firewalls to your DB host.
+
+---
+
+## 9) Rollback & uninstall (optional)
+
+- **Rollback to previous revision:**
+
+  ```bash
+  helm history adopt-api-service
+  helm rollback adopt-api-service <REVISION>
+  
+  ```
+- **Uninstall:**
+
+  ```bash
+  helm uninstall adopt-api-service
+  
+  ```
+
+## Support
+
+If you get stuck, share:
+
+- `helm status adopt-api-service`
+- `kubectl get pods -o wide` and `kubectl logs` for failing pods
+- Your sanitized `values.yaml` (without secrets)
+
+We’ll debug with you and advise the minimal change to get you green.
