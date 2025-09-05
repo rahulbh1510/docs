@@ -88,6 +88,14 @@
           "javascript-sdk/api-reference"
         ]
       }
+      {
+  "tab": "API",
+  "pages": [
+    "api/overview",
+    "api/external-api"
+  ]
+}
+
     ],
     "global": {
       "anchors": [
