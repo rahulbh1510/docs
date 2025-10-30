@@ -1,5 +1,6 @@
 ---
 title: "Add Event Subscriber"
+description: "Subscribes your application to real-time AdoptAI SDK events, allowing you to monitor and respond to sidebar interactions as they happen."
 ---
 
 The addEventSubscriber method lets you listen to real-time events triggered inside the AdoptAI SDK sidebar.
@@ -60,3 +61,19 @@ unsubPromise.then((unsub) => unsub());
 ```
 
 This ensures your handler is properly unsubscribed when it’s no longer needed.
+
+### Available Events
+
+All event names follow the `adopt_copilot:<event>` convention.
+
+| **Event Name**                        | **Description**                                                 |
+| :------------------------------------ | :-------------------------------------------------------------- |
+| `adopt_copilot:newConversation_click` | Triggered when a user starts a new conversation in the sidebar. |
+| `adopt_copilot:minimize_click`        | Fired when the sidebar is minimized.                            |
+| `adopt_copilot:expand_click`          | Fired when the sidebar is expanded.                             |
+| `adopt_copilot:history_open`          | Triggered when a user opens conversation history.               |
+| `adopt_copilot:history_close`         | Triggered when a user closes conversation history.              |
+| `adopt_copilot:action_initiated`      | Fired when a copilot action is initiated.                       |
+| `adopt_copilot:action_executed`       | Fired when a copilot action completes successfully.             |
+| `adopt_copilot:action_failed`         | Fired when a copilot action fails.                              |
+| `adopt_copilot:stop_execution`        | Triggered when a user manually stops a running action.          |
