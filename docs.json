@@ -86,7 +86,8 @@
           "javascript-sdk/usage-examples",
           "javascript-sdk/troubleshooting",
           "javascript-sdk/faq",
-          "javascript-sdk/api-reference"
+          "javascript-sdk/api-reference",
+          "javascript-sdk/add-event-subscriber"
         ]
       },
       

@@ -1,0 +1,62 @@
+---
+title: "Add Event Subscriber"
+---
+
+The addEventSubscriber method lets you listen to real-time events triggered inside the AdoptAI SDK sidebar.
+
+By subscribing to these events, your app can respond to user actions, analytics events, or sidebar updates — all without modifying the SDK itself.
+
+This is useful if you want to:
+
+- Track how users interact with the sidebar.
+- Log events for analytics or monitoring.
+- Trigger workflows in your own app when specific Adopt events occur.
+
+### How to Use
+
+We introduced an event subscription system that allows external applications to **subscribe to AdoptAI-specific events** emitted on the global `window` object.\
+This enables you to monitor and handle sidebar interactions (like message loads, tool executions, or user actions) in real time.
+
+Paste this code block **after the SDK has been booted** in your application.
+
+```json
+//Define your handler (mandatory handler)
+const myHandler = (eventName, eventData) => {
+  // Process the events as required
+};
+//Subscribe to events
+const unsubPromise = window.AdoptAI.addEventSubscriber(myHandler);
+//To unSubscribe 
+```
+
+### Explanation
+
+#### The Event Handler
+
+```json
+const myHandler = (eventName, eventData) => {
+  // Process the events as required
+};
+```
+
+- **eventName** — a string representing the event type (e.g. `adopt_copilot:message_loaded`).
+- **eventData** — an object containing the event payload and contextual details.
+
+Your handler function is called automatically each time the SDK emits a new event.
+
+#### Subscribing to Events
+
+```json
+window.AdoptAI.addEventSubscriber(myHandler);
+```
+
+When you subscribe, the SDK invokes your handler for every emitted event.\
+You can store or forward these events (for example, to analytics tools like Segment or Datadog), or trigger custom actions inside your own app.
+
+To clean up, call the function returned by the promise:
+
+```json
+unsubPromise.then((unsub) => unsub());
+```
+
+This ensures your handler is properly unsubscribed when it’s no longer needed.
