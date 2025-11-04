@@ -71,175 +71,71 @@ Use the token in the `Authorization` header:
 Authorization: Bearer <access_token>
 ```
 
-## Actions
+## Action Logs
 
-The **Actions** endpoints let you programmatically fetch a list of conversation actions and retrieve the messages tied to a specific action.\
-These APIs are useful for building dashboards, monitoring workflows, or debugging agent executions associated with each action.
+The **Action Logs** endpoints let you inspect, filter, and paginate through low-level execution logs produced while an action runs inside a conversation.\
+Use them to debug failures, trace tool calls, or review inputs/outputs for compliance and QA.
 
-### List Conversation
+### List Action Logs
 
-**GET**`/v1/conversations/{conversation_id}/actions`
+**GET **`/v1/conversations/{conversation_id}/action-logs`
 
-Retrieves all actions that have occurred within a given conversation.\
-Supports pagination and filtering by key fields such as `status`, `type`, or timestamps.
+Fetches action logs filtered to specific fields only.\
+Supports pagination and optional date range filtering.
 
-**Request**
+**Query Parameters**
+
+- `page` – (integer) Page number
+  - **Default:** 1
+  - **Minimum:** 1
+- `page_size` – (integer) Number of items per page
+  - **Default:** 10
+  - **Minimum:** 1
+  - **Maximum:** 100
+- `start_date` – (string | null) Start date in `YYYY-MM-DD` format
+- `end_date` – (string | null) End date in `YYYY-MM-DD` format
+
+**Example Request**
 
 ```bash
-curl -sS "https://connect.adopt.ai/v1/conversations/conv_123/actions?page=1&limit=10" \
+curl -sS "https://connect.adopt.ai/v1/action-logs/?page=1&page_size=10&start_date=2025-11-01&end_date=2025-11-04" \
   -H 
 "Authorization: Bearer $TOKEN"
 ```
 
-**Response**
+**Example Response**
 
 ```json
-{
-  "actions": [
-    {
-      "action_id": "act_001",
-      "conversation_id": "conv_123",
-      "type": "fetch_vendor_invoices",
-      "status": "executed",
-      "initiated_at": "2025-09-05T10:00:00Z",
-      "completed_at": "2025-09-05T10:00:03Z"
-    }
-  ],
-  "total_count": 5,
-  "has_next_page": false
-}
+"string"
 ```
+
+### Get Messages for an Action Log
+
+**GET **`/v1/action-logs/{action_log_id}/messages`
+
+Retrieves all messages associated with a specific action log, identified by its `action_log_id`.\
+This endpoint is typically used to debug or inspect the sequence of messages (user, system, or agent) recorded during an action’s execution.
+
+**Path Parameters**
+
+- `action_log_id` – (string, required) Unique ID of the action log to retrieve messages for.
 
 **Query Parameters**
 
-- `page` – (integer) Page number (default: 1)
-- `limit` – (integer) Number of results per page (default: 20, max: 100)
-- `status` – (string, optional) Filter by action status (`initiated`, `executed`, `failed`)
-- `type` – (string, optional) Filter by action type
-- `created_at_from`, `created_at_to` – (ISO date, optional) Filter by creation time range
-
-### Get Messages for a Conversation
-
-**GET**`/v1/conversations/{conversation_id}/actions/{action_id}/messages`
-
-Retrieves the full list of messages (user and assistant) associated with a specific conversation action.\
-Useful for debugging multi-step actions and understanding agent reasoning or failure points.
-
-**Request**
-
-```bash
-curl -sS "https://connect.adopt.ai/v1/conversations/conv_123/actions/act_001/messages" \
-  -H "Authorization: Bearer $TOKEN"
-```
-
-**Response**
-
-```json
-{
-  "action_id": "act_001",
-  "messages": [
-    {
-      "message_id": "msg_101",
-      "role": "user",
-      "content": "Show me all pending invoices."
-    },
-    {
-      "message_id": "msg_102",
-      "role": "assistant",
-      "content": "Here are your 5 pending vendor invoices."
-    }
-  ],
-  "total_count": 2
-}
-```
-
-**Query Parameters**
-
-- `page` – (integer) Page number (default: 1)
-- `limit` – (integer) Number of results per page (default: 20, max: 100)
-- `role` – (string, optional) Filter messages by role (`user`, `assistant`)
-- `created_at_from`, `created_at_to` – (ISO date, optional) Filter by message creation time ranges
-
-### Run a Specific Action
-
-**POST**`/v1/actions/run`
-
-Triggers the execution of a specific action in the training or production pipeline.\
-This endpoint is primarily used to test or replay agent actions manually with controlled parameters.
+- _None_
 
 **Example Request**
 
-```json
-{
-  "messages": [
-    {
-      "content": "string",
-      "type": "system",
-      "name": "string",
-      "id": "string"
-    },
-    {
-      "content": "string",
-      "type": "human",
-      "name": "string",
-      "id": "string"
-    },
-    {
-      "content": "string",
-      "type": "ai",
-      "name": "string",
-      "id": "string",
-      "tool_calls": [],
-      "invalid_tool_calls": [],
-      "usage_metadata": {
-        "input_tokens": 0,
-        "output_tokens": 0,
-        "total_tokens": 0
-      }
-    }
-  ],
-  "trace_id": "14eafe6d-6880-4f1e-a6f5-9b8e3d304e53",
-  "base_url": "",
-  "workflow_params": {},
-  "security_params": {},
-  "user_message": "",
-  "action_id": "",
-  "fetch_latest_models": false,
-  "application_base_url": "",
-  "execution_type": "DEFAULT"
-}
+```bash
+curl -sS "https://connect.adopt.ai/v1/action-logs/al_123456/messages" \
+  -H 
+"Authorization: Bearer $TOKEN"
 ```
 
-**Response**
+**Example Response**
 
-```json
-{
-  "status": false,
-  "message": "",
-  "ai_message": {
-    "content": "",
-    "type": "ai",
-    "tool_calls": [],
-    "invalid_tool_calls": []
-  }
-}
 ```
-
-### Error Handling
-
-All endpoints return standardized error responses with proper HTTP status codes.\
-A typical validation failure looks like:
-
-```json
-{
-  "detail": [
-    {
-      "loc": ["path", "action_id"],
-      "msg": "Action not found",
-      "type": "value_error"
-    }
-  ]
-}
+"string"
 ```
 
 ## Conversations
