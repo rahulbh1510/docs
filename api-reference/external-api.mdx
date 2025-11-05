@@ -78,7 +78,7 @@ Use them to debug failures, trace tool calls, or review inputs/outputs for compl
 
 ### List Action Logs
 
-**GET **`/v1/conversations/{conversation_id}/action-logs`
+\*\*GET \*\*`/v1/conversations/{conversation_id}/action-logs`
 
 Fetches action logs filtered to specific fields only.\
 Supports pagination and optional date range filtering.
@@ -106,12 +106,24 @@ curl -sS "https://connect.adopt.ai/v1/action-logs/?page=1&page_size=10&start_dat
 **Example Response**
 
 ```json
-"string"
+[{
+            "id": "074e591b-2332-469e-8dc2-ea63e53a2c6d",
+            "conversation_id": "e2586571-338a-48d6-ba61-c817924d5da1",
+            "action_statement": "Test User prompt",
+            "message_ids": [
+                "63465bc6-f297-41fc-b862-da4ee4321d48",
+                "8c4d7c31-5363-4e1c-8de3-84d2c05219f9"
+            ],
+            "org_id": "9cce52e6-969b-46d3-919e-fd148072d399",
+            "action_type": "FETCH",
+            "action_status": "Completed",
+            "created_at": "2025-11-03T12:27:51"
+        }]
 ```
 
 ### Get Messages for an Action Log
 
-**GET **`/v1/action-logs/{action_log_id}/messages`
+**GET** `/v1/action-logs/{action_log_id}/messages`
 
 Retrieves all messages associated with a specific action log, identified by its `action_log_id`.\
 This endpoint is typically used to debug or inspect the sequence of messages (user, system, or agent) recorded during an action’s execution.
@@ -134,8 +146,36 @@ curl -sS "https://connect.adopt.ai/v1/action-logs/al_123456/messages" \
 
 **Example Response**
 
-```
-"string"
+```json
+[
+  {
+    "id": "caabd147-a132-4e99-bacf-ccf55e576195",
+    "conversation_id": "e2586571-338a-48d6-ba61-c817924d5da1",
+    "message": "Test User prompt",
+    "role": "user",
+    "feedback": null,
+    "created_at": "2025-11-03 12:28:16.425000"
+  },
+  {
+    "id": "c5a10631-a657-4f9e-9c5b-633cdad70d23",
+    "conversation_id": "e2586571-338a-48d6-ba61-c817924d5da1",
+    "message": {
+      "additional_data": {},
+      "body": [
+        {
+          "data": "This is a test Agent response",
+          "id": "1",
+          "output_type": "default"
+        }
+      ],
+      "footer": "",
+      "header": ""
+    },
+    "role": "agent",
+    "feedback": null,
+    "created_at": "2025-11-03 12:28:32.174000"
+  }
+]
 ```
 
 ## Conversations
