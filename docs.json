@@ -126,6 +126,11 @@
       "href": "https://app.adopt.ai"
     }
   },
+  "integrations": {
+    "gtm": {
+        "tagId": "GTM-MHLCTMWB"
+      }
+  },
   "footer": {
     "socials": {
       "x": "https://x.com/getadoptai",
