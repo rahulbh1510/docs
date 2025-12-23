@@ -1,0 +1,71 @@
+---
+title: "Create SAML Application with Okta"
+description: "Configure SAML 2.0 single sign-on with Okta for your Adopt AI application"
+---
+
+## Step 1: Create SAML Application
+
+1. Log in to your **Okta Application Dashboard** and click **Applications** in the sidebar.
+![okta](https://asset.adopt.ai/web/docs/okta/okta-img1.png)
+
+2. Click **Create App Integration**.
+![okta](https://asset.adopt.ai/web/docs/okta/okta-img2.png)
+
+3. Click **Create New App** and choose **SAML 2.0** as the Sign-in method. Then, click **Next**.
+![okta](https://asset.adopt.ai/web/docs/okta/okta-img3.png)
+
+4. Enter the name of your application, then click **Next**.
+![okta](https://asset.adopt.ai/web/docs/okta/okta-img4.png)
+
+5. Copy and paste the values into the relevant fields in the **SAML Settings** section.
+![okta](https://asset.adopt.ai/web/docs/okta/okta-img5.png)
+![okta](https://asset.adopt.ai/web/docs/okta/okta-img6.png)
+
+## Step 2: Fill Attribute Statements (Optional)
+
+1. Go to **Attribute Statements (optional)** configuration in SAML Settings. Fill in the following Attribute Statements and click **Next**.
+![okta](https://asset.adopt.ai/web/docs/okta/okta-img7.png)
+![okta](https://asset.adopt.ai/web/docs/okta/okta-img8.png)
+
+2. To complete the app creation process, proceed to the next page and skip or fill out the survey. Click on **Finish**.
+![okta](https://asset.adopt.ai/web/docs/okta/okta-img9.png)
+
+## Step 3: Assign Users
+
+Define which groups should be allowed to log in via SAML SSO in Okta using the app you've created.
+
+1. Switch to the **Assignments** tab. Click **Assign** and choose **Assign to Groups**.
+![okta](https://asset.adopt.ai/web/docs/okta/okta-img10.png)
+
+2. Locate the specific group(s) you wish to assign to the app and click **Assign** next to each of them. Once finished, click **Done**.
+![okta](https://asset.adopt.ai/web/docs/okta/okta-img11.png)
+
+## Step 4: Submit Metadata
+
+To complete the implementation of SAML SSO, you need to provide the application with your identity provider's metadata.
+
+### Automatic Configuration
+
+1. Click on the **Sign On** tab of the SAML app you just created.
+
+2. Copy the **Metadata URL** and paste it into the configuration form.
+![okta](https://asset.adopt.ai/web/docs/okta/okta-img12.png)
+![okta](https://asset.adopt.ai/web/docs/okta/okta-img13.png)
+
+### Manual Configuration
+
+1. Click on the **Sign On** tab of the SAML app you just created.
+
+2. Click on **View SAML setup instructions**.
+
+3. Copy the value of the following fields and paste them into the appropriate fields in the form:
+   - **Identity Provider Single Sign-On URL**
+   - **X.509 Certificate**
+![okta](https://asset.adopt.ai/web/docs/okta/okta-img14.png)
+![okta](https://asset.adopt.ai/web/docs/okta/okta-img15.png)
+
+## Step 5: Complete Domain Claiming and Role Assignment
+
+1. Click on **Proceed with domain claiming and role assignment** to confirm the completion of the IDP form configuration.
+
+2. Follow the instructions in the **Self-service SAML configuration guide** to complete this step and manage authorization.

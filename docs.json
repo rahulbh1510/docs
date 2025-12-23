@@ -69,6 +69,17 @@
             "essentials/zero-shot-api-ingestion",
             "essentials/zero-shot-action-generation"
             ]
+          },
+          {
+            "group": "Authentication",
+            "pages": [
+            {
+              "group": "SSO",
+              "pages": [
+                "essentials/okta"
+              ]
+            }
+            ]
           }
         ]
       },
