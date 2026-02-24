@@ -9,6 +9,15 @@
   },
   "favicon": "/favicon.png",
   "navigation": {
+    "global": {
+      "anchors": [
+        {
+          "anchor": "Website",
+          "icon": "globe",
+          "href": "https://adopt.ai"
+        }
+      ]
+    },
     "tabs": [
       {
         "tab": "Documentation",
@@ -22,7 +31,6 @@
                 "pages": [
                   "essentials/agent-builder",
                   "essentials/agent-experience"
-                  
                 ]
               }
             ]
@@ -41,10 +49,14 @@
               {
                 "group": "Build Edit + Test Actions",
                 "pages": [
-                  "essentials/creating-new-action",
-                  "essentials/editing-actions",
-                  "essentials/testing-actions",
-                  "essentials/playground-profiles"
+                  "essentials/getting-started-with-actions",
+                  "essentials/creating-your-first-action",
+                  "essentials/understanding-your-actions-workflow",
+                  "essentials/working-with-step-types",
+                  "essentials/testing-and-refining-actions",
+                  "essentials/managing-versions-and-deployment",
+                  "essentials/advanced-workflows",
+                  "essentials/best-practices"
                 ]
               },
               {
@@ -57,35 +69,34 @@
               {
                 "group": "Design + Deploy End User Experience",
                 "pages": [
-                      "essentials/deployment-options",
-                      "essentials/custom-themes-branding"
-                      ]
+                  "essentials/deployment-options",
+                  "essentials/custom-themes-branding"
+                ]
               }
             ]
           },
           {
             "group": "Features",
             "pages": [
-            "essentials/zero-shot-api-ingestion",
-            "essentials/zero-shot-action-generation"
+              "essentials/zero-shot-api-ingestion",
+              "essentials/zero-shot-action-generation"
             ]
           },
           {
             "group": "Authentication",
             "pages": [
-            {
-              "group": "SSO",
-              "pages": [
-                "essentials/okta"
-              ]
-            }
+              {
+                "group": "SSO",
+                "pages": [
+                  "essentials/okta"
+                ]
+              }
             ]
           }
         ]
       },
-      
       {
-        "tab":"JavaScript SDK",
+        "tab": "JavaScript SDK",
         "pages": [
           "javascript-sdk/introduction",
           "javascript-sdk/installation",
@@ -101,24 +112,14 @@
           "javascript-sdk/add-event-subscriber"
         ]
       },
-      
       {
-        "tab":"API",
+        "tab": "API",
         "pages": [
           "api-reference/external-api",
           "api-reference/on-prem-deployment"
         ]
       }
-    ],
-    "global": {
-      "anchors": [
-        {
-          "anchor": "Website",
-          "href": "https://adopt.ai",
-          "icon": "globe"
-        }
-      ]
-    }
+    ]
   },
   "logo": {
     "light": "/logo/light.svg",

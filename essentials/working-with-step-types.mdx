@@ -1,0 +1,670 @@
+---
+title: "Working with Step Types"
+description: "Master the different step types available for building action workflows"
+icon: "layer-group"
+---
+
+Every action is built from individual steps, and each step has a specific type that determines what it does. Understanding these types helps you build more sophisticated workflows and troubleshoot when things don't work as expected.
+
+## Step Types Overview
+
+Adopt AI provides twelve distinct step types, each designed for specific operations:
+
+- **User Input**: Collect information from users during workflow execution
+- **API Call**: Retrieve or send data to external systems
+- **Data Processing**: Transform, filter, or manipulate data
+- **Intelligence Enrichment**: Apply AI analysis to extract insights
+- **Decision**: Create branching workflows based on conditions
+- **Master Plan**: Define high-level workflow orchestration
+- **Payload Generation**: Construct structured request bodies
+- **Metadata**: Add contextual information to workflow execution
+- **Story**: Generate narrative explanations of workflow outcomes
+- **Output**: Format and present final results to users
+- **Attribution**: Track data sources and provide transparency
+- **Recommendations**: Suggest next actions to users
+
+Let's explore each type in detail.
+
+---
+
+## User Input
+
+These pause the workflow to ask the user for information. Use them when the initial request doesn't contain everything you need.
+
+### When to Use
+
+The user says "show me license renewals" but doesn't specify a timeframe. Your action needs to ask "for which period?"
+
+### Example
+
+```
+Ask the user which timeframe to check: next 30 days, 60 days, 90 days, or custom range
+```
+
+### Configuration Options
+
+- The question to ask
+- Input type (text, number, date, dropdown, multi-select)
+- Whether it's required or optional
+- Default value if they don't specify
+- Validation rules for the input
+
+<Tip>
+  **Best Practice**: Keep user input steps to a minimum. If you can infer information from context, do so. Only ask when truly necessary, as excessive prompting can negatively impact user experience.
+</Tip>
+
+---
+
+## API Call
+
+These connect to your systems to fetch or send data. Most actions include at least one API call.
+
+### When to Use
+
+Whenever you need to get data from an external system, send updates, or trigger actions in other applications.
+
+### Example
+
+```
+Make a GET request to /api/licenses/upcoming with parameters:
+startDate, endDate, status=active
+```
+
+### Configuration Options
+
+- HTTP method (GET, POST, PUT, DELETE, PATCH)
+- Endpoint URL and parameters
+- Headers for authentication
+- Request body for POST/PUT requests
+- Which API integration to use
+- Timeout settings
+- Retry logic
+
+### Common Implementation Patterns
+
+**Fetching data**: GET requests to retrieve information
+
+```
+GET /api/users/{userId}
+```
+
+**Creating records**: POST requests with the data to create
+
+```
+POST /api/tickets
+Body: { "title": "...", "description": "..." }
+```
+
+**Updating records**: PUT or PATCH requests with changes
+
+```
+PUT /api/licenses/{licenseId}
+Body: { "status": "active" }
+```
+
+**Deleting records**: DELETE requests (use with caution!)
+
+```
+DELETE /api/resources/{resourceId}
+```
+
+<Info>
+  The response from an API call becomes available to subsequent steps. You'll typically follow an API call with a data processing step to extract what you need.
+</Info>
+
+---
+
+## Data Processing
+
+These manipulate, filter, extract, or transform data from previous steps. They're the workhorse of most workflows.
+
+### When to Use
+
+After retrieving data that needs to be cleaned, filtered, sorted, or restructured before presenting to the user.
+
+### Common Data Processing Operations
+
+**Extracting fields:**
+
+```
+Extract the "data" array from the API response
+```
+
+**Filtering:**
+
+```
+Keep only licenses where expirationDate is within the next 60 days
+```
+
+**Sorting:**
+
+```
+Sort by expirationDate ascending (soonest first)
+```
+
+**Aggregating:**
+
+```
+Calculate total renewal cost by summing the "annualCost" field
+```
+
+**Transforming format:**
+
+```
+Convert the date from ISO format to "MM/DD/YYYY"
+```
+
+**Mapping:**
+
+```
+Transform each record to include only: name, date, and cost
+```
+
+### Rationale
+
+Raw API responses often contain excessive or unstructured data. Data processing steps transform this information into clear, focused outputs suitable for end-user consumption.
+
+---
+
+## Intelligence Enrichment
+
+These use AI to analyze, interpret, or enhance your data with insights.
+
+### When to Use
+
+When you need to extract meaning from unstructured data, classify information, generate summaries, or add AI-powered analysis.
+
+### Examples
+
+**Extracting structured data from text:**
+
+```
+Parse the user's message to extract: application name, timeframe, and filters
+```
+
+**Classification:**
+
+```
+Categorize each support ticket as: Technical, Billing, or General
+```
+
+**Summarization:**
+
+```
+Generate a one-paragraph summary of these 50 customer reviews
+```
+
+**Analysis:**
+
+```
+Analyze sales data across all regions and identify the top 3 growth opportunities
+```
+
+**Sentiment analysis:**
+
+```
+Determine if this customer feedback is Positive, Neutral, or Negative
+```
+
+**Pattern recognition:**
+
+```
+Identify common themes across customer complaints
+```
+
+### Strategic Value
+
+These steps enable actions that transcend simple data retrieval by incorporating analytical capabilities and generating actionable insights. This intelligence layer differentiates sophisticated agent implementations from basic query systems.
+
+---
+
+## Decision
+
+These create branches in your workflow based on conditions. Think of them as "if/then" statements that determine the next steps.
+
+### When to Use
+
+When different situations require different handling, or when you need to check conditions before proceeding.
+
+### Example
+
+```
+If the user's role is "Admin":
+  - Proceed to show all licenses
+Otherwise:
+  - Show only licenses they own
+```
+
+### Common Applications
+
+**Role-based access:**
+
+```
+If user.role == "Manager":
+  Include budget information
+Else:
+  Exclude budget details
+```
+
+**Error handling:**
+
+```
+If API call succeeded:
+  Process the data
+Else:
+  Show error message and suggest retry
+```
+
+**Data validation:**
+
+```
+If startDate is after endDate:
+  Return error: "Start date must be before end date"
+Else:
+  Continue with the query
+```
+
+**Personalization:**
+
+```
+If user's subscription tier is "Premium":
+  Include advanced analytics
+Else:
+  Show basic metrics only
+```
+
+### Configuration Options
+
+- Condition expression
+- True path (steps to execute when condition is met)
+- False path (steps to execute when condition is not met)
+- Multiple conditions (else-if logic)
+
+---
+
+## Master Plan
+
+These define the high-level orchestration strategy for complex workflows, coordinating multiple sub-workflows or parallel operations.
+
+### When to Use
+
+For complex actions that require coordinating multiple independent workflows, parallel processing, or orchestrating several API calls that can run simultaneously.
+
+### Example
+
+```
+Master Plan:
+1. Fetch user data (parallel with steps 2-3)
+2. Fetch license data (parallel with steps 1 and 3)
+3. Fetch billing data (parallel with steps 1-2)
+4. Once all data retrieved, combine and process
+5. Generate comprehensive report
+```
+
+### Use Cases
+
+**Parallel data fetching:**
+
+```
+Simultaneously retrieve data from multiple APIs to reduce total execution time
+```
+
+**Multi-stage workflows:**
+
+```
+Coordinate sequential phases where each phase may contain parallel operations
+```
+
+**Complex orchestration:**
+
+```
+Manage dependencies between different workflow branches
+```
+
+### Strategic Value
+
+Master Plan steps enable efficient execution of complex workflows by identifying opportunities for parallelization and coordinating multiple operations that would otherwise run sequentially.
+
+---
+
+## Payload Generation
+
+These construct structured request bodies or data payloads for API calls, transforming user input and processed data into the exact format required by external systems.
+
+### When to Use
+
+When you need to create complex request bodies for API calls, especially when the payload structure is intricate or requires specific formatting.
+
+### Example
+
+```
+Generate API payload:
+{
+  "user": {
+    "email": extracted_email,
+    "role": user_role,
+    "permissions": calculated_permissions
+  },
+  "metadata": {
+    "created_at": current_timestamp,
+    "created_by": current_user_id
+  }
+}
+```
+
+### Common Use Cases
+
+**Creating complex POST requests:**
+
+```
+Build nested JSON structure with user data, preferences, and metadata
+```
+
+**Formatting batch operations:**
+
+```
+Construct array of objects for bulk API operations
+```
+
+**Dynamic payload construction:**
+
+```
+Build payload conditionally based on user input and system state
+```
+
+### Benefits
+
+- Ensures payload structure matches API requirements exactly
+- Handles data type conversions and formatting
+- Makes workflows more readable by separating payload construction from API calls
+- Enables reusability of payload templates
+
+---
+
+## Metadata
+
+These add contextual information to workflow execution, including timestamps, user information, execution context, and tracking data.
+
+### When to Use
+
+When you need to enrich workflow data with contextual information, track execution details, or add audit information.
+
+### Example
+
+```
+Add metadata:
+- Execution timestamp
+- User ID who triggered the action
+- Session information
+- Request origin
+```
+
+### Use Cases
+
+**Audit logging:**
+
+```
+Track who performed what action and when
+```
+
+**Execution context:**
+
+```
+Capture environment, version, and configuration details
+```
+
+**Data enrichment:**
+
+```
+Add timestamps, user information, or system state to results
+```
+
+**Analytics tracking:**
+
+```
+Record metrics for workflow performance analysis
+```
+
+### Strategic Value
+
+Metadata steps ensure proper audit trails, enable troubleshooting, support compliance requirements, and provide data for analytics and optimization.
+
+---
+
+## Story
+
+These generate narrative explanations of workflow outcomes, translating technical results into natural language summaries that users can easily understand.
+
+### When to Use
+
+When you want to provide users with a conversational explanation of what happened during workflow execution, especially for complex multi-step processes.
+
+### Example
+
+```
+Generate story:
+"I checked your license renewals and found 12 licenses expiring in the next 60 days.
+Three Adobe Creative Cloud licenses are the most urgent, expiring within 2 weeks.
+The total renewal cost will be approximately $45,000. I've highlighted the urgent
+renewals at the top of the list for your immediate attention."
+```
+
+### Use Cases
+
+**Explaining complex results:**
+
+```
+Translate multi-step analysis into clear narrative
+```
+
+**Providing context:**
+
+```
+Explain why certain results were returned or actions were taken
+```
+
+**Guided interpretation:**
+
+```
+Help users understand what the data means and what they should do next
+```
+
+**Conversational responses:**
+
+```
+Make agent interactions feel more natural and helpful
+```
+
+### Benefits
+
+- Improves user understanding of workflow results
+- Creates more engaging, conversational experiences
+- Provides context that raw data cannot convey
+- Helps users know what to do with the information
+
+---
+
+## Output
+
+These structure the final result for presentation to the user—as tables, cards, lists, or narrative text. Output steps determine how information is visually presented.
+
+### When to Use
+
+Almost always as one of the final steps, to ensure results are clear and easy to understand.
+
+### Formatting Options
+
+**Table format:**
+
+```
+Format as a table with columns: License Name, Expiration Date, Cost, Owner
+Sort by Expiration Date ascending
+```
+
+**Card layout:**
+
+```
+Display each renewal as a card showing:
+- License name (bold header)
+- Days until expiration (highlighted if < 30 days)
+- Cost and owner details
+```
+
+**List format:**
+
+```
+Return as a bulleted list:
+- License Name (expires MM/DD/YYYY) - $X,XXX/year
+```
+
+**Narrative summary:**
+
+```
+Generate a summary paragraph with key statistics and highlights
+```
+
+**Mixed format:**
+
+```
+Combine table for detailed data with summary statistics at the top
+```
+
+### Configuration Options
+
+- Output format type (table, list, cards, text)
+- Columns to display (for tables)
+- Sorting and grouping rules
+- Highlighting and formatting rules
+- Conditional formatting based on values
+
+<Info>
+  Well-formatted output dramatically improves user experience. Choose formats that make information scannable and actionable.
+</Info>
+
+---
+
+## Attribution
+
+These track and display data sources, providing transparency about where information comes from and enabling users to verify accuracy.
+
+### When to Use
+
+When aggregating data from multiple sources, when users need to verify information, or when compliance requires source tracking.
+
+### Example
+
+```
+Add attribution:
+- License data from: License Management System API
+- Cost data from: Finance Database
+- Owner information from: HR System
+- Last updated: 2024-02-19 14:30 UTC
+```
+
+### Use Cases
+
+**Multi-source aggregation:**
+
+```
+Track which data came from which system when combining multiple APIs
+```
+
+**Compliance and audit:**
+
+```
+Document data lineage for regulatory requirements
+```
+
+**Transparency:**
+
+```
+Show users where information originated
+```
+
+**Verification:**
+
+```
+Enable users to validate data by checking sources
+```
+
+### Benefits
+
+- Builds user trust through transparency
+- Enables data verification and validation
+- Supports compliance and audit requirements
+- Helps troubleshoot data quality issues
+
+---
+
+## Recommendations
+
+These suggest what users might want to do next, creating a more proactive and helpful experience.
+
+### When to Use
+
+At the end of an action to guide users on logical next steps or related actions they might find useful.
+
+### Example
+
+```
+Based on these upcoming renewals, suggest:
+- "Would you like to see the budget impact?"
+- "Should I notify the license owners?"
+- "Do you want to review past renewal costs for comparison?"
+```
+
+### Common Recommendation Patterns
+
+**Follow-up actions:**
+
+```
+Suggest related queries based on current results
+```
+
+**Workflow continuation:**
+
+```
+Offer next logical steps in a business process
+```
+
+**Feature discovery:**
+
+```
+Introduce related capabilities users might not know about
+```
+
+**Contextual help:**
+
+```
+Suggest relevant documentation or support resources
+```
+
+### Strategic Purpose
+
+Recommendations maintain conversational continuity and facilitate capability discovery, improving overall user engagement and system utilization.
+
+---
+
+## Combining Step Types
+
+The power of actions comes from combining different step types into comprehensive workflows. A sophisticated action might include:
+
+ 1. **User Input** - Collect parameters
+ 2. **Payload Generation** - Construct API request
+ 3. **API Call** - Fetch data from external system
+ 4. **Data Processing** - Filter and transform results
+ 5. **Decision** - Apply role-based or conditional logic
+ 6. **Intelligence Enrichment** - Generate insights using AI
+ 7. **Metadata** - Add execution context
+ 8. **Output** - Format results for presentation
+ 9. **Story** - Generate narrative explanation
+10. **Attribution** - Document data sources
+11. **Recommendations** - Suggest next steps
+
+## Next Steps
+
+Now that you understand step types, you're ready to:
+
+1. [Test actions](/essentials/testing-actions) with different step combinations
+2. [Build advanced workflows](/essentials/advanced-workflows) using multiple step types
+3. [Apply best practices](/essentials/best-practices) for robust action design

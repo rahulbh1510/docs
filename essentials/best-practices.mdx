@@ -1,0 +1,381 @@
+---
+title: "Best Practices"
+description: "Proven strategies for building reliable, performant, and maintainable actions"
+icon: "circle-check"
+---
+
+Follow these best practices to build actions that are reliable, performant, and easy to maintain.
+
+## Write Actions for Humans
+
+Your action's name, description, and prompts should use natural language rather than technical specifications. Frame descriptions as user-facing explanations rather than system operations.
+
+### Examples
+
+**Technical approach:** "GET request to /api/v2/licenses?status=active&days=30"
+
+**User-centric approach:** "Show me which software licenses are expiring in the next month"
+
+### Naming Guidelines
+
+- Start with an action verb (Track, Get, Update, Generate)
+- Be specific about what it accomplishes
+- Keep it concise (3-5 words)
+- Make it immediately clear to any team member
+
+**Examples of Effective Nomenclature:**
+
+- Track software license renewals
+- Generate monthly sales report
+- Update user permissions
+- Create support ticket
+
+**Nomenclature to Avoid:**
+
+- License stuff (too vague)
+- Get data (what data?)
+- Action 1 (not descriptive)
+
+## Start Simple, Then Enhance
+
+Build the core functionality first. Get it working. Then add nice-to-haves like recommendations, advanced filtering, or conditional logic.
+
+### Progressive Enhancement Strategy
+
+1. **MVP Version**: Basic functionality that solves the core problem
+2. **Enhanced Version**: Add error handling and edge case management
+3. **Optimized Version**: Improve performance and user experience
+4. **Advanced Version**: Add recommendations, analytics, and intelligence
+
+A simple action that works beats a complex action that doesn't.
+
+<Tip>
+  Deploy your MVP quickly to get real user feedback. You'll learn things about actual usage that you couldn't predict during development.
+</Tip>
+
+## Test with Real Scenarios
+
+Validation should extend beyond functional correctness to assess practical utility. Consider the end-user perspective:
+
+### Questions to Ask
+
+- Would this save them time compared to alternative methods?
+- Is the information they need easy to find in the output?
+- Are they likely to ask follow-up questions? (If so, add recommendations)
+- Does the action handle their most common scenarios?
+- Is the response time acceptable for their workflow?
+
+### Testing Checklist
+
+- Test with actual user phrases, not just technical queries
+- Verify output is actionable, not just informative
+- Ensure error messages guide users to resolution
+- Validate performance under realistic load
+- Check accessibility across different devices
+
+## Handle Errors Gracefully
+
+Users shouldn't see technical error messages. They should see:
+
+- What went wrong in plain language
+- What they can do about it
+- That the system is handling it
+
+### Error Message Examples
+
+**Ineffective:** "Error 500: Internal server error at endpoint /api/licenses"
+
+**Effective:** "We're having trouble connecting to the license system right now. We'll keep trying automatically, or you can try again in a few minutes."
+
+### Error Handling Strategy
+
+1. **Prevent**: Validate inputs before making API calls
+2. **Detect**: Catch errors at each step
+3. **Recover**: Implement retry logic for transient failures
+4. **Communicate**: Provide clear, actionable messages
+5. **Log**: Record details for debugging without exposing to users
+
+<Warning>
+  Never expose raw error messages, stack traces, or internal system details to end users. Always translate to user-friendly language.
+</Warning>
+
+## Make Outputs Scannable
+
+Users prefer concise, well-structured information over dense text blocks. Format outputs to enable rapid information retrieval.
+
+### Formatting Principles
+
+**Use tables for structured data**
+
+- Consistent columns
+- Clear headers
+- Sortable when possible
+- Reasonable row limits (show top N, offer export for more)
+
+**Highlight important information**
+
+- Urgent items or approaching deadlines
+- High costs or unusual values
+- Action-required items
+- Status changes
+
+**Put the most important info first**
+
+- Summary at the top
+- Details below
+- Full data at the end
+
+**Use clear labels**
+
+- Avoid jargon and abbreviations
+- Spell out acronyms on first use
+- Use consistent terminology
+
+## Respect User Privacy
+
+Only retrieve data the user should have access to. Build in permission checks from the start.
+
+### Privacy Guidelines
+
+**Filter results based on user role**
+
+- Admins see everything
+- Managers see their team's data
+- Users see only their own data
+
+**Don't expose sensitive information to unauthorized users**
+
+- Mask credit card numbers
+- Redact SSNs and personal identifiers
+- Hide salary information appropriately
+
+**Log access to sensitive data for audit purposes**
+
+- Who accessed what data
+- When they accessed it
+- What operations they performed
+
+### Data Minimization
+
+Only request and process the minimum data needed to accomplish the task. If you don't need a field, don't retrieve it.
+
+## Keep Actions Focused
+
+One action should do one thing well. Avoid creating overly broad actions that attempt to handle multiple distinct scenarios.
+
+### Examples
+
+**Avoid:** "Manage licenses" (vague, too broad)
+
+**Recommended approach - Create separate actions:**
+
+- Track license renewals
+- Assign license to user
+- Cancel unused license
+- Generate license report
+
+This makes each action simpler, easier to maintain, and easier for the AI to select correctly.
+
+### Benefits of Focused Actions
+
+- Easier to test thoroughly
+- Simpler to maintain and update
+- More accurate action selection by AI
+- Clearer purpose for users
+- Better performance
+- Reduced error surface area
+
+## Optimize for Performance
+
+Users won't wait 30 seconds for results. Keep your actions fast.
+
+### Performance Strategies
+
+**Make API calls in parallel when possible** Instead of sequential calls that take 3 seconds each (9 seconds total), run them simultaneously (3 seconds total).
+
+**Filter data as early as possible** Don't retrieve 1000 records and then filter to 10. Apply filters in the API call to get only what you need.
+
+**Cache data that doesn't change often** Reference data, configuration settings, and slowly changing dimensions can be cached to avoid repeated API calls.
+
+**Set reasonable timeouts** Don't let a single slow API call block the entire action indefinitely. Set timeouts and handle failures gracefully.
+
+### Performance Targets
+
+- Simple queries: \< 3 seconds
+- Complex queries: \< 10 seconds
+- Data analysis: \< 20 seconds
+- Anything longer: Show progress indicators
+
+<Info>
+  Profile your actions in production to identify actual bottlenecks. Optimization efforts should focus on the slowest operations.
+</Info>
+
+## Document Your Actions
+
+Future you will forget why you built something a certain way. Leave notes for context.
+
+### What to Document
+
+**Purpose and Context**
+
+- What business process does this support?
+- What problem does it solve?
+- Who are the primary users?
+
+**Technical Details**
+
+- Which APIs and endpoints are used
+- Any data transformation logic
+- Rate limits or quotas to be aware of
+
+**Design Decisions**
+
+- Why did you choose this approach over alternatives?
+- What trade-offs were made?
+- What edge cases are handled?
+
+**Limitations and Known Issues**
+
+- What doesn't this action do?
+- Are there any quirks or workarounds?
+- What future enhancements are planned?
+
+## Monitor and Iterate
+
+Pay attention to how your actions perform in the real world.
+
+### Metrics to Track
+
+**Usage Patterns**
+
+- Which actions get used most? (Build more like those)
+- Which actions get abandoned mid-way? (They might be asking too many questions)
+- What questions do users ask that no action handles well? (Build new actions)
+
+**Performance Metrics**
+
+- Average response time
+- Success rate
+- Error rate by type
+- API call latency
+
+**User Satisfaction**
+
+- Implicit feedback (completion rates)
+- Explicit feedback (ratings, comments)
+- Support ticket volume
+- Feature requests
+
+### Continuous Improvement Process
+
+1. **Collect data**: Monitor usage and performance
+2. **Analyze patterns**: Identify issues and opportunities
+3. **Prioritize**: Focus on high-impact improvements
+4. **Implement**: Make changes in draft versions
+5. **Test**: Validate improvements work as expected
+6. **Deploy**: Use gradual rollout for safety
+7. **Measure**: Confirm improvements achieved goals
+8. **Repeat**: Iterate continuously
+
+## Collaborate with Subject Matter Experts
+
+You might be building the action, but the people who do the work every day know the details that matter.
+
+### Questions for SMEs
+
+- What information do they actually need in the output?
+- What edge cases come up regularly?
+- What would make their job easier?
+- What frustrates them about current tools?
+- What questions do they ask most frequently?
+
+### Collaboration Process
+
+1. **Initial consultation**: Understand the workflow and pain points
+2. **Prototype review**: Show early versions for feedback
+3. **Beta testing**: Have SMEs test with real scenarios
+4. **Feedback incorporation**: Refine based on their experience
+5. **Training**: Help them understand capabilities
+6. **Ongoing partnership**: Maintain dialogue for future improvements
+
+Their insights will make your actions way more useful.
+
+## Security Best Practices
+
+Build security into actions from the start, not as an afterthought.
+
+### Authentication and Authorization
+
+- Verify user identity before returning data
+- Enforce role-based access control
+- Log all access to sensitive data
+- Handle authentication failures gracefully
+
+### Data Protection
+
+- Encrypt sensitive data in transit and at rest
+- Mask or redact PII in outputs
+- Don't log sensitive information
+- Comply with data privacy regulations
+
+### Input Validation
+
+- Sanitize all user inputs
+- Validate data types and formats
+- Prevent injection attacks
+- Set reasonable limits on input size
+
+## Maintenance and Lifecycle
+
+Actions require ongoing maintenance to remain effective.
+
+### Regular Reviews
+
+**Quarterly**
+
+- Review usage statistics
+- Check for deprecated APIs
+- Update documentation
+- Assess user satisfaction
+
+**Annually**
+
+- Major version updates
+- Technology refresh
+- Competitive analysis
+- Strategic alignment review
+
+### Deprecation Process
+
+When retiring an action:
+
+1. Announce deprecation with timeline
+2. Suggest alternative actions
+3. Monitor usage decline
+4. Disable after grace period
+5. Archive for reference
+
+## Key Takeaways
+
+- **Simplicity wins**: Start simple, add complexity only when needed
+- **Users first**: Design for real users and real scenarios
+- **Test thoroughly**: Beyond happy paths to edge cases and errors
+- **Performance matters**: Optimize for speed from the start
+- **Iterate continuously**: Use real-world feedback to improve
+- **Document everything**: Your future self will thank you
+- **Security always**: Build in protection from day one
+
+<Tip>
+  Print or bookmark this page. Review these practices before starting each new action and periodically for existing actions.
+</Tip>
+
+## Next Steps
+
+You now have comprehensive knowledge of actions. You're ready to:
+
+1. Build sophisticated actions for your organization
+2. Optimize existing actions using these practices
+3. Train team members on action development
+4. Establish governance and quality standards
+
+Start building, keep iterating, and remember: the best actions are the ones that get used.

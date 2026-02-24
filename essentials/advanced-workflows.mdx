@@ -1,0 +1,302 @@
+---
+title: "Advanced Workflows"
+description: "Build sophisticated multi-step actions with conditional logic and complex patterns"
+icon: "diagram-next"
+---
+
+Once you're comfortable with basic actions, you can build sophisticated workflows that handle complex scenarios.
+
+## Building Multi-Path Workflows
+
+Sometimes an action needs to do different things based on the situation. This is where conditional logic shines.
+
+### Example: Role-Based License Access
+
+A license renewal action that behaves differently based on user role:
+
+```
+Step 1: Get the current user's role
+Step 2: Fetch upcoming license renewals
+
+Step 3: If user role is "Admin" or "Finance":
+  ↳ Include cost information and budget projections
+  ↳ Show renewals for all departments
+
+Step 3 (else): If user role is "Manager":
+  ↳ Include cost information
+  ↳ Show only renewals for their department
+
+Step 3 (else): Regular user:
+  ↳ Hide cost information
+  ↳ Show only licenses assigned to them
+
+Step 4: Format and present results
+```
+
+This single action intelligently adapts based on who's asking.
+
+<Tip>
+  Design your conditional logic to handle all possible cases, including unexpected roles or missing data. Always include a default path.
+</Tip>
+
+## Chaining Multiple Data Sources
+
+Complex questions often require data from multiple systems. You can chain API calls together, using the output from one as input to the next.
+
+### Example: Complete Customer View
+
+Getting comprehensive customer information from multiple systems:
+
+```
+Step 1: User asks about customer "Acme Corp"
+Step 2: Call CRM API to get customer ID and basic info
+Step 3: Use customer ID to call Orders API for purchase history
+Step 4: Use customer ID to call Support API for ticket history
+Step 5: Use customer ID to call Billing API for payment status
+Step 6: Combine all data into a comprehensive customer profile
+Step 7: Analyze patterns and generate insights
+Step 8: Format as a dashboard view
+```
+
+Each API call builds on the previous ones, creating a rich, complete picture.
+
+### Optimization Strategies
+
+When chaining multiple API calls:
+
+- Make independent calls in parallel when possible
+- Cache frequently accessed data
+- Handle partial failures gracefully
+- Set appropriate timeouts
+- Implement retry logic for critical calls
+
+## Handling Batch Operations
+
+Need to perform the same action on multiple items? Loops let you process them efficiently.
+
+### Example: License Owner Notifications
+
+Notifying multiple license owners about upcoming renewals:
+
+```
+Step 1: Get list of licenses expiring in next 30 days
+Step 2: For each license in the list:
+  ↳ Get the owner's email address
+  ↳ Check if they've already been notified
+  ↳ If not notified:
+    ↳ Send personalized email with license details
+    ↳ Mark as notified in database
+    ↳ Add to summary count
+Step 3: Return summary: "Sent notifications to 12 license owners"
+```
+
+The loop handles whether there's 1 license or 100, adjusting automatically.
+
+### Loop Best Practices
+
+- Add limits to prevent infinite loops
+- Include progress indicators for long-running operations
+- Handle errors within the loop gracefully
+- Batch operations when possible for efficiency
+- Provide summary information when complete
+
+<Warning>
+  Always set maximum iteration limits on loops to prevent runaway executions that could impact performance or costs.
+</Warning>
+
+## Creating Self-Correcting Actions
+
+Build in error recovery so your actions handle problems gracefully.
+
+### Example: Resilient API Integration
+
+An API call that might timeout or fail:
+
+```
+Step 1: Try to call the license API
+Step 2: If API call fails:
+  ↳ Check the error type:
+    ↳ If timeout: wait 2 seconds and retry (up to 3 times)
+    ↳ If 429 (rate limit): wait 10 seconds and retry
+    ↳ If 500 (server error): wait 5 seconds and retry twice
+    ↳ If 404 (not found): proceed with empty result
+    ↳ If 401 (auth error): return "Please reconnect your license system"
+Step 3: If all retries fail:
+  ↳ Log the error
+  ↳ Return: "The license system is temporarily unavailable. We've logged
+     this issue and will retry automatically."
+```
+
+Users get helpful messages instead of cryptic errors, and transient issues resolve themselves.
+
+### Error Recovery Strategies
+
+**Exponential Backoff**: Increase wait time between retries **Circuit Breaker**: Stop trying after repeated failures **Fallback Data**: Use cached or default values when primary source fails **Partial Success**: Return what you can even if some operations fail **User Notification**: Keep users informed about what's happening
+
+## Using Variables and Context
+
+Actions can remember information throughout the workflow and reference it in later steps.
+
+### Example: Dynamic Output Generation
+
+```
+Step 1: User input - timeframe (store as variable: selectedTimeframe)
+Step 2: Calculate dates based on selectedTimeframe (store as: startDate, endDate)
+Step 3: API call using startDate and endDate
+Step 4: Process data, count results (store as: renewalCount)
+Step 5: Format output mentioning selectedTimeframe and renewalCount:
+  "Found {renewalCount} renewals in your selected timeframe ({selectedTimeframe})"
+```
+
+This makes your outputs dynamic and personalized.
+
+### Variable Scope
+
+- Variables persist throughout the action execution
+- Each execution has its own variable context
+- Variables can be overwritten by later steps
+- Use descriptive variable names for maintainability
+
+<Info>
+  Variables make your actions more dynamic and allow for complex decision-making based on accumulated data throughout the workflow.
+</Info>
+
+## Building Conversational Workflows
+
+Create actions that feel like a conversation, asking follow-up questions based on previous answers.
+
+### Example: Guided Report Selection
+
+Helping users find the right report through progressive questions:
+
+```
+Step 1: Ask "What type of report do you need?"
+  Options: Financial, Operational, Customer Analytics
+
+Step 2: If they chose "Financial":
+  ↳ Ask "Which financial metric?"
+    Options: Revenue, Expenses, Profit Margin
+  ↳ If they chose "Revenue":
+    ↳ Ask "Compare to?" Options: Previous month, Previous quarter, Last year
+  ↳ If they chose "Expenses":
+    ↳ Ask "Breakdown by?" Options: Department, Category, Vendor
+
+Step 3: Based on all selections, generate the specific report requested
+```
+
+Each answer narrows down to exactly what the user needs.
+
+### Conversational Design Principles
+
+- Limit to 2-3 questions maximum
+- Provide clear options rather than open-ended questions
+- Show progress (e.g., "Question 2 of 3")
+- Allow users to go back and change answers
+- Provide a way to skip optional questions
+
+## Complex Data Transformations
+
+Advanced actions often need sophisticated data processing.
+
+### Example: Multi-Source Data Aggregation
+
+```
+Step 1: Fetch data from 3 different APIs
+Step 2: Normalize date formats across all sources
+Step 3: Merge datasets on common customer ID
+Step 4: Calculate aggregate metrics:
+  ↳ Total spend across all sources
+  ↳ Most recent activity date
+  ↳ Average transaction value
+Step 5: Rank customers by total value
+Step 6: Apply business rules:
+  ↳ Flag high-value customers (> $10k spend)
+  ↳ Identify at-risk customers (no activity in 90 days)
+Step 7: Generate recommendations for each segment
+Step 8: Format as executive dashboard
+```
+
+### Data Transformation Techniques
+
+**Normalization**: Standardize formats across sources **Enrichment**: Add calculated fields or derived values **Filtering**: Remove irrelevant or low-quality data **Aggregation**: Summarize detailed data into insights **Joining**: Combine related data from multiple sources
+
+## Performance Optimization Patterns
+
+For actions that handle large datasets or complex operations:
+
+### Caching Strategy
+
+```
+Step 1: Check if result is in cache
+Step 2: If cached and fresh (< 1 hour old):
+  ↳ Return cached result immediately
+Step 3: If not cached or stale:
+  ↳ Fetch fresh data from APIs
+  ↳ Process and transform
+  ↳ Store in cache with timestamp
+  ↳ Return result
+```
+
+### Parallel Processing
+
+```
+Step 1: User requests data requiring 4 different API calls
+Step 2: Execute all 4 API calls in parallel
+Step 3: Wait for all to complete (or timeout after 10 seconds)
+Step 4: Process results that succeeded
+Step 5: Show partial results if some calls failed
+```
+
+### Pagination Handling
+
+```
+Step 1: Make initial API call with page_size=100
+Step 2: While hasMorePages and totalFetched < maxLimit:
+  ↳ Fetch next page
+  ↳ Append to results
+  ↳ Update totalFetched counter
+Step 3: Process complete dataset
+Step 4: If hit maxLimit:
+  ↳ Add note: "Showing first {maxLimit} results. Refine filters for complete data."
+```
+
+<Tip>
+  Profile your actions to identify bottlenecks. Often, a single slow API call is the culprit. Consider caching, parallel requests, or alternative data sources.
+</Tip>
+
+## Security Patterns
+
+Advanced actions often handle sensitive data. Build in security from the start.
+
+### Data Access Control
+
+```
+Step 1: Authenticate user and get permission level
+Step 2: Fetch requested data
+Step 3: Filter results based on user permissions:
+  ↳ If Admin: return all data
+  ↳ If Manager: filter to their department only
+  ↳ If User: filter to their records only
+Step 4: Redact sensitive fields:
+  ↳ Mask credit card numbers
+  ↳ Hide full SSNs
+  ↳ Anonymize PII if needed
+Step 5: Log access for audit trail
+Step 6: Return filtered and redacted results
+```
+
+### Audit Trail Pattern
+
+```
+Every action execution logs:
+- User ID and role
+- Timestamp
+- Action name and version
+- Input parameters
+- Data accessed
+- Results returned
+- Execution time
+- Any errors encountered
+```
+
+As next steps with these advanced patterns, you can: [Apply best practices](/essentials/best-practices) to ensure robustness

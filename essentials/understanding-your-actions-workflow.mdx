@@ -1,0 +1,175 @@
+---
+title: "Understanding Your Action's Workflow"
+description: "Explore the Action Details page and learn how actions execute Once your action is created, you'll see the full breakdown of how it works. This is your opportunity to review, understand, and refine the workflow before deploying it."
+icon: "diagram-project"
+---
+
+<Frame>
+  ![Screenshot 2026 02 18 At 12 53 20 PM](/images/Screenshot2026-02-18at12.53.20PM.png)
+</Frame>
+
+\
+The Action Details page shows you exactly what your action will do when a user triggers it. Let's walk through each section.
+
+## The Action's Purpose and Scope
+
+At the top, you'll find a high-level summary that explains what your action does. This was generated from your description and serves as documentation for your team. If it doesn't accurately reflect your intent, that's a signal to refine your selection criteria.
+
+The Description provides a concise overview of the action's functionality. It's auto-generated but can be helpful for quickly understanding what an action does at a glance.
+
+## Selection Criteria
+
+\
+The selection criteria determines when the AI chooses this action to fulfill a user request. It's like a pattern matcher—when someone asks something that fits this pattern, this action runs.
+
+### How Selection Criteria Works
+
+For example, if your action is about license renewals, the selection criteria might look like:
+
+```
+FETCH upcoming software license renewals by analyzing expiration dates.
+Use this action when users want to check which licenses are expiring soon,
+plan renewal budgets, or avoid service interruptions.
+```
+
+Notice the keyword "FETCH" at the beginning—this helps the AI quickly categorize the intent. The rest describes scenarios where this action applies.
+
+### Editing Selection Criteria
+
+You can edit the selection criteria by clicking the pencil icon. Refining these criteria helps the AI pick the right action more accurately, especially when you have multiple similar actions.
+
+<Tip>
+  If you notice your action isn't triggering when expected, the selection criteria is usually the first place to look. Make it more specific and include common phrasings users might use.
+</Tip>
+
+## Instructions
+
+\
+The Instructions section shows you exactly what happens when this action runs, step by step. Each step has:
+
+- A number indicating its position in the sequence
+- A clear description of what it does
+- A type badge showing what kind of operation it is
+- Any associated tools or APIs being called
+
+### Reading a Workflow
+
+Here's a typical workflow example:
+
+```
+Step 1: Ask the user what timeframe they want to check
+Type: User Input
+
+Step 2: Calculate the start and end dates based on their choice
+Type: Data Processing
+
+Step 3: Call the /api/licenses/upcoming endpoint with date parameters
+Type: API Call | Tool: License Management API
+
+Step 4: Filter results to only include the selected applications
+Type: Data Processing
+
+Step 5: Format the data as a table with relevant columns
+Type: Output Formatting
+```
+
+This sequential flow is exactly how the agent will execute your action. If something seems out of order or missing, you can edit the steps.
+
+### Step Components
+
+Each step includes:
+
+**Step Number**: Shows execution order **Description**: Explains what this step accomplishes **Type Badge**: Categorizes the operation (API Call, Data Processing, etc.) **Tool Tags**: Identifies which integrated tools are used
+
+<Info>
+  Steps execute sequentially from top to bottom. Data flows from one step to the next, with each step able to use outputs from previous steps.
+</Info>
+
+## Example Prompts
+
+<Frame>
+  ![Image](/images/image-2.png)
+</Frame>
+
+Below the workflow, you'll see example prompts—real phrases users might say to trigger this action. These aren't limitations; they're just examples to show the variety of ways people might ask for the same thing.
+
+```
+"Show me software licenses expiring in the next 60 days"
+"Which app licenses do we need to renew soon?"
+"Give me a list of upcoming license renewals"
+```
+
+### Using Example Prompts
+
+Click any example prompt to:
+
+- Automatically run a test with that phrasing
+- See how the action responds to different variations
+- Validate that the action triggers correctly
+
+If you notice important variations missing, you can add them. This helps ensure the AI recognizes different phrasings.
+
+<Warning>
+  Don't rely solely on example prompts for testing. Users will phrase requests in unexpected ways. Test with variations beyond the examples provided.
+</Warning>
+
+## Logs and Activity History
+
+<Frame>
+  ![Image](/images/image-3.png)
+</Frame>
+
+The logs panel keeps a history of everything that's happened with this action:
+
+- When it was created
+- When instructions were updated
+- When it was submitted for approval
+- When it went live
+- Any errors or issues encountered
+
+### What Logs Include
+
+- **Creation Events**: Initial action setup and generation
+- **Modification Events**: Changes to instructions, selection criteria, or settings
+- **Deployment Events**: Version changes, approvals, and publishing
+- **Execution Events**: Test runs and their results
+
+This audit trail is helpful for:
+
+- Troubleshooting when actions behave unexpectedly
+- Understanding how an action evolved over time
+- Tracking who made changes and when
+- Compliance and governance requirements
+
+## Version Information
+
+At the top right, you'll see version information showing whether this action is:
+
+- **Draft**: Still being developed and tested
+- **Submitted for Approval**: Awaiting review
+- **Published**: Live and available to users
+- **Archived**: Superseded by a newer version
+
+The version dropdown lets you switch between different versions to compare changes or roll back if needed.
+
+## Action Management Options
+
+The Action Details page provides several management capabilities:
+
+- **Deployment Rules**: Configure how and when this action gets deployed to users
+- **Edit Action**: Modify the name, description, or core functionality
+- **Test Action**: Validate behavior before deploying changes
+- **View Logs**: Access detailed execution and modification history
+- **Manage Versions**: Switch between versions or roll back changes
+
+## Next Steps
+
+Now that you understand the Action Details page, you're ready to:
+
+1. [Learn about different step types](/essentials/working-with-step-types) and when to use each
+2. [Test your action](/essentials/testing-and-refining-actions) with various scenarios
+3. [Deploy your action](/essentials/managing-versions-and-deployment) and manage versioning
+
+<Tip>
+  Take time to read through the entire workflow before making changes. Understanding how data flows from step to step will help you make better modifications.
+</Tip>
