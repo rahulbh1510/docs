@@ -1,0 +1,138 @@
+---
+title: "Connecting Data"
+description: "Learn how to write queries, create transformers, and bind pipeline data to your Experience components."
+icon: "database"
+---
+
+An Experience without data is just a layout. The Data panel is where you connect your pipeline outputs to the widgets on your canvas — turning structured records into dashboards, review queues, and analytics views your team can actually use.
+
+There are three steps to getting data into an Experience: write a **Query** to pull records from a Pipeline Outcome, optionally apply a **Transformer** to reshape the result, then **bind** the output to a widget using the right panel.
+
+## Queries
+
+Queries are the foundation of your data layer. Each query pulls records from a Pipeline Outcome using SQL, and the result becomes a named data source that any widget on the page can reference.
+
+To add a query, open the **Data** panel from the left sidebar and click `+` next to **QUERIES**.
+
+### Writing a Query
+
+Queries use standard SQL syntax. You reference Pipeline Outcome tables by name — the same table names you see in your pipeline configuration.
+
+A basic query looks like this:
+
+```sql
+SELECT
+  task_id,
+  workflow_name,
+  status,
+  priority,
+  created_at,
+  reviewer_id,
+  resolution_time_minutes
+FROM tasks
+ORDER BY created_at DESC
+```
+
+You can write any valid SQL expression — filtering, aggregating, joining multiple tables, computing derived columns. The query runs against your connected pipeline data and returns a result set the page can use.
+
+```sql
+-- Example: aggregated KPI query
+SELECT
+  COUNT(*) FILTER (WHERE status = 'open') AS pending_tasks,
+  COUNT(*) FILTER (WHERE status = 'resolved') AS resolved_tasks,
+  ROUND(AVG(resolution_time_minutes)) AS avg_resolution_time,
+  ROUND(
+    100.0 * COUNT(*) FILTER (WHERE status = 'resolved') / COUNT(*), 1
+  ) AS success_rate
+FROM tasks
+```
+
+<Info>
+  Each query is scoped to the current Experience page. Queries defined on the Dashboard page aren't automatically available on the Tasks page — create separate queries per page based on what that page needs.
+</Info>
+
+### Naming Queries
+
+Give each query a clear, descriptive name — it shows up in the Data binding panel when you're connecting widgets. A name like `q-tasks-by-status` is far easier to work with than `query1`.
+
+Convention: prefix with `q-` followed by what the query returns. Examples: `q-pending-tasks`, `q-reviewer-performance`, `q-activity-feed`.
+
+### Query Execution
+
+Queries run automatically when a viewer loads the page. They re-run whenever a Filter component on the same page changes its value — so filtering by Status or Date Range automatically refreshes all connected widgets without any extra configuration.
+
+## Transformers
+
+Transformers sit between a query result and a widget. They're JavaScript functions that let you reshape, filter, sort, join, or compute new values from raw query output before it reaches a component.
+
+To add a Transformer, click `+` next to **TRANSFORMERS** in the Data panel.
+
+A Transformer receives the output of a query as its input and returns a modified result set. For example, to add a computed `priority_label` column:
+
+```javascript
+return query1.data.map(row => ({
+  ...row,
+  priority_label: row.priority >= 3 ? 'High' : row.priority === 2 ? 'Medium' : 'Low'
+}));
+```
+
+Or to aggregate query output into a format a Chart needs:
+
+```javascript
+const grouped = {};
+query1.data.forEach(row => {
+  grouped[row.status] = (grouped[row.status] || 0) + 1;
+});
+return Object.entries(grouped).map(([status, count]) => ({ status, count }));
+```
+
+<Tip>
+  Use Transformers when the data shape a widget needs differs from what a SQL query naturally returns — especially for Chart series data, which often needs a specific `[{ x, y }]` or `[{ label, value }]` structure.
+</Tip>
+
+## Binding Data to Widgets
+
+Once you have a query (and optionally a Transformer), you connect it to a widget using the **Data binding** panel on the right side of the builder.
+
+<Steps>
+  <Step title="Select a widget">
+    Click any widget on the canvas to select it. The right panel will show three tabs: Properties, Styles, and Data.
+  </Step>
+  <Step title="Open the Data tab">
+    Click the **Data** icon (the rightmost icon in the right panel icon strip) to open the Data binding panel.
+  </Step>
+  <Step title="Choose your data source">
+    Select the query or transformer result you want to bind to this widget. For a Table, this is the full result set. For a KPI Card, you'll pick a specific column and aggregation (sum, count, average, first value).
+  </Step>
+  <Step title="Map the fields">
+    For components like Chart, you'll map specific columns to the x-axis, y-axis, and series fields. For a Filter, you'll choose the column whose distinct values should appear as filter options.
+  </Step>
+</Steps>
+
+### How Filters Connect to Queries
+
+Filter components on a page automatically apply their selected values to all queries that reference the same column — no manual wiring needed. When a viewer selects "Resolved" in a Status filter, every query on that page that uses the `status` column is updated and re-fetches its results.
+
+For explicit filter-to-query wiring, use query parameters in your SQL:
+
+```sql
+SELECT * FROM tasks
+WHERE status = {{ status_filter.value }}
+  AND priority >= {{ priority_filter.value }}
+ORDER BY created_at DESC
+```
+
+The `{{ }}` syntax references a Filter component by its name, making the query reactive to whatever value the viewer selects.
+
+## How Pipeline Data Flows into Experiences
+
+Experiences don't connect directly to external systems — they connect to **Pipeline Outcomes**. A Pipeline Outcome is the structured, pre-processed result of a Data Pipeline that has been associated with this Experience in your Project configuration.
+
+When you write a query like `SELECT * FROM tasks`, the `tasks` table is a Pipeline Outcome that your Project has made available to this Experience. The pipeline handles extraction, transformation, and freshness — the Experience just queries the clean result.
+
+This separation keeps Experiences fast and reliable. Instead of triggering live API calls on every page load, the Experience reads from a pre-processed snapshot that the pipeline keeps current on its own schedule.
+
+## Next Steps
+
+1. [Publish and share your Experience](/essentials/experience-publishing-and-sharing)
+2. [White-label the Experience for your team or customers](/essentials/experience-white-label-theming)

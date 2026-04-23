@@ -1,0 +1,115 @@
+---
+title: "When to Use Pipelines"
+description: "Understand the scenarios where Pipelines are the right choice, and when to use Tools instead."
+icon: "question"
+---
+
+## Overview
+
+Pipelines shine when you need data to be **ready before an agent runs**. If your agent requires context — historical records, aggregated totals, filtered lists — a Pipeline ensures that data is pre-processed and available instantly.
+
+This page covers the most common use cases for Pipelines and helps you decide when to use a Pipeline versus a Tool.
+
+---
+
+## Core Use Cases
+
+### 1. Aggregating Financial Data for Analysis
+
+**Scenario:** A finance agent calculates R&D tax credits each month. To do this, it needs a clean, structured view of all relevant expenses from your accounting system.
+
+**Why a Pipeline:** Pulling thousands of expense records from QuickBooks at agent runtime would be slow and unreliable. Instead, a Pipeline extracts and aggregates expenses daily — so when the agent runs, it simply reads from the pre-built `aggregated_expenses` outcome.
+
+> Use Pipelines when you need to aggregate expense data from QuickBooks for monthly R&D tax credit calculations.
+
+---
+
+### 2. Pre-Processing CRM Data for Sales Agents
+
+**Scenario:** A sales support agent needs to show a rep the full history of a customer — deals, contacts, notes — before a call.
+
+**Why a Pipeline:** CRM data is large and relational. A Pipeline extracts and joins the relevant records on a schedule, producing a clean `customer_records` table. The agent reads from this table instead of making multiple live API calls during the session.
+
+> Use Pipelines to pre-process customer records so your support agent can show relevant deal history and contact details without latency.
+
+---
+
+### 3. Monitoring Risk and Compliance
+
+**Scenario:** A compliance agent flags any deals or transactions above a risk threshold for human review.
+
+**Why a Pipeline:** Risk data needs to be continuously refreshed. A Pipeline set to run hourly pulls deals from your CRM, filters those above the threshold, and writes them to a `deals_over_10k` outcome. A HITL Experience then displays this table to the reviewing team.
+
+---
+
+### 4. Populating HITL Dashboards
+
+**Scenario:** Your operations team reviews an AI-generated summary each morning. The dashboard needs to show live data from multiple systems.
+
+**Why a Pipeline:** HITL Experiences bind to Pipeline Outcomes to display structured data in tables and charts. The Pipeline runs overnight to prepare the data; when the reviewer opens the Experience, the dashboard loads instantly.
+
+---
+
+### 5. Normalizing Data Across Systems
+
+**Scenario:** Your company uses both Salesforce and HubSpot. An agent needs a unified view of accounts.
+
+**Why a Pipeline:** A Pipeline can extract data from both systems (using two Connectors), transform and normalize the schemas, and write a unified `accounts` table. The agent works from a single, clean dataset.
+
+---
+
+## Pipelines vs. Tools: Decision Guide
+
+Use this table to decide whether to use a Pipeline or a Tool for a given need.
+
+| Need | Use | Example |
+| --- | --- | --- |
+| Pre-fetch and store data before an agent runs | **Pipeline** | Pull all deals from CRM nightly |
+| Display data in a HITL dashboard | **Pipeline** | Show expense totals in a review table |
+| Aggregate or transform large datasets | **Pipeline** | Group expenses by category and project |
+| Refresh data on a schedule | **Pipeline** | Update customer records every hour |
+| Send an email during agent execution | **Tool** | `Send Email` tool called when agent triggers |
+| Create a record in real time | **Tool** | `Create Salesforce Opportunity` called by agent |
+| Fetch a single live record on demand | **Tool** | `Get Contact by ID` called during agent run |
+| Trigger a webhook or external action | **Tool** | `Notify Slack Channel` called by agent |
+
+<Info>
+  A good rule of thumb: if the data exists before the agent runs and doesn't change per-request, use a **Pipeline**. If the action or data fetch happens _during_ agent execution in response to something specific, use a **Tool**.
+</Info>
+
+---
+
+## What Data Sources Work With Pipelines?
+
+Pipelines connect to external systems via **Connectors**. Any system with a Connector configured in Adopt AI can serve as a Pipeline data source. Common examples include:
+
+- **CRM systems** — HubSpot, Salesforce
+- **Accounting & finance** — QuickBooks, Xero
+- **Cloud storage** — AWS S3, Google Drive
+- **Databases** — internal databases via JDBC or REST
+- **Productivity tools** — Google Sheets, Airtable
+- **Support platforms** — Zendesk, Zoho Desk
+
+<Tip>
+  If you don't yet have a Connector for your data source, you can create one during the Pipeline setup flow. See the [Connectors documentation](/essentials/connectors) for details.
+</Tip>
+
+---
+
+## When NOT to Use Pipelines
+
+Pipelines are not the right choice when:
+
+- The data is **user-specific and requested at runtime** (e.g., "fetch the details of _this specific_ ticket the user just mentioned")
+- The operation **writes data to an external system** (e.g., creating a record, sending a notification)
+- The data changes so rapidly that **scheduled pre-computation would always be stale**
+- The operation requires **real-time context from the conversation** (e.g., looking up a specific customer by name the user just said)
+
+For these cases, use Tools instead.
+
+---
+
+## Next Steps
+
+- [Building Your First Pipeline](/essentials/pipelines-create) — step-by-step creation guide
+- [Pipeline Features](/essentials/pipelines-features) — explore scheduling, transformations, and monitoring

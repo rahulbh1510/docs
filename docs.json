@@ -72,6 +72,30 @@
                   "essentials/deployment-options",
                   "essentials/custom-themes-branding"
                 ]
+              },
+              {
+                "group": "Pipelines",
+                "pages": [
+                  "essentials/understanding-data-pipelines",
+                  "essentials/pipelines-use-cases",
+                  "essentials/pipelines-create",
+                  "essentials/pipelines-features",
+                  "untitled-pagedwcwc",
+                  "essentials/using-pipelines-in-experiences",
+                  "essentials/pipelines-best-practices"
+                ]
+              },
+              {
+                "group": "Experiences",
+                "pages": [
+                  "essentials/getting-started-with-experiences",
+                  "essentials/creating-a-new-experience",
+                  "essentials/inside-the-experience-builder",
+                  "essentials/experience-components-reference",
+                  "essentials/experience-connecting-data",
+                  "essentials/experience-white-label-theming",
+                  "essentials/experience-publishing-and-sharing"
+                ]
               }
             ]
           },

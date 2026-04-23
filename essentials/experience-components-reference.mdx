@@ -1,0 +1,227 @@
+---
+title: "Components Reference"
+description: "Every component available in the Experience Builder — what it does, when to use it, and how to configure it."
+icon: "shapes"
+---
+
+Components are the building blocks of every Experience page. You drag them from the Components panel onto your canvas, connect them to data, and configure their behavior and appearance through the right panel. There are 21 components in total, organized into four categories.
+
+Here's a breakdown of each one.
+
+---
+
+## Layout Type of Components
+
+Layout components control the structural organization of your page. They don't display data themselves — they wrap other components to group and arrange them.
+
+---
+
+### Container
+
+A generic grouping wrapper. Place multiple components inside a Container to keep them visually grouped, apply shared styling (background, border, padding), or make them collapse and expand together.
+
+**When to use:** Whenever you want to visually group related widgets — for example, a KPI section at the top of a page or a filter bar above a table.
+
+### Detail Panel
+
+A slide-in panel that opens when a user selects a row from a Table or Card List. The Detail Panel shows deeper information about the selected record without navigating away from the page.
+
+**When to use:** HITL review workflows where reviewers click a task row to open a full detail view — showing extracted fields, source documents, or approval actions — without losing context of the list.
+
+---
+
+## Data Type of Components
+
+Data components display information from your queries and pipeline data. They're the primary way your Pipeline Outcomes become visible to the people using your Experience.
+
+---
+
+### Table
+
+A paginated, searchable, sortable data grid. Displays rows and columns from a query result. Supports column configuration, row-level actions, and inline editing.
+
+**When to use:** Displaying structured records — task lists, rate tables, reviewer performance logs, or any dataset with multiple fields per row.
+
+**Key configuration options:**
+
+- Column visibility and display names
+- Sort defaults and pagination size
+- Row-click actions (open Detail Panel, trigger a button action)
+- Inline edit mode per column
+
+---
+
+### Chart
+
+A flexible chart component supporting multiple visualization types: bar, line, area, pie, donut, scatter, and combo charts. Data comes from a query result — you map the x-axis, y-axis, and series fields in the Properties panel.
+
+**When to use:** Trend analysis, comparisons, and distributions — shipping rate trends over time, tasks resolved by status, carrier performance by volume.
+
+### KPI Card
+
+A single-metric highlight card. Shows one number prominently with a label, optional unit, and optional change indicator (up/down from a comparison value).
+
+**When to use:** Surfacing top-line metrics at a glance — Pending Tasks, Avg Resolution Time, High Priority Count, Success Rate. Stack several in a row for a summary header.
+
+### Gauge
+
+A radial gauge that shows a value against a defined min/max range. Color bands indicate thresholds (green/yellow/red).
+
+**When to use:** Operational health metrics with clear thresholds — SLA compliance rate, confidence score, pipeline fill percentage.
+
+### Progress
+
+A linear progress bar showing completion percentage toward a goal.
+
+**When to use:** Multi-step workflow tracking, quota attainment, batch job completion.
+
+### Map
+
+A geographic map that plots data points by location. Supports markers, heatmaps, and region shading depending on your data.
+
+**When to use:** Any dataset with geographic dimensions — shipment origins, carrier coverage areas, regional distribution.
+
+### Timeline
+
+A vertical event timeline showing a chronological sequence of events with timestamps and labels.
+
+**When to use:** Audit trails, agent run histories, document processing sequences — any scenario where the order of events matters.
+
+### Card List
+
+A scrollable list of summary cards, each representing one record. More visual than a Table row — each card can show a title, subtitle, metadata fields, and a status badge.
+
+**When to use:** Task queues, notification feeds, and review inboxes where a card layout is easier to scan than a dense table row.
+
+### Progress Tracker
+
+A stepped progress indicator showing where a record sits in a defined multi-step workflow.
+
+**When to use:** Showing the current stage of a processing pipeline — e.g. "Extracted → Validated → Reviewed → Approved" — for a selected record in a Detail Panel.
+
+---
+
+## Input Type of Components
+
+Input components let the viewer interact with the Experience — filtering data, submitting information, or triggering actions. They're how humans feed back into a workflow.
+
+### Button
+
+A clickable button that triggers a configured action — submitting a form, calling an API, resolving a task, or navigating to another page.
+
+**When to use:** HITL approval and rejection flows, form submissions, workflow triggers. The Review button on a task card is a typical example.
+
+### Filter
+
+A dropdown or multi-select filter that lets viewers narrow what's shown in a connected Table or Card List. Filter values are populated from a query column.
+
+**When to use:** Status filters (All / Open / Resolved / Skipped), date range pickers, priority selectors — any control that lets viewers slice the data without rewriting the query.
+
+### Form
+
+A structured form with labelled fields and a submit action. Form submissions can write data back to a pipeline table or trigger a workflow event.
+
+**When to use:** Data entry flows, review submission with notes, configuration wizards where the viewer fills in parameters before an action runs.
+
+### Chat
+
+An embedded chat interface that lets the viewer converse with an AI model in context — with the current page data available as context for the conversation.
+
+**When to use:** Analyst copilot workflows where reviewers can ask questions about the data they're looking at — "What's driving the spike in skipped tasks this week?"
+
+### Selection Cards
+
+A grid of visually styled option cards the viewer can choose between. Returns the selected option as a value.
+
+**When to use:** Configuration flows where the viewer needs to pick a mode, strategy, or category — more visual and explicit than a dropdown.
+
+### Tree Select
+
+A hierarchical dropdown that lets viewers select from a nested set of options (parent → child categories).
+
+**When to use:** Category and classification inputs with multiple levels — region → subregion, department → team, product → variant.
+
+### File Upload
+
+A drag-and-drop file upload zone that accepts one or more files and makes them available for processing.
+
+**When to use:** Document submission flows — uploading invoices, contracts, or spreadsheets that feed into an extraction pipeline.
+
+### Button Group
+
+A set of mutually exclusive toggle buttons (like a segmented control). The selected button returns its value.
+
+**When to use:** Switching between views or time periods — Today / This Week / This Month — where only one option can be active at a time.
+
+### Grid Input
+
+An editable grid where viewers can directly enter or modify multiple rows of data in a table-like layout.
+
+**When to use:** Bulk data entry or correction flows — reviewing extracted fields across multiple records and fixing errors in one place.
+
+---
+
+## Display Type of Components
+
+Display components show static or enriched content. They don't respond to data queries but are essential for giving pages context, clarity, and structure.
+
+---
+
+### Text
+
+A rich text block for headings, labels, descriptions, and instructions. Supports basic formatting — bold, italic, lists, links.
+
+**When to use:** Section headers, instructional copy, page introductions, or any explanatory text that helps viewers understand what they're looking at.
+
+### Markdown
+
+A Markdown renderer for longer formatted content — tables, code blocks, lists, headings. Ideal when content is generated dynamically or comes from an external source.
+
+**When to use:** Displaying AI-generated summaries, agent output, or structured reports that need formatting preserved.
+
+### Image
+
+Displays a static image from a URL or uploaded asset.
+
+**When to use:** Logos, diagrams, product photos, or any visual asset that provides context for the data on the page.
+
+### Embed
+
+Embeds an external URL in an iframe — a web page, app, or tool displayed inline within the Experience.
+
+**When to use:** Embedding a linked document preview, an external reporting tool, or a third-party status page alongside your pipeline data.
+
+### Alert
+
+A styled callout box with an icon and message. Available in info, success, warning, and error variants.
+
+**When to use:** Surfacing important notices to reviewers — "3 records require immediate attention", "Confidence score below threshold", or confirmation messages after a form submission.
+
+### Key-Value
+
+A clean two-column layout for displaying labeled field-value pairs.
+
+**When to use:** Record detail views inside a Detail Panel — showing all extracted fields from a document alongside their values in a clean, scannable format.
+
+### Document Viewer
+
+An inline viewer for rendering PDFs and documents directly within the Experience.
+
+**When to use:** HITL review flows where the reviewer needs to see the source document alongside extracted fields — so they can verify accuracy without leaving the Experience.
+
+### Review
+
+A specialized component for HITL task management. Displays the task title, description, and relevant context, with built-in Approve, Skip, and Reject actions that write the reviewer's decision back to the pipeline.
+
+**When to use:** Any HITL workflow where an agent has flagged a record for human review. The Review component is the purpose-built way to surface those tasks and capture the reviewer's response.
+
+---
+
+## Combining Components
+
+The real power comes from combining components into a coherent page. A typical HITL review page might combine a **Filter** (by status) \+ **Card List** (task queue) \+ **Detail Panel** containing a **Document Viewer**, **Key-Value** (extracted fields), and a **Review** component (approve/reject actions). Every piece serves the reviewer's workflow.
+
+## Next Steps
+
+1. [Connect your pipeline data to components](/essentials/experience-connecting-data)
+2. [Publish and share your Experience](/essentials/experience-publishing-and-sharing)

@@ -1,0 +1,151 @@
+---
+title: "Using Pipelines in Agents"
+description: "Learn how to give agents access to Pipeline Outcomes by adding Pipeline nodes to the agent canvas."
+icon: "user-robot"
+hidden: true
+---
+
+## Overview
+
+Agents in Adopt AI can access pre-processed data from Pipelines by including a **Pipeline node** in their workflow canvas. This injects the Pipeline Outcome directly into the agent's execution context — giving it structured, up-to-date data without requiring live API calls during execution.
+
+---
+
+## Why Connect a Pipeline to an Agent?
+
+When an agent needs to reason about business data (customer records, financial summaries, risk scores), that data must be available within the agent's context. You have two options:
+
+1. **Use a Tool** — the agent calls an API live during execution (slower, uses API quota, may fail)
+2. **Use a Pipeline** — the agent reads from pre-computed data already in the Internal Data Store (fast, reliable, always available)
+
+Pipelines are the right choice whenever the data is the same for all agent runs or is refreshed on a predictable schedule — not per-user or per-request.
+
+<Info>
+  Connecting a Pipeline to an Agent does not trigger the Pipeline to run. The Pipeline runs on its own schedule independently. The agent simply reads the most recent outcome.
+</Info>
+
+---
+
+## How Pipeline Nodes Work in an Agent
+
+In the Agent canvas, a **Pipeline node** acts as a data injection point. When the agent reaches that node during execution, it reads the latest Pipeline Outcome and makes it available to subsequent nodes as structured data.
+
+The agent can then:
+
+- Reference specific fields from the Pipeline Outcome in subsequent steps
+- Use the data as context when calling a Tool
+- Pass the data to a decision/branching node
+- Include the data in a response or report
+
+---
+
+## Adding a Pipeline to an Agent
+
+### Step 1 — Open the Agent canvas
+
+Navigate to your Agent and open the workflow canvas editor.
+
+![Agent canvas showing the node palette on the left side](/images/pipelines/agent-canvas-node-palette.png)
+
+### Step 2 — Add a Pipeline node
+
+In the node palette, locate the **Pipeline** node type. Drag it onto the canvas or click to insert it into the workflow at the appropriate point.
+
+![Agent canvas with a Pipeline node added, showing its position in the workflow](/images/pipelines/agent-canvas-pipeline-node.png)
+
+### Step 3 — Configure the Pipeline node
+
+Click the Pipeline node to open its configuration panel. You'll see:
+
+- **Pipeline** — a dropdown to select which pipeline's outcome to inject
+- **Outcome** — the specific named output table to use (if the pipeline has multiple outcomes)
+
+![Pipeline node configuration panel showing pipeline selector and outcome field](/images/pipelines/agent-pipeline-node-config.png)
+
+Select your pipeline (e.g., `QuickBooks Expense Aggregation`) and the desired outcome (e.g., `aggregated_expenses`).
+
+### Step 4 — Reference the Outcome in downstream nodes
+
+Once the Pipeline node is configured, downstream nodes in the agent can reference the injected data. The data is available as a variable that maps to the columns of the Pipeline Outcome table.
+
+For example, if your Pipeline Outcome `deals_over_10k` has columns `deal_name`, `amount`, and `close_date`, you can reference `{{deals_over_10k.amount}}` in a subsequent Transform or Output node.
+
+---
+
+## Example: Expense Report Agent
+
+This example shows how a pipeline integrates into a full agent workflow.
+
+**Pipeline:** `QuickBooks Expense Aggregation` — runs daily, produces `aggregated_expenses` table with columns: `category`, `total_amount`, `transaction_count`.
+
+**Agent Workflow:**
+
+```text
+[Pipeline Node: aggregated_expenses]
+        ↓
+[Transform: Format into report sections by category]
+        ↓
+[Filter: Flag categories over budget threshold]
+        ↓
+[Tool: Send Slack notification for flagged categories]
+        ↓
+[Output: Generate expense summary document]
+```
+
+The Pipeline node injects the pre-computed expense summary at the start of the agent run. The agent never needs to call QuickBooks directly — it works from the clean, structured Pipeline Outcome.
+
+---
+
+## Example: R&D Tax Credit Agent
+
+**Pipeline:** `Expense Aggregation by Project` — aggregates expenses tagged as R&D by project code.
+
+**Agent Workflow:**
+
+```text
+[Pipeline Node: rd_expenses_by_project]
+        ↓
+[Transform: Calculate eligible percentages per project]
+        ↓
+[Tool: Look up applicable tax rates (live API call)]
+        ↓
+[Transform: Compute credit amounts]
+        ↓
+[HITL: Present draft calculation to finance reviewer]
+```
+
+The Pipeline handles the expensive data extraction. The Tool is used only for the targeted live lookup (tax rates), keeping the agent run fast and focused.
+
+---
+
+## Keeping Pipeline Data Fresh
+
+Since agents read from the most recent Pipeline Outcome, the freshness of that data depends on the Pipeline's schedule.
+
+| Pipeline Schedule | Agent Data Freshness |
+| --- | --- |
+| Hourly | Data up to ~1 hour old |
+| Daily | Data up to ~24 hours old |
+| Manual | Data as of the last manual run |
+
+<Tip>
+  Match your Pipeline schedule to how frequently the data actually changes. Running a Pipeline more often than the data changes wastes resources. Running it less often means agents work with stale data.
+</Tip>
+
+---
+
+## Troubleshooting
+
+**The Pipeline Outcome is empty when the agent runs.** Check that the Pipeline has been activated and has at least one successful run. Go to the pipeline's **Data** tab to verify records exist.
+
+**The agent is using outdated data.** Check the Pipeline's schedule and last run time on the **Overview** tab. If the pipeline is paused, resume it and run a manual test.
+
+**The pipeline fails and the agent has no data.** By default, pipelines auto-pause after 3 consecutive failures. Check the **Runs** tab for error details and fix the underlying issue.
+
+---
+
+## Related Pages
+
+- [Understanding Pipelines](pipelines-overview) — concepts and architecture
+- [Using Pipelines in Experiences](pipelines-experiences-integration) — display outcomes in HITL dashboards
+- [Pipeline Features](pipelines-features) — scheduling, monitoring, and configuration reference

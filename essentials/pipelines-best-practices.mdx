@@ -1,0 +1,195 @@
+---
+title: "Pipeline Best Practices"
+description: "Recommendations, patterns, and common pitfalls to help you build reliable, maintainable Pipelines."
+icon: "circle-check"
+---
+
+## Overview
+
+Well-designed Pipelines are the foundation of reliable agent behavior and trustworthy HITL dashboards. This page covers the patterns that lead to clean, maintainable data infrastructure — and the mistakes to avoid.
+
+---
+
+## Design Principles
+
+### 1. Single Responsibility per Pipeline
+
+Each Pipeline should extract and transform **one logical dataset**. Avoid trying to produce unrelated outputs from a single pipeline.
+
+**Good:**
+
+- `HubSpot Deals Over Threshold` — pulls deals, filters by amount, produces `deals_over_10k`
+- `QuickBooks Expense Summary` — pulls expenses, aggregates by category, produces `expense_totals`
+
+**Avoid:**
+
+- `CRM and Finance Data` — pulls deals AND expenses AND contacts into one pipeline with mixed outputs
+
+Keeping pipelines focused makes them easier to debug, schedule independently, and reuse across different agents and experiences.
+
+---
+
+### 2. Use Descriptive Outcome Names
+
+Pipeline Outcomes are referenced by name across Agents and Experiences. Choose names that are specific and self-documenting.
+
+| ❌ Avoid | ✅ Better |
+| --- | --- |
+| `output1` | `deals_over_10k` |
+| `data` | `aggregated_rd_expenses_by_project` |
+| `results` | `customer_support_tickets_open` |
+
+The name should convey what the data is, not just that it exists.
+
+---
+
+### 3. Match Schedule to Data Change Frequency
+
+Over-scheduling wastes connector quota and compute. Under-scheduling means agents work with stale data.
+
+Ask: _How often does the underlying data actually change in a meaningful way?_
+
+| Data Type | Recommended Frequency |
+| --- | --- |
+| Financial totals, reporting data | Daily |
+| CRM records, deal pipelines | Hourly |
+| Support tickets, incident data | Hourly |
+| Weekly summaries, payroll data | Weekly |
+| Historical archives | Manual |
+
+<Tip>
+  If you're unsure, start with **Daily** and adjust based on how stale the data looks in your agent outputs and experience dashboards.
+</Tip>
+
+---
+
+### 4. Test Before Activating
+
+Always run a **Test Run** on a Draft pipeline before clicking Activate. This catches:
+
+- Connector credential issues
+- Schema mismatches between expected and actual data
+- Empty results from misconfigured filters
+- Transformation errors
+
+Check the **Data** tab after the test run to confirm records appear with the expected structure.
+
+---
+
+### 5. Monitor Pipeline Health Regularly
+
+Check the **Pipelines Overview** dashboard weekly (or set up alerting via Tools). Watch for:
+
+- **Success rate dropping below 100%** — usually indicates a connector issue or upstream schema change
+- **Duration increasing significantly** — may signal that the data volume has grown unexpectedly
+- **Auto-pause** — a pipeline that auto-paused due to 3 consecutive failures needs immediate attention
+
+<Warning>
+  If a pipeline feeding a critical agent or dashboard auto-pauses, the agent will be working with stale data. Set the **Max Consecutive Failures** setting to match your tolerance — but don't set it so high that silent failures go unnoticed for long.
+</Warning>
+
+---
+
+### 6. Write Clear Pipeline Descriptions
+
+The natural language description you enter in Step 3 of the wizard does two things: it generates the workflow AND serves as documentation for your team.
+
+Write descriptions that are:
+
+- **Specific about data sources:** "Pull all deals from HubSpot" not "Get deals"
+- **Explicit about filters:** "Filter to only include deals with amount \> \$10,000" not "Filter large deals"
+- **Clear about transformations:** "Aggregate by category, summing the amount field" not "Group the data"
+- **Descriptive about outputs:** "Store as a table named `deals_over_10k` with columns: deal\_name, amount, close\_date"
+
+Good descriptions also make it easier to regenerate the workflow if you need to change the pipeline later.
+
+---
+
+### 7. Document Transformation Logic
+
+When pipelines involve complex transforms (multi-step aggregations, conditional logic, joins), add notes to each workflow node explaining _why_ the transform exists, not just what it does.
+
+Use the **notes** field in node configuration:
+
+```text
+notes: "Filter to R&D-tagged expenses only. The 'tag' field uses
+a free-text convention — check for both 'RD' and 'R&D' spellings."
+```
+
+This documentation is invaluable when you or a colleague needs to debug the pipeline months later.
+
+---
+
+### 8. Coordinate Pipeline and Agent Schedules
+
+If an agent runs on a schedule (e.g., daily at 10 AM), ensure the Pipeline it depends on runs **before** the agent (e.g., daily at 8 AM). An agent that runs before its Pipeline has refreshed is working with yesterday's data.
+
+**Pattern:**
+
+```text
+07:00 AM — Pipeline: QuickBooks Expense Aggregation runs
+08:00 AM — Pipeline: HubSpot Deal Sync runs
+09:00 AM — Agent: Finance Review Agent runs (reads from both pipeline outcomes)
+```
+
+---
+
+### 9. Don't Over-Extract
+
+Extract only the fields and records your agents and experiences actually need. Over-extracting creates larger outcome tables, slower runs, and more cognitive overhead when inspecting data.
+
+If your agent only needs `deal_name` and `amount`, don't extract 40 fields from your CRM.
+
+---
+
+### 10. Use the Regenerate Feature to Iterate
+
+If the AI-generated workflow doesn't match your intent exactly, don't manually edit individual nodes — instead, refine the pipeline description and click **Regenerate**. This produces a cleaner, more consistent workflow than patching individual nodes by hand.
+
+---
+
+## Common Patterns
+
+### Pattern 1: Extract → Filter → Aggregate → Write
+
+The most common pipeline shape. Extract all records, filter to the relevant subset, aggregate to a summary, write to the outcome table.
+
+```text
+READ DB: Pull all expense records
+   ↓
+FILTER: Include only records where amount > 500
+   ↓
+GROUP: Aggregate by category, sum amount
+   ↓
+WRITE: Store as aggregated_expenses
+```
+
+### Pattern 2: Extract → Transform → Write (No Filter)
+
+For pipelines where all records are relevant but need reshaping before agents can use them.
+
+```text
+TOOL: Fetch all contacts from HubSpot CRM
+   ↓
+TRANSFORM: Extract and normalize contact fields
+   ↓
+TRANSFORM: Flatten nested address fields
+   ↓
+WRITE: Store as normalized_contacts
+```
+
+### Pattern 3: Multi-Step Risk Scoring
+
+For pipelines that compute derived values before writing.
+
+```text
+READ DB: Pull all open deals
+   ↓
+FILTER: Deals over $10K
+   ↓
+TRANSFORM: Calculate days until close
+   ↓
+TRANSFORM: Assign risk tier (High/Medium/Low) based on days and amount
+   ↓
+WRITE: Store as deals_with_risk_score
+```
