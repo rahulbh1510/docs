@@ -153,15 +153,22 @@
   "navbar": {
     "links": [
       {
-        "label": "Support",
-        "href": "mailto:info@adopt.ai"
+        "href": "/end-user-guide/running-a-task",
+        "label": "End users"
+      },
+      {
+        "href": "/builder-guide/builder-overview",
+        "label": "Builders"
+      },
+      {
+        "href": "/core-concepts/the-object-model",
+        "label": "Concepts"
+      },
+      {
+        "href": "/reference/glossary",
+        "label": "Reference"
       }
-    ],
-    "primary": {
-      "type": "button",
-      "label": "Dashboard",
-      "href": "https://app.adopt.ai"
-    }
+    ]
   },
   "integrations": {
     "gtm": {
