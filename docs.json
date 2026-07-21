@@ -150,13 +150,17 @@
             "group": "Overview",
             "icon": "compass",
             "pages": [
-              "accounting/introduction"
+              "accounting/introduction",
+              "accounting/platform-architecture"
             ]
           },
           {
             "group": "Build",
             "icon": "wand-magic-sparkles",
-            "pages": []
+            "pages": [
+              "accounting/connectors",
+              "accounting/skills"
+            ]
           },
           {
             "group": "Adopt Primitives",
