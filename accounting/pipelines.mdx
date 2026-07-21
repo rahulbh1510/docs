@@ -1,0 +1,72 @@
+---
+title: "Pipelines"
+description: "Scheduled jobs that pull data from your systems, transform it, and land it in the Data Store for agents to use."
+icon: "arrows-spin"
+---
+
+Agents work best when the data they need is already clean, structured, and waiting for them — not fetched live in the middle of a conversation. Pipelines are what make that true. A Pipeline connects to your external systems on a schedule, extracts and transforms the data, and lands it in the [Data Store](/accounting/data-store), so agents read pre-computed results instead of hammering raw APIs mid-run.
+
+## What Are Pipelines?
+
+A Pipeline is pure data infrastructure. On a schedule or trigger, it reaches out through [Connectors](/accounting/connectors), pulls data, reshapes it, and writes it to the Data Store. It doesn't make decisions — it prepares inputs.
+
+<Info>
+  Pipelines are the extract-and-transform engine of the platform — integration, extraction, and transformation that hands clean, structured data to everything downstream.
+</Info>
+
+A crucial detail: **a Pipeline is always defined within a [Skill](/accounting/skills).** The pipeline is that skill's mechanism for bringing in fresh data. Because skills compose into agents, a pipeline is associated with an agent only _through_ its skill — never directly. Pipelines get their own management surface under the **Adopt Primitives** group, but they remain bound to a skill.
+
+## How to Access Pipelines
+
+Click **Pipelines** in the left navigation, under the **Adopt Primitives** group. This opens the pipeline library.
+
+<Frame>
+  ![The Pipelines library showing cards for R&D Tax Credit, Account Recon, Meridian Account Reconciliation, and Flux Report Demo, each with a status, source, schedule, and workstream](/images/acct-pipelines-library.png)
+</Frame>
+
+## Inside the Pipelines List
+
+The library lists every pipeline as a card. Tabs let you switch between **All Pipelines** and an **Overview**, filter chips separate **Active** from **Paused**, and dropdowns filter by schedule or workstream.
+
+Each card surfaces everything you need to understand a pipeline at a glance:
+
+| Field | What it shows |
+| --- | --- |
+| **Name & status** | The pipeline's name and whether it's **Active** or **Paused**. |
+| **Description** | What the pipeline does. |
+| **Type** | Whether it's an _Agent pipeline_ or driven by a _Connector_. |
+| **Source → destination** | The source system and the destination — almost always the Internal Data Store. |
+| **Schedule** | How it runs: _Manual_, or on a cadence like _Every 15 minutes_. |
+| **Workstream** | The client this pipeline's data belongs to. |
+| **Updated by** | Who last changed it, and when. |
+
+## Building a Pipeline
+
+Click **New Pipeline** to open the builder. It walks you through four steps.
+
+<Frame>
+  ![The Create Pipeline builder on the Source step, showing the step indicator Source, Workstreams, Schedule, Describe, with fields for Pipeline Name, Skills, Agent, and a Source connector picker](/images/acct-pipelines-builder.png)
+</Frame>
+
+| Step | What you configure |
+| --- | --- |
+| **Source** | Name the pipeline, associate the **Skills** and **Agent** it belongs to, and choose the source — one or more Connectors, or the Internal Data Store itself. |
+| **Workstreams** | Bind the run's data to a client, so it lands in the right workstream. |
+| **Schedule** | Set how it runs: on a cadence, on an event, or on demand. |
+| **Describe** | Describe the extract-and-transform logic that cleans, joins, or enriches the data in flight. |
+
+Whatever the source, the destination is the same: **data syncs to the Internal Data Store**, where the structured result becomes available for dashboards, agents, and export.
+
+## How Pipelines Behave
+
+Pipelines run **independently of agent execution**. They pre-compute data on a schedule rather than blocking a conversation — so when an agent runs, the data it needs is already sitting in the Data Store. A skill can own one or more pipelines; their output lands in the Data Store, and the skill's agents read it from there. A pipeline never feeds an agent directly.
+
+## Why Pipelines Matter
+
+Pipelines are what keep agents fast and reliable. Instead of an agent making a dozen slow, fragile API calls every time someone asks for a flux report, a pipeline has already pulled and cleaned the ledger overnight. The agent just reads the result. That separation — heavy data work on a schedule, light reasoning at runtime — is what lets the platform handle real accounting volume without falling over.
+
+## Next Steps
+
+1. [See where pipeline data lands in the Data Store](/accounting/data-store)
+2. [Understand the skill that owns a pipeline](/accounting/skills)
+3. [Review Pipeline behaviour in the wider data flow](/accounting/how-it-connects)

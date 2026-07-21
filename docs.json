@@ -159,13 +159,17 @@
             "icon": "wand-magic-sparkles",
             "pages": [
               "accounting/connectors",
-              "accounting/skills"
+              "accounting/skills",
+              "accounting/agents"
             ]
           },
           {
             "group": "Adopt Primitives",
             "icon": "layer-group",
-            "pages": []
+            "pages": [
+              "accounting/pipelines",
+              "accounting/data-store"
+            ]
           },
           {
             "group": "The App",
