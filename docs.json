@@ -149,7 +149,9 @@
           {
             "group": "Overview",
             "icon": "compass",
-            "pages": []
+            "pages": [
+              "accounting/introduction"
+            ]
           },
           {
             "group": "Build",
