@@ -1,0 +1,56 @@
+---
+title: "Build → Run Sequence"
+description: "The six-step path from an empty platform to a working agent your team runs against a real client."
+icon: "list-ol"
+---
+
+The building blocks are easier to act on when you know the order to tackle them in. This is the canonical sequence — from registering your first system to a team member running an agent against a live client. Each step builds on the one before it, so following the order saves you backtracking.
+
+## The Six-Step Build Sequence
+
+<Steps>
+  <Step title="Configure Connectors">
+    Register the external systems you'll need — from the catalogue or as custom MCP connectors. This is done once and reused broadly, so start here.
+
+    See [Connectors](/accounting/connectors).
+  </Step>
+  <Step title="Build Skills">
+    Compose connectors into single-purpose skills, each with a clear instruction and a defined input/output contract. Keep each skill focused on one job.
+
+    See [Skills](/accounting/skills).
+  </Step>
+  <Step title="Add Pipelines to skills that need data">
+    Within a skill, define its pipeline — the source connectors, the transformation, the schedule, and the workstream binding. The data lands in the Data Store, ready for agents to read.
+
+    See [Pipelines](/accounting/pipelines).
+  </Step>
+  <Step title="Build Agents">
+    Chain skills together with glue logic, wire in the Data Store and File Explorer reads through those skills, place human-in-the-loop gates at the review moments, and bind the agent to its workstreams.
+
+    See [Agents & Human-in-the-Loop](/accounting/agents).
+  </Step>
+  <Step title="Set up Workstreams">
+    Create a workstream per client and add the people who should have access. Point pipelines and files at the right client systems.
+
+    See [Workstreams](/accounting/workstreams).
+  </Step>
+  <Step title="Run it in the App">
+    End-users open the agent, pick the workstream, converse, and resolve any human-in-the-loop steps. Every run is logged under the workstream.
+
+    See [The End-User App](/accounting/end-user-app).
+  </Step>
+</Steps>
+
+<Tip>
+  The first three steps are foundation you build once and reuse across every client. The real per-client work is small: create a workstream, point it at the client's systems, and run. That's what makes onboarding a new client fast.
+</Tip>
+
+## Why the Sequence Matters
+
+The order isn't arbitrary — it follows the dependency chain. You can't build a useful skill without a connector to give it access, can't build an agent without skills to compose, and can't run anything meaningful without a workstream to scope it. Work the sequence in order and each step has everything it needs from the steps before it.
+
+## Next Steps
+
+1. [Review the design principles behind the platform](/accounting/design-principles)
+2. [See how everything connects](/accounting/how-it-connects)
+3. [Start at step one with Connectors](/accounting/connectors)

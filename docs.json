@@ -168,18 +168,27 @@
             "icon": "layer-group",
             "pages": [
               "accounting/pipelines",
-              "accounting/data-store"
+              "accounting/data-store",
+              "accounting/file-explorer",
+              "accounting/workstreams"
             ]
           },
           {
             "group": "The App",
             "icon": "window",
-            "pages": []
+            "pages": [
+              "accounting/end-user-app"
+            ]
           },
           {
             "group": "Reference",
             "icon": "book",
-            "pages": []
+            "pages": [
+              "accounting/how-it-connects",
+              "accounting/build-to-run",
+              "accounting/design-principles",
+              "accounting/migrating-from-horizontal"
+            ]
           }
         ]
       }
