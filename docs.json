@@ -14,11 +14,13 @@
         {
           "anchor": "Website",
           "icon": "globe",
-          "href": "https://adopt.ai"
+          "href": "https://adopt.ai",
+          "hidden": true
         }
       ]
     },
     "pages": [
+      "index",
       {
         "group": "Getting started",
         "icon": "flag",
@@ -49,27 +51,6 @@
           "end-user-guide/notifications",
           "end-user-guide/your-dashboard",
           "end-user-guide/clients-and-files"
-        ]
-      },
-      "index",
-      {
-        "group": "Security & access",
-        "icon": "shield-halved",
-        "pages": [
-          "security-access/isolation-and-multi-tenancy",
-          "security-access/roles-and-permissions",
-          "security-access/access-scoping",
-          "security-access/data-handling-and-compliance"
-        ]
-      },
-      {
-        "group": "Admin",
-        "icon": "users-gear",
-        "pages": [
-          "admin/managing-members",
-          "admin/billing-and-credits",
-          "admin/usage-and-reporting",
-          "admin/org-settings"
         ]
       },
       {
@@ -119,6 +100,26 @@
               "builder-guide/skills-vs-plugins"
             ]
           }
+        ]
+      },
+      {
+        "group": "Security & access",
+        "icon": "shield-halved",
+        "pages": [
+          "security-access/isolation-and-multi-tenancy",
+          "security-access/roles-and-permissions",
+          "security-access/access-scoping",
+          "security-access/data-handling-and-compliance"
+        ]
+      },
+      {
+        "group": "Admin",
+        "icon": "users-gear",
+        "pages": [
+          "admin/managing-members",
+          "admin/billing-and-credits",
+          "admin/usage-and-reporting",
+          "admin/org-settings"
         ]
       },
       {
