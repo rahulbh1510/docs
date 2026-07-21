@@ -142,6 +142,36 @@
           "api-reference/external-api",
           "api-reference/on-prem-deployment"
         ]
+      },
+      {
+        "tab": "Accounting & Tax",
+        "groups": [
+          {
+            "group": "Overview",
+            "icon": "compass",
+            "pages": []
+          },
+          {
+            "group": "Build",
+            "icon": "wand-magic-sparkles",
+            "pages": []
+          },
+          {
+            "group": "Adopt Primitives",
+            "icon": "layer-group",
+            "pages": []
+          },
+          {
+            "group": "The App",
+            "icon": "window",
+            "pages": []
+          },
+          {
+            "group": "Reference",
+            "icon": "book",
+            "pages": []
+          }
+        ]
       }
     ]
   },
