@@ -1,0 +1,43 @@
+---
+title: "When a run fails"
+description: "How to read a failed run and the usual causes, from most to least common."
+icon: "triangle-exclamation"
+tag: "Everyone"
+---
+
+A failed run means the agent couldn't complete its work. Open the run to see the specific reason, then match it to the causes below — ordered from most to least common.
+
+## Most common: missing or unsynced data
+
+The agent had nothing (or not enough) to work from.
+
+- Confirm the client's Doc Store actually has the files it needs.
+- If the files come from a connected source, trigger a **fresh sync** — a recent file may not have synced yet. See [Sync problems](/troubleshooting/sync-problems).
+
+## Access not granted
+
+The agent isn't allowed to read the data it needs.
+
+- Confirm the agent has access to the Doc Store (see [Setting Doc Store access](/builder-guide/doc-store-access)).
+- For a Data Store, confirm the table scope includes this client and agent, and that the **Query Data Store** skill is on.
+
+## Instructions or skill mismatch
+
+The agent was asked to do something it isn't equipped for.
+
+- If the task needs a capability (e.g. filling a tax form), confirm the matching skill is enabled.
+- Check the instructions aren't asking for an output the available skills can't produce.
+
+## Transient errors
+
+Occasionally a run fails for a temporary reason (a source briefly unavailable). Re-running is a reasonable first response; if it recurs, work through the causes above.
+
+<Note>
+  If none of the above resolves it, capture the run and its error message and raise it with whoever administers Adopt for your firm, or Adopt support.
+</Note>
+
+## Next steps
+
+1. [Common issues](/troubleshooting/common-issues)
+2. [Sync problems](/troubleshooting/sync-problems)
+3. [Setting Doc Store access](/builder-guide/doc-store-access)
