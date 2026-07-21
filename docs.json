@@ -19,7 +19,6 @@
       ]
     },
     "pages": [
-      "index",
       {
         "group": "Getting started",
         "icon": "flag",
@@ -27,6 +26,50 @@
           "getting-started/what-is-adopt",
           "getting-started/your-first-run",
           "getting-started/choosing-your-path"
+        ]
+      },
+      {
+        "group": "Core concepts",
+        "icon": "cubes",
+        "pages": [
+          "core-concepts/the-object-model",
+          "core-concepts/workstreams-and-engagements",
+          "core-concepts/doc-stores-and-data-stores",
+          "core-concepts/agents-spaces-skills",
+          "core-concepts/connectors-and-sync",
+          "core-concepts/human-in-the-loop"
+        ]
+      },
+      {
+        "group": "End user guide",
+        "icon": "user-check",
+        "pages": [
+          "end-user-guide/running-a-task",
+          "end-user-guide/reviewing-and-approving",
+          "end-user-guide/notifications",
+          "end-user-guide/your-dashboard",
+          "end-user-guide/clients-and-files"
+        ]
+      },
+      "index",
+      {
+        "group": "Security & access",
+        "icon": "shield-halved",
+        "pages": [
+          "security-access/isolation-and-multi-tenancy",
+          "security-access/roles-and-permissions",
+          "security-access/access-scoping",
+          "security-access/data-handling-and-compliance"
+        ]
+      },
+      {
+        "group": "Admin",
+        "icon": "users-gear",
+        "pages": [
+          "admin/managing-members",
+          "admin/billing-and-credits",
+          "admin/usage-and-reporting",
+          "admin/org-settings"
         ]
       },
       {
@@ -79,58 +122,6 @@
         ]
       },
       {
-        "group": "Reference",
-        "icon": "book",
-        "pages": [
-          "reference/glossary",
-          "reference/connector-reference",
-          "reference/quick-answers"
-        ]
-      },
-      {
-        "group": "End user guide",
-        "icon": "user-check",
-        "pages": [
-          "end-user-guide/running-a-task",
-          "end-user-guide/reviewing-and-approving",
-          "end-user-guide/notifications",
-          "end-user-guide/your-dashboard",
-          "end-user-guide/clients-and-files"
-        ]
-      },
-      {
-        "group": "Core concepts",
-        "icon": "cubes",
-        "pages": [
-          "core-concepts/the-object-model",
-          "core-concepts/workstreams-and-engagements",
-          "core-concepts/doc-stores-and-data-stores",
-          "core-concepts/agents-spaces-skills",
-          "core-concepts/connectors-and-sync",
-          "core-concepts/human-in-the-loop"
-        ]
-      },
-      {
-        "group": "Admin",
-        "icon": "users-gear",
-        "pages": [
-          "admin/managing-members",
-          "admin/billing-and-credits",
-          "admin/usage-and-reporting",
-          "admin/org-settings"
-        ]
-      },
-      {
-        "group": "Security & access",
-        "icon": "shield-halved",
-        "pages": [
-          "security-access/isolation-and-multi-tenancy",
-          "security-access/roles-and-permissions",
-          "security-access/access-scoping",
-          "security-access/data-handling-and-compliance"
-        ]
-      },
-      {
         "group": "Troubleshooting",
         "icon": "wrench",
         "pages": [
@@ -138,6 +129,15 @@
           "troubleshooting/when-a-run-fails",
           "troubleshooting/sync-problems",
           "troubleshooting/faq"
+        ]
+      },
+      {
+        "group": "Reference",
+        "icon": "book",
+        "pages": [
+          "reference/glossary",
+          "reference/connector-reference",
+          "reference/quick-answers"
         ]
       },
       "",
