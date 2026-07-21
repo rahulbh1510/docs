@@ -1,0 +1,54 @@
+---
+title: "Human-in-the-loop (HITL) review"
+description: "The review gate that sits between an agent's work and anything becoming final — the single most important concept in Adopt."
+icon: "user-check"
+tag: "Everyone"
+---
+
+If you take away one idea from this knowledge base, make it this one. Every piece of work an agent prepares passes through a human before it counts.
+
+## What it is
+
+Every piece of work an agent prepares passes through a **human-in-the-loop review gate** before it's treated as final. The agent prepares; a person approves. This is structural — **it is not a setting you can turn off.**
+
+## Why it exists
+
+Finance and accounting work carries professional and regulatory responsibility. A prepared workpaper, a filed return, a reconciliation — these need a qualified person to stand behind them. The HITL gate makes that explicit and auditable: there is always a named reviewer and a timestamp on every approval.
+
+## How it works
+
+<Steps>
+  <Step title="A run finishes">
+    An agent run completes and produces output.
+  </Step>
+  <Step title="It lands in the review queue">
+    The output lands in the review queue for that engagement, marked **action needed**.
+  </Step>
+  <Step title="A reviewer decides">
+    A reviewer opens it, checks the work, and either:
+
+    - **Approves it** — it becomes final and can be shared or promoted, or
+    - **Sends it back with notes** — the work returns for correction.
+  </Step>
+  <Step title="The decision is recorded">
+    The decision, the reviewer's identity, and the time are all recorded.
+  </Step>
+</Steps>
+
+## Who reviews
+
+Reviewers are assigned **per engagement** (per process), not per client. That means R&D reviewers and transfer-pricing reviewers for the same client can be different people, each seeing only their own queue.
+
+## For end users
+
+Most of your time in Adopt is spent here. See [Reviewing and approving work](/end-user-guide/reviewing-and-approving) for the day-to-day.
+
+## For builders
+
+You don't wire the gate up — it's always present. What you do control is who the reviewers are, and (in Advanced setup) how review routing and escalation behave. See [Instructions and skills](/builder-guide/instructions-and-skills) and [Notifications](/end-user-guide/notifications).
+
+## Next steps
+
+1. [Reviewing and approving work](/end-user-guide/reviewing-and-approving)
+2. [The object model](/core-concepts/the-object-model)
+3. [Notifications](/end-user-guide/notifications)

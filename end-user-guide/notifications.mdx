@@ -1,0 +1,46 @@
+---
+title: "Notifications"
+description: "Get told the moment an agent needs your review — by email, Slack, or Teams — so you're not checking a queue all day."
+icon: "bell"
+tag: "End user"
+---
+
+Notifications tell you when something needs your attention — most importantly, when an agent has prepared work and is waiting on your review.
+
+## Channels
+
+- **Email** — built in. Nothing to connect; you only choose how often you're notified.
+- **Slack** — connect your workspace once, then choose a channel or direct message.
+- **Teams** — connect your team once, then choose a channel or chat.
+
+## Choosing how often (email)
+
+Email supports three frequencies:
+
+- **Real-time** — one message per event, as it happens.
+- **Hourly digest** — events batched into one email each hour.
+- **Daily digest** — one summary email per day, at a time you choose.
+
+Digests are the way to cut noise if you get a lot of activity.
+
+## Notification rules
+
+A rule decides which agents, which events, and which channels you're notified on. The events you can choose from:
+
+| Event | What it means |
+| --- | --- |
+| **HITL: action needed** | An agent paused and needs your review. This is the important one, and it's on by default. |
+| **Run completed** | A run finished successfully. |
+| **Run failed** | A run stopped with an error. |
+| **Awaiting review \> 4h** | Something has been waiting on a reviewer longer than a set time (an escalation). |
+
+You can create more than one rule — for example, real-time Slack alerts for "action needed" on your close agents, and a daily email digest for everything else.
+
+## Setting it up
+
+Notifications live in **Settings → Notifications**. Connect any channels you want, create a rule (pick agents, pick triggers, pick channels), and save. There's a **Send test notification** button to confirm it's working.
+
+## Next steps
+
+1. [Reviewing and approving work](/end-user-guide/reviewing-and-approving)
+2. [Human-in-the-loop review](/core-concepts/human-in-the-loop)

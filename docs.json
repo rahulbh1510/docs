@@ -22,6 +22,90 @@
       {
         "group": "Getting started",
         "icon": "flag",
+        "pages": [
+          "getting-started/what-is-adopt",
+          "getting-started/your-first-run",
+          "getting-started/choosing-your-path"
+        ]
+      },
+      {
+        "group": "Builder guide",
+        "icon": "screwdriver-wrench",
+        "pages": [
+          "builder-guide/builder-overview",
+          "builder-guide/quick-vs-advanced-setup",
+          "builder-guide/create-a-workstream",
+          {
+            "group": "Agents",
+            "icon": "robot",
+            "pages": [
+              "builder-guide/create-an-agent",
+              "builder-guide/inviting-members-and-access"
+            ]
+          },
+          {
+            "group": "Connectors",
+            "icon": "plug",
+            "pages": []
+          },
+          {
+            "group": "Data",
+            "icon": "table",
+            "pages": []
+          },
+          {
+            "group": "Scheduling",
+            "icon": "calendar-clock",
+            "pages": []
+          },
+          {
+            "group": "Skills",
+            "icon": "wand-magic-sparkles",
+            "pages": []
+          }
+        ]
+      },
+      {
+        "group": "Reference",
+        "icon": "book",
+        "pages": []
+      },
+      {
+        "group": "End user guide",
+        "icon": "user-check",
+        "pages": [
+          "end-user-guide/running-a-task",
+          "end-user-guide/reviewing-and-approving",
+          "end-user-guide/notifications",
+          "end-user-guide/your-dashboard",
+          "end-user-guide/clients-and-files"
+        ]
+      },
+      {
+        "group": "Core concepts",
+        "icon": "cubes",
+        "pages": [
+          "core-concepts/the-object-model",
+          "core-concepts/workstreams-and-engagements",
+          "core-concepts/doc-stores-and-data-stores",
+          "core-concepts/agents-spaces-skills",
+          "core-concepts/connectors-and-sync",
+          "core-concepts/human-in-the-loop"
+        ]
+      },
+      {
+        "group": "Admin",
+        "icon": "users-gear",
+        "pages": []
+      },
+      {
+        "group": "Security & access",
+        "icon": "shield-halved",
+        "pages": []
+      },
+      {
+        "group": "Troubleshooting",
+        "icon": "wrench",
         "pages": []
       }
     ]

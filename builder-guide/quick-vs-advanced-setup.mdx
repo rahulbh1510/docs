@@ -1,0 +1,47 @@
+---
+title: "Quick setup vs Advanced setup"
+description: "Adopt offers two front doors to the same setup — a fast, template-driven Quick path and a fully explicit Advanced path. When to use each."
+icon: "diagram-project"
+tag: "Builder"
+---
+
+Both modes create the same underlying objects — Workstream, Doc Store, Data Store, Agent, Space. The only difference is how many decisions you make yourself versus accept as sensible defaults.
+
+## Quick setup (3 steps)
+
+Goal-first, with defaults applied automatically. Best for getting a finance user live fast, or for standard processes.
+
+1. **Pick what you need done** — choose a task template; it sets the agent, instructions, and skills.
+2. **Add the client and its files** — name the client, add or connect files, invite people.
+3. **Review and go live** — preview the output, choose a cadence, publish.
+
+What's decided for you: the Data Store scope (workstream-based), the skill selection (from the template), and the access defaults (owner \+ invited people).
+
+## Advanced setup (full builder)
+
+Every primitive is explicit. Best when you need precise control — custom schemas, specific skills, tight access.
+
+<Steps>
+</Steps>
+
+## How they relate
+
+- **Same objects.** Quick provisions exactly what Advanced builds explicitly — it just applies defaults instead of asking.
+- **No dead-ends, both directions.** You can start in Quick and switch to Advanced to fine-tune; work already entered carries over. Switching back keeps the advanced settings underneath.
+- **Defaults are visible in Advanced.** Anything Quick decided for you can be seen and changed in Advanced.
+
+## What Quick decides, and where to change it
+
+| Decision | Quick default | Change in Advanced |
+| --- | --- | --- |
+| Isolation scope | Row-scoped per client | Global / Workstream / Workstream \+ Agent |
+| Data Store table | Auto-provisioned from template | Full schema \+ SQL |
+| Skills | From the template | Full skill \+ plugin picker |
+| Access | Owner \+ invited people | Full access matrix |
+| Cadence | Chosen from plain options | Full schedule config |
+
+## Next steps
+
+1. [Builder overview](/builder-guide/builder-overview)
+2. [Create a Workstream](/builder-guide/create-a-workstream)
+3. [Creating an agent](/builder-guide/create-an-agent)

@@ -1,0 +1,62 @@
+---
+title: "What is Adopt?"
+description: "A plain-language introduction to what Adopt does, who it's for, and the one idea that sets it apart from a general-purpose AI assistant."
+icon: "circle-question"
+tag: "Everyone"
+---
+
+Adopt is an agentic platform for finance and accounting work. You point an agent at a client's documents and data, tell it what to prepare — an R&D tax credit workpaper, a month-end close checklist, a set of reconciliations — and it does the preparation. Then a person reviews and approves the result before it becomes final.
+
+That last part is the whole point: **the agent prepares, the professional approves.** Nothing an agent produces is treated as final until a human signs off.
+
+## Who Adopt is for
+
+Two kinds of people use Adopt, and this knowledge base is organized around both. You might be one, or both.
+
+- **Finance professionals** — CPAs, controllers, and CFO-org reviewers who need work prepared and reviewed. If someone has already set up an agent for you, you mostly live in the review queue: run a task, check the prepared output, approve it or send it back. Your track is the [End user guide](/end-user-guide/running-a-task).
+- **Builders and admins** — the people who set the agents up: connecting data sources, defining what an agent does, deciding who can see what, and scheduling when it runs. Your track is the [Builder guide](/builder-guide/builder-overview).
+
+Many teams have one or two people who build agents and a wider group who review their output.
+
+## What makes Adopt different
+
+General-purpose AI tools generate an answer and hand it to you. Adopt is built for regulated finance work, so it adds guarantees those tools don't:
+
+- **A human-in-the-loop review gate that can't be switched off.** Prepared work waits for a reviewer. This is structural, not a setting.
+- **Strict data isolation per client.** Work for one client is walled off from every other client's data.
+- **Traceable output.** You can always see which files and which run produced a given result.
+- **Domain skills.** Agents use finance-specific capabilities — reading workpapers, querying structured tables, citing sources — rather than generic chat.
+
+<Info>
+  The review gate is the single most important idea in Adopt. If you read one concept article, make it [Human-in-the-loop review](/core-concepts/human-in-the-loop).
+</Info>
+
+## What you can do with it
+
+A few representative examples from finance and accounting:
+
+- Prepare **R&D tax credit workpapers** from payroll and project files, with citations.
+- Run a **month-end close checklist** and flag exceptions for review.
+- Prepare **account and bank reconciliations** and surface breaks.
+- Draft **variance analysis and CFO commentary** from the numbers.
+- Assemble **audit support materials** — evidence, workpapers, request tracking.
+
+## Where to go next
+
+<CardGroup cols={2}>
+  <Card title="Your first run" icon="rocket" href="/getting-started/your-first-run">
+    Go from nothing to a live, reviewable piece of work in about ten minutes.
+  </Card>
+
+  <Card title="Core concepts" icon="cubes" href="/core-concepts/the-object-model">
+    Want the mental model first? Start with the object model.
+  </Card>
+
+  <Card title="Choosing your path" icon="signs-post" href="/getting-started/choosing-your-path">
+    Not sure whether you're an end user or a builder? Find out here.
+  </Card>
+
+  <Card title="How review works" icon="user-check" href="/core-concepts/human-in-the-loop">
+    The approval gate that touches every role in Adopt.
+  </Card>
+</CardGroup>

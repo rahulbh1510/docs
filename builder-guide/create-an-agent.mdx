@@ -1,0 +1,32 @@
+---
+title: "Creating an agent"
+description: "How to create an agent, what naming it does behind the scenes, and the fields that matter."
+icon: "robot"
+tag: "Builder"
+---
+
+An Agent is the thing that prepares the work. You either create one directly (Advanced) or get one automatically by choosing a task template (Quick).
+
+## Create one
+
+1. In the **Agents** area (or the "Create an Agent" step), choose to add an agent.
+2. **Name** — e.g. "R&D Tax Credit." This generates a fixed identifier (e.g. `r_d_tax_credit`) that can't change after creation, so choose deliberately.
+3. **Description** — what it prepares, e.g. "Prepares R&D tax credit workpapers from each client's payroll and project files."
+4. **Enabled** — whether workstreams can see and use it. Leave it enabled from the start, or turn it on after testing.
+5. Create the agent.
+
+## What naming an agent does
+
+Creating an agent silently provisions a **Space** — an isolated bucket for that agent's data. You don't manage the Space directly; you work in terms of the agent. It's simply why the agent's working data stays separate from everything else.
+
+<Info>
+  The agent editor is a five-step flow: **Basics → Capabilities → Instructions → Workstreams → Review**. Naming happens in Basics; skills are chosen in Capabilities.
+</Info>
+
+## Next steps
+
+A created agent isn't useful until it has:
+
+1. [Instructions and skills](/builder-guide/instructions-and-skills)
+2. [Access to data](/builder-guide/doc-store-access)
+3. A [test run](/builder-guide/testing-an-agent) and a [schedule](/builder-guide/schedule-and-publish)
