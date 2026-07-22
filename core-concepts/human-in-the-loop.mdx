@@ -22,30 +22,35 @@ Finance and accounting work carries professional and regulatory responsibility. 
     An agent run completes and produces output.
   </Step>
   <Step title="It lands in the review queue">
-    The output lands in the review queue for that engagement, marked **action needed**.
+    The output lands in the review queue for that engagement, marked **action needed**, and the assigned reviewers are notified.
   </Step>
   <Step title="A reviewer decides">
-    A reviewer opens it, checks the work, and either:
-
-    - **Approves it** — it becomes final and can be shared or promoted, or
-    - **Sends it back with notes** — the work returns for correction.
+    A reviewer opens it, checks the work against its cited sources, and either **approves** it (it becomes final) or **sends it back** with notes (it returns for correction).
   </Step>
   <Step title="The decision is recorded">
-    The decision, the reviewer's identity, and the time are all recorded.
+    The decision, the reviewer's identity, and the time are all recorded in the audit trail.
   </Step>
 </Steps>
 
+## What a gate looks like in practice
+
+Gates aren't only an end-of-run yes/no — an agent can pause _mid-run_ at a specific decision point. In a Revenue Flux run, for example, the agent completes its variance analysis and then opens a **Controller exceptions gate**: it lists the exceptions it couldn't resolve on its own (say, an unfamiliar vendor in Data Costs) with the supporting detail, and waits. Only once a controller clears those exceptions does the agent go on to draft commentary and build the workbook. The gate is a checkpoint _inside_ the workflow, not a rubber stamp at the end.
+
+<Info>
+  A gate can be conditional — always, only on low-confidence items, or only on flagged exceptions — so routine work flows through while genuinely uncertain items stop for a human. Builders configure this; the gate itself is always present.
+</Info>
+
 ## Who reviews
 
-Reviewers are assigned **per engagement** (per process), not per client. That means R&D reviewers and transfer-pricing reviewers for the same client can be different people, each seeing only their own queue.
+Reviewers are assigned **per engagement** (per process), not per client. R&D reviewers and transfer-pricing reviewers for the same client can be different people, each seeing only their own queue. This lets review responsibility follow expertise.
 
 ## For end users
 
-Most of your time in Adopt is spent here. See [Reviewing and approving work](/end-user-guide/reviewing-and-approving) for the day-to-day.
+Most of your time in Adopt is spent at this gate. See [Reviewing and approving work](/end-user-guide/reviewing-and-approving) for the day-to-day.
 
 ## For builders
 
-You don't wire the gate up — it's always present. What you do control is who the reviewers are, and (in Advanced setup) how review routing and escalation behave. See [Instructions and skills](/builder-guide/instructions-and-skills) and [Notifications](/end-user-guide/notifications).
+You don't wire the gate up — it's always present. What you control is who the reviewers are, and (in Advanced setup) how routing and escalation behave. See [Instructions and skills](/builder-guide/instructions-and-skills) and [Notifications](/end-user-guide/notifications).
 
 ## Next steps
 

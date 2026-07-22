@@ -1,0 +1,85 @@
+---
+title: "Builder guide"
+description: "Connect data, define agents and skills, control access, schedule — the full setup surface."
+icon: "screwdriver-wrench"
+---
+
+You're a builder if you set up the agents other people run — connecting data, defining what an agent does and is allowed to see, and scheduling it. Start with the overview and the two setup paths, then work through each area.
+
+<CardGroup cols={2}>
+  <Card title="Builder overview" icon="compass" href="/builder-guide/builder-overview">
+    What building an agent involves, the mental model to hold, and how the pieces connect.
+  </Card>
+
+  <Card title="Quick setup vs Advanced setup" icon="diagram-project" href="/builder-guide/quick-vs-advanced-setup">
+    Two front doors to the same setup — a fast, template-driven Quick path and a fully explicit Advanced path.
+  </Card>
+
+  <Card title="Create a Workstream" icon="layer-group" href="/builder-guide/create-a-workstream">
+    Create the client / isolation boundary everything else hangs off, and provision many at once.
+  </Card>
+</CardGroup>
+
+### Agents
+
+<CardGroup cols={2}>
+  <Card title="Creating an agent" icon="robot" href="/builder-guide/create-an-agent">
+    Create an agent, what naming it does behind the scenes, and the fields that matter.
+  </Card>
+
+  <Card title="Inviting members and setting access" icon="user-plus" href="/builder-guide/inviting-members-and-access">
+    Give people access to a client, scoped so they see only what they should.
+  </Card>
+
+  <Card title="Setting Doc Store access" icon="lock" href="/builder-guide/doc-store-access">
+    Grant which workstreams and agents can reach a Doc Store — the access matrix behind what an agent can read.
+  </Card>
+</CardGroup>
+
+### Connectors
+
+<CardGroup cols={2}>
+  <Card title="Connecting a data source" icon="plug" href="/builder-guide/connecting-a-source">
+    Link a source (Google Drive, SharePoint, File Upload, S3) and sync its files into a client's Doc Store.
+  </Card>
+
+  <Card title="Sync settings and filters" icon="arrows-rotate" href="/builder-guide/sync-settings-and-filters">
+    Control what a sync brings in and when — one-time vs scheduled, and include/exclude filters.
+  </Card>
+</CardGroup>
+
+### Data
+
+<CardGroup cols={2}>
+  <Card title="Create a Data Store table" icon="table" href="/builder-guide/create-a-data-store-table">
+    Add a structured table an agent can query, define its columns, and choose its scope.
+  </Card>
+</CardGroup>
+
+### Scheduling
+
+<CardGroup cols={2}>
+  <Card title="Schedule and publish" icon="calendar-clock" href="/builder-guide/schedule-and-publish">
+    Set how often an agent runs and make it live for the people who use it.
+  </Card>
+
+  <Card title="Testing an agent" icon="flask" href="/builder-guide/testing-an-agent">
+    Run an agent on a client before publishing, so you can catch problems early.
+  </Card>
+</CardGroup>
+
+### Skills
+
+<CardGroup cols={2}>
+  <Card title="Instructions and skills" icon="wand-magic-sparkles" href="/builder-guide/instructions-and-skills">
+    How to tell an agent how to work and what it's allowed to do — and why capability isn't access.
+  </Card>
+
+  <Card title="Skills vs plugins" icon="puzzle-piece" href="/builder-guide/skills-vs-plugins">
+    Both extend what an agent can do; how they differ and when you'd reach for each.
+  </Card>
+</CardGroup>
+
+## Other sections
+
+[Getting started](/getting-started/what-is-adopt) · [Core concepts](/core-concepts/the-object-model) · [End user guide](/end-user-guide/overview) · [Security & access](/security-access/isolation-and-multi-tenancy) · [Admin](/admin/managing-members) · [Troubleshooting](/troubleshooting/common-issues) · [Reference](/reference/glossary)

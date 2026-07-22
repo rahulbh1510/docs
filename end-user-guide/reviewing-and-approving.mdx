@@ -5,41 +5,66 @@ icon: "clipboard-check"
 tag: "End user"
 ---
 
-Every agent output waits for a person before it's final. That person is you. This is where most of your time in Adopt is spent.
+Every agent output waits for a person before it's final, and that person is you. If you do one thing in Adopt each day, it's clearing your review queue — this page is how.
 
 ## The review queue
 
-Your review queue lists work that's waiting on you, marked **action needed**. Each item shows:
+Your review queue lists everything waiting on you, each item marked **action needed**. It's the first place to look when you sit down. Each row tells you, at a glance:
 
-- which client and task it's for
-- what was prepared (e.g. "3 reconciliations ready for review")
-- when it finished
+- **which client and task** it's for (e.g. _Revenue Flux Reports · XYZ Corp_),
+- **what was prepared** and how much needs you (e.g. _"2 exceptions awaiting Controller decision"_),
+- **how long it's been waiting** — so nothing quietly ages past its deadline.
 
-Open an item to see the full prepared output.
+An item sits in the queue for one engagement (one process for one client), and only reviewers assigned to that engagement see it. If you review R&D for a client but not their transfer pricing, you'll only ever see the R&D items.
+
+## Opening an item
+
+Open an item and you land in the workspace for that run: the client's **files** on the left, the **conversation** in the middle where the agent narrates what it did, and a live **Workflow** panel on the right showing every step of the run and exactly where it paused for you.
 
 <Frame>
-  ![A prepared output open for review, showing the agent's work, the sources it used, and Approve / Send back actions](/images/acct-app-conversation-hitl.png)
+  ![A prepared output open for review — the agent's narrative and an "Action needed" card in the centre, the workstream's files on the left, and a Workflow panel on the right showing each step's status](/images/acct-app-conversation-hitl.png)
 </Frame>
 
-## Reviewing an item
+The agent doesn't just hand you an answer — it shows its work and **cites its sources**. Because every figure traces back to the document it came from, you can check a number the way you'd check a junior preparer's: open the source, confirm it supports the output.
 
-Inside an item you see the prepared work — the workpaper, the reconciliation set, the checklist — along with the sources it used. Because Adopt agents **cite their sources**, you can trace a figure back to the document it came from. Check the work as you would a junior preparer's: is it complete, are the numbers right, are the citations sound?
+## A worked example: a flux review
 
-## Two decisions
+Say the **Revenue Flux Reports** agent has run for a client. The Workflow panel shows the steps it completed — _Confirm period → Pull GL \+ budget → Run variance engine → Drill material lines_ — all marked **Done**, with _Resolve exceptions_ marked **Review** and _Draft commentary_, _Build workbook_, and _CFO sign-off_ still **Pending**. The run has stopped at a gate and is waiting on you.
 
-- **Approve** — the work is correct. It becomes final and can be shared or delivered. Your approval is recorded with your name and the time.
+The agent explains what it found in plain language, then opens a **Controller exceptions gate** with an **"Action needed"** card. For example, _Exception 1 of 2 — Data Costs (5100): Unknown Vendor_:
+
+| Field | Value |
+| --- | --- |
+| **Account** | 5100 — Data Costs |
+| **Vendor** | Acme Data Partners LLC |
+| **Amount** | \$45,000 |
+| **Date** | 2026-05-14 |
+| **Agent classification** | Unknown driver — owner confirmation required |
+| **Confidence** | Low |
+
+You pick an action (confirm the classification, recode it, or send it back), and only once you've cleared the exceptions does the agent move on to draft the commentary and build the workbook. Nothing downstream happens until you decide.
+
+## Your two decisions
+
+- **Approve** — the work is correct. It becomes final and can be shared or promoted. Your approval is recorded with your name and the time.
 - **Send back** — something's off. Add notes describing what needs to change, and the work returns for correction. Nothing is shared until it comes back and you approve it.
+
+<Warning>
+  "Approve" is a professional sign-off, not a formality. It's what makes the output final and is recorded in the audit trail — treat it with the same weight you'd give signing the workpaper yourself.
+</Warning>
 
 ## Why your approval matters
 
-Your approval is the professional sign-off. It's recorded as part of the audit trail, so there's always a clear record of who approved what, and when. This is what lets Adopt be used for regulated finance work.
+Every approval is recorded — who approved, and when — as part of an auditable trail. That record is exactly what lets Adopt be used for regulated finance work: there's always a named person standing behind each final output. See [Human-in-the-loop review](/core-concepts/human-in-the-loop) for how the gate works underneath.
+
+## Tips
 
 <Tip>
-  If you review the same kinds of work often, set up [notifications](/end-user-guide/notifications) so items come to you instead of you checking the queue. And if an item references a file that looks wrong or out of date, that's usually a files issue — see [Working with clients and files](/end-user-guide/clients-and-files).
+  Work the queue oldest-first so nothing breaches a deadline, and set up [notifications](/end-user-guide/notifications) so items come to you instead of you checking all day. If an item cites a file that looks wrong or out of date, that's usually a files issue — see [Working with clients and files](/end-user-guide/clients-and-files).
 </Tip>
 
 ## Next steps
 
-1. [Human-in-the-loop review](/core-concepts/human-in-the-loop)
-2. [Notifications](/end-user-guide/notifications)
-3. [Your dashboard](/end-user-guide/your-dashboard)
+1. [Human-in-the-loop review](/core-concepts/human-in-the-loop) — the concept behind the gate
+2. [Notifications](/end-user-guide/notifications) — get pinged the moment something needs you
+3. [Your dashboard](/end-user-guide/your-dashboard) — the wider view of your work

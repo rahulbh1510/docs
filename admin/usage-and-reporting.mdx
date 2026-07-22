@@ -7,23 +7,32 @@ tag: "Admin"
 
 Admins get a view across the whole org — not just their own queue — which is where you spot bottlenecks and manage cost.
 
-## Admin dashboard
+## The Runs view
 
-Beyond an individual's dashboard, admins get an org-wide view, including:
+The **Runs** view is the org-wide monitor for agent and pipeline runs — status, failures, and HITL, at a glance.
 
-- **Pending HITL queue across the org** — where work is waiting on reviewers. Useful for spotting bottlenecks before they become client-facing delays.
-- **Runs by process and agent** — successful and failed runs, broken down so you can see which processes are healthy.
-- **Token consumption** — for cost management and BYOK planning.
+<Frame>
+  ![The Runs overview — live activity, awaiting human input, needs attention, runs in the last 7 days, a volume/outcome chart, and top agents by run count](/images/acct-runs.png)
+</Frame>
+
+At the top you get the numbers that matter day to day:
+
+- **Live activity** — how many runs are active right now, and how many are waiting on HITL review.
+- **Awaiting human input** — work paused for a reviewer, over the last 7 days and 24 hours.
+- **Needs attention** — failures that need looking at.
+- **Runs (last 7 days)** — total and succeeded.
+
+Below that, a **volume & outcome** chart (succeeded / active / cancelled / failed over time) and **top agents** by run count, plus a live list of runs **awaiting human input** so you can see exactly where work is stuck.
 
 ## Reporting
 
-Reporting can be broken down by process and by agent, so you can answer questions like _"how much R&D work ran this quarter, and how much of it needed rework."_ End users also get a self-service view of their own usage.
+Reporting breaks down by process and by agent, so you can answer questions like _"how much R&D work ran this quarter, and how much needed rework."_ End users also get a self-service view of their own usage on [their dashboard](/end-user-guide/your-dashboard).
 
 ## Using the data
 
-- If the pending queue is growing, reviewers are the constraint — add or reassign them.
+- If **awaiting human input** is growing, reviewers are the constraint — add or reassign them.
 - If a specific agent shows a high failure rate, investigate its data source and instructions (see [When a run fails](/troubleshooting/when-a-run-fails)).
-- Use token trends to decide where BYOK or open-weight models would pay off.
+- Use token trends to decide where BYOK or open-weight models would pay off (see [Billing and credits](/admin/billing-and-credits)).
 
 ## Next steps
 
