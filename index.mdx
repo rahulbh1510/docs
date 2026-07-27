@@ -4,90 +4,20 @@ description: "The help center for Adopt — run and review agent-prepared work, 
 mode: "custom"
 ---
 
-<div style={{maxWidth: '960px', margin: '0 auto', padding: '3rem 1.25rem'}}>
-  # Everything about running, reviewing, and building on Adopt
+# Welcome to the Adopt AI Docs
 
-  Agents prepare the work; your professionals approve it. This help center is split into two clear tracks — one for the people who **use** agents, one for the people who **set them up**.
+Adopt AI powers two platforms. Pick the one you're working with and jump straight into its documentation.
 
-  <div style={{display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '1rem', margin: '2rem 0'}}>
-    <a href="/end-user-guide/overview" style={{display: 'block', padding: '1.5rem', border: '1px solid rgba(148,163,184,0.25)', borderRadius: '14px', textDecoration: 'none'}}>
-      <div style={{fontSize: '0.75rem', letterSpacing: '0.08em', textTransform: 'uppercase', color: '#94a3b8', marginBottom: '0.5rem'}}>End user</div>
-      <div style={{fontSize: '1.35rem', fontWeight: 700, marginBottom: '0.5rem'}}>I run agents someone else set up</div>
-      <div style={{color: '#94a3b8', marginBottom: '1rem'}}>You handle a queue of prepared work. Check what the agent found, approve or send it back, and know exactly when something needs you.</div>
-      <div style={{color: '#3b82f6', fontWeight: 600}}>Open the guide →</div>
-    </a>
+<Columns cols={2}>
+  <Card title="Adopt Legacy Platform" icon="diagram-project" href="/essentials/about-adopt-ai" cta="Explore the platform" arrow>
+    The original agentic platform — turn any software application into powerful AI agents. Built around Connectors, Tools, Actions, Agents, Pipelines, and Experiences.
+  </Card>
 
-    <a href="/builder-guide/overview" style={{display: 'block', padding: '1.5rem', border: '1px solid rgba(148,163,184,0.25)', borderRadius: '14px', textDecoration: 'none'}}>
-      <div style={{fontSize: '0.75rem', letterSpacing: '0.08em', textTransform: 'uppercase', color: '#94a3b8', marginBottom: '0.5rem'}}>Builder</div>
-      <div style={{fontSize: '1.35rem', fontWeight: 700, marginBottom: '0.5rem'}}>I set agents up for my team</div>
-      <div style={{color: '#94a3b8', marginBottom: '1rem'}}>Connect data, define what an agent can do, control who sees which client, and put it on a schedule. The whole control surface.</div>
-      <div style={{color: '#3b82f6', fontWeight: 600}}>Open the guide →</div>
-    </a>
-  </div>
+  <Card title="Adopt Harness for Accounting & Tax" icon="file-invoice-dollar" href="/accounting" cta="Explore Accounting & Tax" arrow>
+    The verticalized platform for accounting and tax — agents that run close, reconciliation, tax, and advisory workflows, with a professional reviewing every result.
+  </Card>
+</Columns>
 
-  **New here?** [Do your first run →](/getting-started/your-first-run)
-
-  ## Browse by section
-
-  <CardGroup cols={2}>
-    <Card title="Getting started" icon="flag" href="/getting-started/what-is-adopt">
-      What Adopt is, first login, a 10-minute first run, and choosing your path.
-    </Card>
-
-    <Card title="Core concepts" icon="cubes" href="/core-concepts/the-object-model">
-      The object model everything else is built on — read this once and the rest clicks.
-    </Card>
-
-    <Card title="End user guide" icon="user-check" href="/end-user-guide/overview">
-      For CPAs, controllers, and reviewers: run tasks, review prepared work, approve outputs.
-    </Card>
-
-    <Card title="Builder guide" icon="screwdriver-wrench" href="/builder-guide/overview">
-      Connect data, define agents and skills, control access, schedule — the full setup surface.
-    </Card>
-
-    <Card title="Security & access" icon="shield-halved" href="/security-access/isolation-and-multi-tenancy">
-      Isolation, roles and permissions, access scoping, and how data is handled.
-    </Card>
-
-    <Card title="Admin" icon="users-gear" href="/admin/managing-members">
-      Members, billing and credits, org settings, and usage reporting.
-    </Card>
-
-    <Card title="Troubleshooting" icon="wrench" href="/troubleshooting/common-issues">
-      Common issues, run failures, sync problems, and answers to frequent questions.
-    </Card>
-
-    <Card title="Reference" icon="book" href="/reference/glossary">
-      Glossary, connector matrix, and quick answers.
-    </Card>
-  </CardGroup>
-
-  ## Start here
-
-  <CardGroup cols={2}>
-    <Card title="Your first run" icon="rocket" href="/getting-started/your-first-run">
-      Go from nothing to a live, reviewable piece of work in about ten minutes, using the guided Quick setup.
-    </Card>
-
-    <Card title="Human-in-the-loop (HITL) review" icon="user-check" href="/core-concepts/human-in-the-loop">
-      The review gate that sits between an agent's work and anything becoming final — the single most important concept in Adopt.
-    </Card>
-
-    <Card title="Reviewing and approving work" icon="clipboard-check" href="/end-user-guide/reviewing-and-approving">
-      The heart of your day in Adopt — the review queue, how to check prepared work, and how to approve it or send it back.
-    </Card>
-
-    <Card title="Quick setup vs Advanced setup" icon="diagram-project" href="/builder-guide/quick-vs-advanced-setup">
-      Adopt offers two front doors to the same setup — a fast, template-driven Quick path and a fully explicit Advanced path.
-    </Card>
-
-    <Card title="Instructions and skills" icon="wand-magic-sparkles" href="/builder-guide/instructions-and-skills">
-      How to tell an agent how to work (instructions) and what it's allowed to do (skills), and the crucial difference between a skill and access.
-    </Card>
-
-    <Card title="Roles and permissions" icon="user-shield" href="/security-access/roles-and-permissions">
-      The roles people can hold, what each can do, and how roles combine with client-level access.
-    </Card>
-  </CardGroup>
-</div>
+<Note>
+  Not sure which one you're on? If your team logs into the Builder and sees **Connectors, Skills, and Agents**, you're on the Accounting & Tax platform. If you see **Tools, Actions, and Experiences**, you're on the Horizontal platform.
+</Note>
