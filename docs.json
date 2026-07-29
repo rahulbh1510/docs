@@ -19,10 +19,15 @@
         }
       ]
     },
-    "pages": [
-      "index",
-      "",
-      ""
+    "products": [
+      {
+        "product": "Adopt Legacy Platform",
+        "href": "essentials/about-adopt-ai"
+      },
+      {
+        "product": "Adopt Harness for Accounting & Tax",
+        "href": "accounting"
+      }
     ]
   },
   "logo": {
