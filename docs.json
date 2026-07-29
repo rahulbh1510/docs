@@ -16,6 +16,11 @@
           "icon": "globe",
           "href": "https://adopt.ai",
           "hidden": false
+        },
+        {
+          "anchor": "Adopt AI Documentation",
+          "icon": "house",
+          "href": "https://docs.adopt.ai"
         }
       ]
     },
