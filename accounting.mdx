@@ -11,21 +11,15 @@ icon: "house"
 
   Agents prepare the work; your professionals approve it. This help center is split into two clear tracks — one for the people who **use** agents, one for the people who **set them up**.
 
-  <div style={{display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '1rem', margin: '2rem 0'}}>
-    <a href="/end-user-guide/overview" style={{display: 'block', padding: '1.5rem', border: '1px solid rgba(148,163,184,0.25)', borderRadius: '14px', textDecoration: 'none'}}>
-      <div style={{fontSize: '0.75rem', letterSpacing: '0.08em', textTransform: 'uppercase', color: '#94a3b8', marginBottom: '0.5rem'}}>End user</div>
-      <div style={{fontSize: '1.35rem', fontWeight: 700, marginBottom: '0.5rem'}}>I run agents someone else set up</div>
-      <div style={{color: '#94a3b8', marginBottom: '1rem'}}>You handle a queue of prepared work. Check what the agent found, approve or send it back, and know exactly when something needs you.</div>
-      <div style={{color: '#3b82f6', fontWeight: 600}}>Open the guide →</div>
-    </a>
+  <CardGroup cols={2}>
+    <Card title="I run agents someone else set up" icon="user-check" href="/end-user-guide/overview" cta="Open the guide" arrow>
+      **End user** — You handle a queue of prepared work. Check what the agent found, approve or send it back, and know exactly when something needs you.
+    </Card>
 
-    <a href="/builder-guide/overview" style={{display: 'block', padding: '1.5rem', border: '1px solid rgba(148,163,184,0.25)', borderRadius: '14px', textDecoration: 'none'}}>
-      <div style={{fontSize: '0.75rem', letterSpacing: '0.08em', textTransform: 'uppercase', color: '#94a3b8', marginBottom: '0.5rem'}}>Builder</div>
-      <div style={{fontSize: '1.35rem', fontWeight: 700, marginBottom: '0.5rem'}}>I set up agents up for my team</div>
-      <div style={{color: '#94a3b8', marginBottom: '1rem'}}>Connect data, define what an agent can do, control who sees which client, and put it on a schedule. The whole control surface.</div>
-      <div style={{color: '#3b82f6', fontWeight: 600}}>Open the guide →</div>
-    </a>
-  </div>
+    <Card title="I set up agents for my team" icon="screwdriver-wrench" href="/builder-guide/overview" cta="Open the guide" arrow>
+      **Builder** — Connect data, define what an agent can do, control who sees which client, and put it on a schedule. The whole control surface.
+    </Card>
+  </CardGroup>
 
   **New here?** [Do your first run →](/getting-started/your-first-run)
 
