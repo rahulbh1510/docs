@@ -1,6 +1,6 @@
 {
   "$schema": "https://mintlify.com/docs.json",
-  "theme": "maple",
+  "theme": "almond",
   "name": "AdoptAI Docs",
   "colors": {
     "primary": "#007fff",
