@@ -1,0 +1,35 @@
+---
+title: "Sync problems"
+description: "When connected files don't show up or look out of date, work through these in order."
+icon: "arrows-rotate"
+---
+
+When connected files don't show up or look stale, work through these in order — top to bottom catches the vast majority of cases.
+
+## Files aren't appearing
+
+- **Did the sync run?** A one-time connect doesn't keep pulling. Run a sync (or set a scheduled one). See [Sync settings and filters](/builder-guide/sync-settings-and-filters).
+- **Are they filtered out?** Check your include/exclude patterns — the files may be excluded by a pattern or outside the included folder.
+- **Right client?** Confirm you're looking at the Doc Store for the correct workstream.
+
+## Files are stale
+
+- A scheduled sync may not have run since the file changed. Trigger a fresh sync.
+- For fast-moving folders, schedule the sync to run shortly **before** the agent's run so files are current.
+
+## The connection stopped working
+
+- Credentials to the source can expire or be revoked at the source system. **Reconnect** the connector.
+- Choose the most privacy-preserving reconnection option offered.
+
+## Nothing syncs at all
+
+- Confirm the connector points at a location that actually contains files (correct folder, library, or bucket prefix).
+- Confirm the source account still has access to that location.
+- If it still fails, capture details and raise with an admin or Adopt support.
+
+## Next steps
+
+1. [Connecting a data source](/builder-guide/connecting-a-source)
+2. [Sync settings and filters](/builder-guide/sync-settings-and-filters)
+3. [When a run fails](/troubleshooting/when-a-run-fails)

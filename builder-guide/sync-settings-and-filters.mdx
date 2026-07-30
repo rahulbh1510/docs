@@ -1,0 +1,35 @@
+---
+title: "Sync settings and filters"
+description: "Control what a sync brings in and when — one-time vs scheduled, and include/exclude filters."
+icon: "arrows-rotate"
+---
+
+A sync doesn't have to pull an entire drive on a fixed schedule. You control both _what_ comes in and _when_.
+
+## One-time vs scheduled
+
+- **One-time sync** — pulls the current files once. Good for a fixed set of documents.
+- **Scheduled sync** — re-runs on a cadence, bringing in new and changed files automatically. Good for a source that keeps getting new documents (an ongoing client folder).
+
+## Include / exclude filters
+
+You rarely want an entire drive. Filters let you pull only what matters:
+
+- **Include patterns** — e.g. only `*.xlsx` and `*.pdf`.
+- **Exclude patterns** — e.g. skip a `/drafts` or `/archive` folder.
+
+Wildcards are supported for both. Set these when you configure the sync.
+
+## Re-syncing
+
+Re-running a sync brings across anything new or changed since last time. If a client says the agent used stale data, triggering a fresh sync is usually the fix.
+
+<Tip>
+  Scope narrowly — a tighter filter means faster syncs and less irrelevant data for the agent to wade through. For ongoing engagements, schedule a sync a little before the agent's run so files are current, and exclude work-in-progress folders so the agent never cites something unfinished.
+</Tip>
+
+## Next steps
+
+1. [Connecting a data source](/builder-guide/connecting-a-source)
+2. [Connectors and sync](/core-concepts/connectors-and-sync)
+3. [Sync problems](/troubleshooting/sync-problems)

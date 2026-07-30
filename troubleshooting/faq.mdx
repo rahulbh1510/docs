@@ -1,0 +1,47 @@
+---
+title: "FAQ"
+description: "Short answers to the questions that come up most."
+icon: "circle-question"
+---
+
+<AccordionGroup>
+  <Accordion title="Is anything an agent produces ever sent out automatically?">
+    No. Every output waits for a human to approve it. Publishing an agent starts _preparation_, not _delivery_.
+  </Accordion>
+
+  <Accordion title="Can someone see another client's data?">
+    No. Each client is an isolation boundary; people and agents only reach clients they're scoped to. See [Isolation and multi-tenancy](/security-access/isolation-and-multi-tenancy).
+  </Accordion>
+
+  <Accordion title="What's the difference between a Workstream and an Engagement?">
+    A Workstream is a client (the isolation boundary). An Engagement is a process for that client (R&D, transfer pricing, close). One client can have several engagements. See [Workstreams and Engagements](/core-concepts/workstreams-and-engagements).
+  </Accordion>
+
+  <Accordion title="What's the difference between a Doc Store and a Data Store?">
+    Doc Store = files (documents). Data Store = structured tables. See [Doc Stores and Data Stores](/core-concepts/doc-stores-and-data-stores).
+  </Accordion>
+
+  <Accordion title="Do I have to learn all the platform terms?">
+    No. End users work in finance terms (client, files, task). The platform terms (workstream, doc store, agent, space) are for builders. The [Glossary](/reference/glossary) maps them.
+  </Accordion>
+
+  <Accordion title="I enabled a skill but the agent still can't see some data. Why?">
+    Skills grant capability, not access. Grant the agent access to the data separately. See [Access scoping](/security-access/access-scoping).
+  </Accordion>
+
+  <Accordion title="Quick setup or Advanced setup?">
+    Quick for speed and standard processes; Advanced when you need explicit control. Same objects underneath. See [Quick setup vs Advanced setup](/builder-guide/quick-vs-advanced-setup).
+  </Accordion>
+
+  <Accordion title="Can I run something right now instead of waiting for the schedule?">
+    Yes — run a task on demand. See [Running a task](/end-user-guide/running-a-task).
+  </Accordion>
+
+  <Accordion title="How do I get notified when something needs me?">
+    Set a notification rule (email, Slack, or Teams). See [Notifications](/end-user-guide/notifications).
+  </Accordion>
+
+  <Accordion title="Can we use our own model / keep data on-prem?">
+    There are options for bring-your-own-key, open-weight / self-hosted models, and on-prem / residency deployments. Confirm what's enabled for your plan. See [Data handling and compliance](/security-access/data-handling-and-compliance).
+  </Accordion>
+</AccordionGroup>
