@@ -1,0 +1,43 @@
+---
+title: "Common issues"
+description: "Fast fixes for the problems people hit most, with links to deeper articles."
+icon: "screwdriver-wrench"
+---
+
+Most day-to-day snags have a quick fix. Here are the ones people hit most, with a link to the deeper article when you need it.
+
+<AccordionGroup>
+  <Accordion title="I can't see a client I expect to see">
+    Access is granted per client — you only see clients you've been added to. Ask an admin to grant access. See [Roles and permissions](/security-access/roles-and-permissions).
+  </Accordion>
+
+  <Accordion title="The agent used old / wrong data">
+    Usually a files issue. Add the newer file, or have a builder trigger a fresh sync of the connected source. See [Sync problems](/troubleshooting/sync-problems).
+  </Accordion>
+
+  <Accordion title="A run failed">
+    Open the failed run to see the reason — most often a missing file or an unsynced source. See [When a run fails](/troubleshooting/when-a-run-fails).
+  </Accordion>
+
+  <Accordion title="I'm not getting notified">
+    Check that a notification rule exists for that agent and event, and that your channel is connected. Use the test button. See [Notifications](/end-user-guide/notifications).
+  </Accordion>
+
+  <Accordion title="I turned on a skill but the agent still can't see some data">
+    Skills grant **capability, not access**. You also need to grant the agent access to the data. See [Access scoping](/security-access/access-scoping).
+  </Accordion>
+
+  <Accordion title="Testing an agent is blocked">
+    Testing needs files in place. If the client's Doc Store is empty, set up the data source first. See [Testing an agent](/builder-guide/testing-an-agent).
+  </Accordion>
+
+  <Accordion title="The output isn't quite right">
+    Adjust the agent's instructions first — most behavior issues are instruction issues. Then confirm skills and access, and re-test. See [Instructions and skills](/builder-guide/instructions-and-skills).
+  </Accordion>
+</AccordionGroup>
+
+## Next steps
+
+1. [FAQ](/troubleshooting/faq)
+2. [When a run fails](/troubleshooting/when-a-run-fails)
+3. [Sync problems](/troubleshooting/sync-problems)
