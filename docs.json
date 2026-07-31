@@ -26,7 +26,7 @@
     },
     "tabs": [
       {
-        "tab": "Adopt.ai for CTOs and CIOs",
+        "tab": "For CTOs and CIOs",
         "pages": [
           "essentials/about-adopt-ai",
           {
@@ -147,7 +147,7 @@
         ]
       },
       {
-        "tab": "Adopt.ai Harness for CPAs and CFOs",
+        "tab": "For CPAs and CFOs",
         "pages": [
           "accounting",
           {
