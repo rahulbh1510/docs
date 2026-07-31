@@ -26,7 +26,7 @@
     },
     "tabs": [
       {
-        "tab": "Adopt Legacy Platform",
+        "tab": "Adopt.ai for CTOs and CIOs",
         "pages": [
           "essentials/about-adopt-ai",
           {
@@ -147,7 +147,7 @@
         ]
       },
       {
-        "tab": "Adopt Harness for Accounting & Tax",
+        "tab": "Adopt.ai Harness for CPAs and CFOs",
         "pages": [
           "accounting",
           {
