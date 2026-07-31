@@ -1,0 +1,44 @@
+---
+title: "Migrating from the Horizontal Platform"
+description: "A vocabulary map for anyone who knows the original Adopt platform — what changed, what's new, and what stayed the same."
+icon: "arrow-right-arrow-left"
+---
+
+If you've used the original Adopt AI platform — the one built around Tools, Actions, and Experiences — this page is your bridge. The _shape_ of the platform is the same. The vocabulary is sharper, the data side is now made of concrete primitives, and there's a dedicated end-user app. Here's how the old model maps to the new one.
+
+<Info>
+  Both platforms remain available. The original horizontal platform continues to run for existing customers, and you can switch between the two views inside the product. This page is about understanding the accounting & tax platform in terms you already know.
+</Info>
+
+## The Vocabulary Map
+
+Most concepts carry over one-to-one, with a clearer name and a tighter definition. Two concepts are genuinely new.
+
+| Original concept | New concept | What's different |
+| --- | --- | --- |
+| **Tools** | [Connectors](/accounting/connectors) | Same role — capability access — now MCP-based, with a large catalogue plus custom MCP. |
+| **Actions** | [Skills](/accounting/skills) | Same role — an atomic outcome. Skills and Plugins now sit together, with a Playground to test them. |
+| **Agents** | [Agents](/accounting/agents) | Same role. Human review is now defined _inside_ the agent, and agents bind to workstreams at build time. |
+| **Data Pipelines** | [Pipelines](/accounting/pipelines) | Now has its own management view, but a pipeline is defined _within_ a Skill and lands data in the Data Store. |
+| _(implicit before)_ | [Data Store](/accounting/data-store) | **New primitive:** structured tables with SQL, and the agent-to-agent handoff buffer. |
+| _(implicit before)_ | [File Explorer](/accounting/file-explorer) | **New primitive:** raw document stores, searchable by agents and visible to end-users. |
+| **Projects** | [Workstreams](/accounting/workstreams) | The isolation boundary, reframed around the client data line, with a per-workstream access list. |
+| **Experiences** | HITL gates \+ [End-User App](/accounting/end-user-app) | Human review moves into the agent as gates, rendered by a dedicated app as "Action needed" steps. |
+
+## What's Genuinely New
+
+Three things don't have a direct predecessor in the original platform:
+
+- **The Data Store** makes structured data a first-class citizen — tables you can query with SQL, and a place where one agent parks results for the next to pick up.
+- **File Explorer** gives raw documents the same first-class treatment, organized per client and visible to both agent and reviewer.
+- **The End-User App** is now an explicit product surface. Where human review used to be a separately-built Experience wired into an agent, it's now a gate defined inside the agent and rendered by the app as an "Action needed" step — same job, fewer moving parts.
+
+## What Stayed the Same
+
+The mental model is unchanged. You still layer capability from access up to behaviour, still separate the data track from the capability track, still build once and reuse broadly, and still keep client data isolated. If you understood the original platform, you already understand this one — you're mostly learning new names and two new primitives.
+
+## Next Steps
+
+1. [Start with the platform architecture](/accounting/platform-architecture)
+2. [See how everything connects](/accounting/how-it-connects)
+3. [Review the design principles](/accounting/design-principles)

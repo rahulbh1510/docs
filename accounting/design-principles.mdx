@@ -1,0 +1,41 @@
+---
+title: "Design Principles"
+description: "The five ideas the platform rests on — and why each one shapes how you build and run agents."
+icon: "compass-drafting"
+---
+
+The platform's structure isn't accidental. A handful of principles drive every design decision, and knowing them helps you build in the grain of the platform rather than against it.
+
+## Two Tracks, One Execution Surface
+
+[Connectors](/accounting/connectors) and [Skills](/accounting/skills) give agents the ability to _act_; the [primitives](/accounting/data-store) give agents the _data_ to act on. Keeping capability and data separate stops the two from being conflated — logic stays reusable, data stays managed, and neither leaks into the other.
+
+## Pre-Computed Context Over Inline Calls
+
+Querying external systems on every turn is slow, costly, and fragile. Instead, [Pipelines](/accounting/pipelines) pre-process and persist clean data ahead of time, so agents consume structured rows and organized files rather than raw API responses mid-conversation. The heavy data work happens on a schedule; the runtime stays light.
+
+## Human-in-the-Loop Is First-Class
+
+Human review is a designed gate inside the [agent](/accounting/agents), on equal footing with any other step — not an error handler tacked on at the end. It surfaces in the [App](/accounting/end-user-app) as a clear "Action needed" checkpoint that arms the reviewer with the agent's work. The professional's judgment is part of the workflow by design.
+
+## Isolation for Data, Reuse for Logic
+
+Skills, agents, and connectors are reusable assets — built once, used everywhere. Files, tables, and pipeline data are client-specific and never cross a [Workstream](/accounting/workstreams) boundary. This split is what lets one agent safely serve many clients: identical logic, isolated data.
+
+## One Platform, Two Views
+
+The Builder and the End-User App are two lenses over the same objects. Builders assemble; end-users run and review. Neither re-implements the other, so what you build is exactly what your team runs.
+
+## Key Takeaways
+
+- **Separation of concerns:** capability and data are different tracks, and keeping them apart keeps both clean.
+- **Speed and reliability:** pre-computed data beats live calls, every time.
+- **Control:** human review is built in, not bolted on.
+- **Safety at scale:** shared logic, isolated client data.
+- **Consistency:** one set of objects, surfaced through two views.
+
+## Next Steps
+
+1. [See these principles in the architecture](/accounting/platform-architecture)
+2. [Follow the build → run sequence](/accounting/build-to-run)
+3. [Map the old vocabulary to the new](/accounting/migrating-from-horizontal)

@@ -1,0 +1,61 @@
+---
+title: "Workstreams"
+description: "The isolation boundary that keeps each client's files, data, and agent runs sealed off from every other's."
+icon: "layer-group"
+---
+
+A firm serves many clients, and their data must never mix. Workstreams are how the platform guarantees that. A Workstream is a logical partition for all the data flowing in from a client's systems — and for an accounting or tax firm, a workstream is typically one client. Everything an agent touches on a run happens inside a single workstream's boundary.
+
+## What Are Workstreams?
+
+A Workstream is the platform's tenant line for client data. All the data flowing in through [Pipelines](/accounting/pipelines) and agents is separated on a per-client basis according to the workstream it belongs to. No two workstreams share data or access.
+
+<Info>
+  A Workstream is a per-client tenant — a sealed room that holds one client's documents, data, and runs, with a guest list on the door.
+</Info>
+
+## How to Access Workstreams
+
+Click **Workstreams** in the left navigation, under the **Adopt Primitives** group.
+
+<Frame>
+  ![Acct Workstreams](/images/acct-workstreams.png "Acct Workstreams")
+</Frame>
+
+The left panel lists every workstream, each with a count of the people who have access. Selecting one opens its detail on the right, where you manage that workstream's members.
+
+## What a Workstream Isolates
+
+A workstream draws a hard boundary around everything tied to a client:
+
+| Isolated | What it means |
+| --- | --- |
+| **Files** | Each workstream's [File Explorer](/accounting/file-explorer) document stores. |
+| **Data Store tables** | Structured rows scoped to that client. |
+| **Pipeline data** | Each pipeline run is bound to a workstream. |
+| **Agent runs** | A conversation happens inside one workstream's context. |
+| **Access** | An explicit list of people who can see and work in that workstream. |
+
+The logic stays shared while the data stays separate: the same agent runs across many workstreams, and only the data context changes per client.
+
+## Managing Access
+
+Each workstream carries its own member list — the people permitted to see and work in it. Add someone by email from the workstream's detail panel, and remove access just as easily. Create a new partition with the **New workstream** button at the top right.
+
+<Warning>
+  Adding a person to a workstream gives them access to that client's files, tables, and agent runs. Keep each workstream's member list tight — it's the access boundary for real client data.
+</Warning>
+
+## Workstreams at Runtime
+
+In the [End-User App](/accounting/end-user-app), a workstream is the thing a person _picks_ to scope a conversation. Choosing a workstream points the agent at that one client's files, tables, and pipeline data — nothing else is in scope. It's the moment the shared agent logic meets one client's isolated data.
+
+## Why Workstreams Matter
+
+Client confidentiality isn't a nice-to-have in accounting and tax work — it's the whole basis of the relationship. Workstreams make isolation structural rather than a matter of care: one client's data physically cannot appear in another's run. That's what lets a firm safely point the same powerful agents at dozens of clients, confident that the wall between them holds.
+
+## Next Steps
+
+1. [Run an agent scoped to a workstream](/accounting/end-user-app)
+2. [Review the design principles behind isolation](/accounting/design-principles)
+3. [See how workstreams wrap the whole platform](/accounting/how-it-connects)

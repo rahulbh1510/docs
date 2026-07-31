@@ -1,0 +1,84 @@
+---
+title: "How Everything Connects"
+description: "The dependency map, runtime data flow, and reuse rules that tie all six building blocks together."
+icon: "sitemap"
+---
+
+Each building block has its own page, but the platform only makes sense once you see how they depend on one another. This page is the map — how the pieces reference each other, how data moves at runtime, and what's reusable versus what's isolated.
+
+## The Dependency Map
+
+The single most important thing to hold onto: **[Skills](/accounting/skills) are the association hub.** Connectors sit below them, the primitives hang off them, and agents compose them.
+
+```text
+Platform level (built once, reused broadly)
+├── Connectors
+│     └── access used by → Skills (and the Pipelines they define)
+├── Skills  ← the association hub
+│     ├── use → Connectors
+│     ├── define → Pipelines
+│     ├── read / write → Data Store & File Explorer
+│     ├── scoped to → Workstreams
+│     └── composed into → Agents (which inherit all of the above)
+├── Pipelines (defined in a Skill)
+│     └── land structured data in → Data Store
+├── Data Store · File Explorer → read via Skills; also shown to end-user UIs
+└── Agents
+      ├── compose → Skills + glue logic (inheriting their connector & primitive links)
+      └── open → HITL gates
+
+Isolation (wraps all client data)
+└── Workstreams → scope files, tables, pipeline data & runs, per client + access list
+
+Runtime (end-user app)
+└── App → pick Agent → pick Workstream → converse → resolve HITL
+```
+
+An agent, notice, never wires directly to a connector or a primitive. It composes skills, and the skills carry those links.
+
+## Runtime Data Flow
+
+At execution time, the pieces engage in a predictable order:
+
+1. **Pick an agent.** The user opens a published agent from the [App](/accounting/end-user-app) home.
+2. **Pick a workstream.** The chosen workstream scopes the run to one client's files, tables, and pipeline data.
+3. **The agent begins.** It starts from the user's message or a trigger, with its configured skills and instructions.
+4. **Skills execute.** Each skill uses its connectors to act and returns structured output into the run's context.
+5. **Primitives supply data.** The agent reads pre-computed rows from the [Data Store](/accounting/data-store) and source files from [File Explorer](/accounting/file-explorer) — all workstream-scoped — rather than hitting raw systems inline.
+6. **Reasoning and logic.** The model reasons over the accumulated context; glue logic routes, loops, and branches.
+7. **HITL gate (if opened).** Execution pauses, the app shows an "Action needed" card, a person decides, and their input is injected back into context.
+8. **Complete.** The agent finishes, persists results (often back to the Data Store), and logs the run under the workstream.
+
+## The Two Tracks
+
+Every concept belongs to one of two tracks — capability or data. They differ in almost every dimension, which is exactly why they're kept apart.
+
+|  | Capability track | Data track |
+| --- | --- | --- |
+| **Concepts** | Connectors → Skills → Agents | Pipelines (defined in Skills) · Data Store · File Explorer · Workstreams |
+| **Nature** | What the agent _can do_ | What the agent _knows / has_ |
+| **Execution** | Runs at runtime, on demand | Runs independently; data is pre-computed & persisted |
+| **State** | Mostly stateless | Stateful — persists between runs |
+| **Isolation** | Shared platform logic | Partitioned per client by Workstream |
+
+## Reusability
+
+The reuse rules follow directly from the two tracks: logic is shared, data is isolated.
+
+| Object | Across skills | Across agents | Across workstreams |
+| --- | --- | --- | --- |
+| **Connector** | Yes | Yes (via skills) | Yes |
+| **Skill** | — | Yes | Yes |
+| **Pipeline** | Bound to one skill | Yes (via its skill) | Logic shared; data isolated |
+| **Data Store table** | — | Yes | Schema shared; rows isolated |
+| **Agent** | — | — | Yes (same logic, per-client data) |
+
+## Why This Matters
+
+This map is the difference between seeing six separate tools and seeing one coherent platform. When you know that skills are the hub, that pipelines feed the Data Store rather than the agent, and that workstreams wrap everything client-specific, you can reason about any change confidently — where to add a connector, why a pipeline belongs to a skill, what a new workstream will and won't share.
+
+## Next Steps
+
+1. [Follow the build → run sequence step by step](/accounting/build-to-run)
+2. [Review the design principles behind the model](/accounting/design-principles)
+3. [Map the old vocabulary to the new](/accounting/migrating-from-horizontal)
